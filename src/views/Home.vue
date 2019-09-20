@@ -118,6 +118,16 @@ export default {
                     color: '#fff',
                     formatter: `{b}`
                 }
+              },
+              {
+                name:'美国',
+                value:[-110.5, 50.48],
+                label: {
+                    show: true,
+                    position: [40, 40],
+                    color: '#fff',
+                    formatter: `{b}`
+                }
               }
             ]
           }
