@@ -108,6 +108,16 @@ export default {
                     color: '#fff',
                     formatter: `{b}`
                 }
+              },
+              {
+                name:'澳大利亚',
+                value:[133.13, -20.3],
+                label: {
+                    show: true,
+                    position: [40, 40],
+                    color: '#fff',
+                    formatter: `{b}`
+                }
               }
             ]
           }
