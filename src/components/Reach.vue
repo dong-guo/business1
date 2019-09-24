@@ -1,11 +1,11 @@
 <template>
   <div class="reach">
     <ul>
-      <li class="reach_after" @click="color1" :class="{'textColor1':discColor1}">
+      <li class="reach_after"  :class="{'textColor1':discColor1}">
         <div class="reach_after_disc" :class="{'activeColor1':discColor1}"></div>
         <span>已开发区域</span>
       </li>
-      <li class="reach_after" @click="color2" :class="{'textColor2':discColor2}">
+      <li class="reach_after" :class="{'textColor2':discColor2}">
         <div class="reach_after_disc" :class="{'activeColor2':discColor2}"></div>
         <span>未开发区域</span>
       </li>
