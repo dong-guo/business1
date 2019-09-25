@@ -14,7 +14,7 @@
         <li v-for="(item,index) in drawCountry" :key="item+index">
           <div class="record">
             <span class="record_country">{{item}}</span>
-            <span class="record_number">{{drawNum}}</span>
+            <span class="record_number">{{drawNumber[index]}}</span>
           </div>
           <div class="shop">
             <div class="shop_franchser">
@@ -60,8 +60,11 @@ export default {
       drawBoxKey: state => state.home.boxKey,
       drawNum: state => state.home.allNum,
       drawCountry: state => state.home.country,
-      drawNumber: state => state.home.number
+      drawNumber: state => state.home.number,
+      drawCountryNumber: state => state.home.countryNumber
     })
+  },
+  mounted(){
   },
   methods: {
     change() {

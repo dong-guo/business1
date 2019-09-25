@@ -4,7 +4,6 @@
 <script>
 import axios from "axios";
 import echarts from "echarts";
-
 import balloonIcon from "../base64/balloon";
 
 import { mapState } from "vuex";
@@ -18,71 +17,114 @@ export default {
   },
   computed: {
     ...mapState({
-      drawCountry: state => state.home.country,
-      drawNum: state => state.home.number,
-      drawJw: state => state.home.jw
+      drawCountryNumber: state => state.home.countryNumber
     })
   },
   mounted() {
-    let obj = this.drawCountry;
-    let num = this.drawNum;
-    let jw = this.drawJw;
-    let ob = [];
-    let countryBg = [];
-    let countryZg =[];
-    let countrySg =[];
-    for (let i = 0; i < obj.length; i++) {
-      ob.push({ name: obj[i], selected: true, emphasis:{itemStyle:{areaColor:'#33D8FA'}}});
-      if (num[i] > 500) {
-        countryBg.push({
-          name: obj[i],
-          value: jw[i],
+    let dcn = this.drawCountryNumber
+    let countryNum=[];
+    let otherStyle = [];
+    let countryBigBall = [];
+    let countryMidBall =[];
+    let countrySmallBall =[];
+    for (let i = 0; i < dcn.length; i++) {
+      countryNum.push(String(dcn[i].amount))
+      otherStyle.push({ name: dcn[i].name, selected: true, emphasis:{itemStyle:{areaColor:'#33D8FA'}}});
+      if (dcn[i].amount > 500) {
+        countryBigBall.push({
+          name: dcn[i].name,
+          value: dcn[i].jindu,
+          color:'#333333',
           label: {
             show: true,
-            position: [50, 80],
-            color: "#333333",
-            formatter: `{b}`
+            position: ['20%', '35%'],
+            fontSize:16,
+            rich:{
+              a:{
+                fontSize:30,
+              },
+              b:{
+                fontSize:15,
+                verticalAlign:'middle'
+              },
+              c:{
+                fontSize:20,
+                align:'center',
+              }
+            },
+            // formatter: `{b}`
+            formatter:countryNum[i]+ '家'+ '\n' +dcn[i].name,
+            formatter:[
+              '{a| '+countryNum[i]+ '}{b| 家}' +"\n" + '{c| ' + dcn[i].name + '}'
+            ].join('\n'),
           }
         });
-      } else if (num[i] > 100 && num[i] <=500) {
-        countryZg.push({
-          name: obj[i],
-          value: jw[i],
+      } else if (dcn[i].amount > 100 && dcn[i].amount <=500) {
+        countryMidBall.push({
+          name: dcn[i].name,
+          value: dcn[i].jindu,
           label: {
             show: true,
-            position: ['40%', '40%'],
-            color: "#333333",
-            formatter: `{b}`
+            position: ['20%', '30%'],
+            color: '#333333',
+            fontSize:16,
+            rich:{
+              a:{
+                fontSize:28,
+              },
+              b:{
+                fontSize:14,
+                verticalAlign:'middle'
+              },
+              c:{
+                fontSize:20,
+                align:'center'
+              }
+            },
+            // formatter: `{b}`
+            formatter:[
+              '{a| '+countryNum[i]+ '}{b| 家}' +"\n" + '{c| ' + dcn[i].name + '}'
+            ].join('\n'),            
           }
         });
       } else {
-          countrySg.push({
-            name: obj[i],
-            value: jw[i],
+          countrySmallBall.push({
+            name: dcn[i].name,
+            value: dcn[i].jindu,
             label: {
               show: true,
-              position: ['20%', '40%'],
+              position: ['18%', '25%'],
               color: "#333333",
-              formatter: `{b}`
+              fontSize:16,
+              rich:{
+                a:{
+                  fontSize:28,
+                },
+                b:{
+                  fontSize:14,
+                },
+                c:{
+                  align:'center',
+                }
+              },
+              // formatter: `{b}`
+              formatter:[
+                '{a| '+countryNum[i]+ '}{b| 家}' +"\n" + '{c| ' + dcn[i].name + '}'
+              ].join('\n'),              
             }
           });        
       }
     }
-    console.log(333, ob);
-    console.log(444, countryBg);
-    console.log(445, countryZg);
-    console.log(446, countrySg);
-
     axios.get("./geoJson/world.json").then(res => {
       let worldJson = res.data;
       echarts.registerMap("world", worldJson);
       this.myEcharts = echarts.init(document.getElementById("world_box"));
-      let option = this.worldOption(ob, countryBg, countryZg, countrySg);
+      let option = this.worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall);
       this.myEcharts.setOption(option);
     });
   },
   methods: {
-    worldOption(ob, countryBg, countryZg, countrySg) {
+    worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
       return {
         geo: {
           type: "map",
@@ -101,18 +143,18 @@ export default {
             shadowOffsetY: 2
           },
           nameMap: {
-            China: "中国",
+            'China': "中国",
             "United States of America": "美国",
-            Australia: "澳大利亚",
-            Japan: "日本",
-            Germany: "德国",
-            India: "印度",
+            'Australia': "澳大利亚",
+            'Japan': "日本",
+            'Germany': "德国",
+            'India': "印度",
             "South Africa": "南非",
-            Brazil: "巴西",
-            Argentina: "阿根廷",
-            Slovakia: "斯洛伐克",
-            Mexico: "墨西哥",
-            Russia: "俄罗斯"
+            'Brazil': "巴西",
+            'Argentina': "阿根廷",
+            'Slovakia': "斯洛伐克",
+            'Mexico': "墨西哥",
+            'Russia': "俄罗斯"
           },
           emphasis: {
             itemStyle: {
@@ -127,15 +169,7 @@ export default {
             fontSize: 16
             // color: "white"
           },
-          regions: ob
-          // {
-          //   name: obj1,
-          //   selected: true,
-          // },
-          // {
-          //   name: "澳大利亚",
-          //   selected: true
-          // },
+          regions: otherStyle
         },
         series: [
           {
@@ -147,17 +181,7 @@ export default {
             label:{
               fontSize:18,
             },
-            data: countryBg
-            // {
-            //   name: "中国",
-            //   value: [100.5, 40.48],
-            //   label: {
-            //     show: true,
-            //     position: [50, 80],
-            //     color: "#333333",
-            //     formatter: `{b}`
-            //   }
-            // }
+            data: countryBigBall
           },
           {
             coordinateSystem: "geo",
@@ -167,18 +191,7 @@ export default {
             label:{
               fontSize:18,
             },
-            data: countryZg
-              // {
-              //   name: "美国",
-              //   value: [-100.5, 40.48],
-              //   label: {
-              //     show: true,
-              //     position: [20, 30],
-              //     color: "#333333",
-              //     formatter: `{b}`
-              //   }
-              // }
-
+            data: countryMidBall
           },
           {
             coordinateSystem: "geo",
@@ -188,18 +201,7 @@ export default {
             label:{
               fontSize:18,
             },
-            data: countrySg
-              // {
-              //   name: "澳大利亚",
-              //   value: [133.13, -20.3],
-              //   label: {
-              //     show: true,
-              //     position: [20, 50],
-              //     color: "#333333",
-              //     formatter: `{b}`
-              //   }
-              // }
-            
+            data: countrySmallBall    
           }
         ]
       };

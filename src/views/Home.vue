@@ -54,8 +54,8 @@ export default {
   },
   mounted() {
     this.changeNum()
-    console.log(555,this.stringNum)
-    console.log(556,typeof(this.stringNum))
+    // console.log(555,this.stringNum)
+    // console.log(556,typeof(this.stringNum))
 
   },
   methods: {
