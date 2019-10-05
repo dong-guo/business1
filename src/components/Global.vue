@@ -1,11 +1,11 @@
 <template>
   <div class="global">
-    <router-link :to="{path:'/china'}">
+    <router-link :to="{name:'home'}">
       <div class="global_world">
         <p>全球</p>
       </div>
     </router-link>
-    <router-link to="succession">
+    <router-link :to="{name:'succession'}">
       <div class="global_brand">
         <p>品牌</p>
       </div>
@@ -19,10 +19,11 @@ export default {};
 <style scoped>
 .global {
   position: absolute;
-  top: 843px;
-  left: 44px;
+  /* top: 843px;
+  left: 44px; */
   height: 212px;
   width: 214px;
+  /* border:1px solid greenyellow; */
 }
 .global_world {
   height: 120px;

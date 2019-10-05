@@ -1,14 +1,14 @@
 <template>
   <div class="home">
-    <div class="home_head">
+    <!-- <div class="home_head">
       <p>
         <span :class="{'home_head_change':drawBoxKey}">慕思招商系统</span>
       </p>
-    </div>
+    </div> -->
     <div class="home_body">
       <world></world>
       <reach></reach>
-      <global></global>
+      <global class="home_global"></global>
       <div class="home_body_top">
         <p>截止目前,全球共有门店<span>(家)</span></p>
         <div class="home_body_bg">
@@ -19,6 +19,7 @@
       </div>
       <body-right></body-right>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
     BodyRight,
     Reach,
     Global,
-    World
+    World,
   },
   computed: {
     ...mapState({
@@ -68,19 +69,18 @@ export default {
 </script>
 <style scoped>
 .home {
-  height: 1080px;
-  width: 1920px;
+  /* width: 1920px; */
   /* background-color:#2B3A7C; */
-  background-image: url(../assets/images/background@2x.png);
+  /* background-image: url(../assets/images/background@2x.png); */
 }
-.home_head {
+/* .home_head {
   height: 96px;
   width: 1920px;
   background-image: url(../assets/images/home_head@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
-}
-.home_head p {
+} */
+/* .home_head p {
   width: 797px;
   height: 228px;
   margin: 0 auto;
@@ -94,11 +94,10 @@ export default {
 }
 .home_head_change {
   text-shadow: 2px 2px 9px rgba(1, 21, 59, 1);
-}
+} */
 .home_body {
   height: 984px;
   width: 1920px;
-  /* background-color: yellow; */
 }
 .home_body_top {
   height: 132px;
@@ -106,8 +105,6 @@ export default {
   position: absolute;
   top: 126px;
   left: 747px;
-  /* top:-954px;
- left:747px; */
 }
 .home_body_top p {
   width: 432px;
@@ -116,7 +113,6 @@ export default {
   font-size: 36px;
   line-height: 40px;
   text-align: center;
-  /* border:1px solid red; */
 }
 .home_body_top span {
   font-size: 24px;
@@ -131,7 +127,6 @@ export default {
   top: 46px;
 }
 .home_body_bg ul {
-  /* background:rgba(255, 255, 255,0.2); */
   height: 73px;
   width: 291px;
   margin-left:39px;
@@ -145,16 +140,19 @@ export default {
   background-image: url(../assets/images/number_border@2x.png);
   background-size: 100%;
   margin-left: 20px;
-  /* margin-top: -23px; */
   text-align: center;
   line-height: 64px;
   font-size: 43px;
   font-weight: 400;
   color: #5fbbf0;
 }
-/* #world_box {
-  height: 984px;
-  width: 1920px;
-  background-color:yellow;
-} */
+.home_global{
+  /* position: absolute; */
+  top: 843px;
+  left:  44px;
+  /* border:1px solid yellow; */
+}
+.router-view{
+  color:brown;
+}
 </style>

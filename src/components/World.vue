@@ -45,7 +45,7 @@ export default {
               },
               b:{
                 fontSize:15,
-                verticalAlign:'middle'
+                verticalAlign:'middle',
               },
               c:{
                 fontSize:20,
@@ -78,7 +78,6 @@ export default {
               },
               c:{
                 fontSize:20,
-                align:'center'
               }
             },
             // formatter: `{b}`
@@ -93,7 +92,7 @@ export default {
             value: dcn[i].jindu,
             label: {
               show: true,
-              position: ['18%', '25%'],
+              position: ['15%', '25%'],
               color: "#333333",
               fontSize:16,
               rich:{
@@ -166,7 +165,7 @@ export default {
             }
           },
           label: {
-            fontSize: 16
+            fontSize: 16,
             // color: "white"
           },
           regions: otherStyle

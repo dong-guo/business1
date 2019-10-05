@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import China from './views/China.vue'
+import Succession from './views/Succession.vue'
 
 Vue.use(Router)
 
@@ -10,7 +11,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: Home,
     },
@@ -26,6 +27,11 @@ export default new Router({
       path: '/china',
       name: 'china',
       component: China
-    }
+    },
+    {
+      path:'/home/succession',
+      name:'succession',
+      component:Succession
+    },
   ]
 })
