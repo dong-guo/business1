@@ -1,7 +1,7 @@
 const state = {
   boxKey:false,
   allNum:'5788',
-  country:['中国','美国','日本','德国','印度','南非','巴西','阿根廷','奥地利','澳大利亚','俄罗斯'],
+  country:['China','USA','Japan','Germany','India','South Africa','Brazil',' Argentina','','Australia','Russia'],
   number:[5700,223,45,67,17,133,65,72,8,10,55],
   jw:[
     [100.5, 50.48],
@@ -25,16 +25,20 @@ const state = {
     {name:'南非',amount:133,jindu:[24.13, -22.3]},
     {name:'巴西',amount:65,jindu:[-48.5,-12.54]},
     {name:'阿根廷',amount:72,jindu:[-66.22,-30.13]},
-    {name:'奥地利',amount:8,jindu:[21.13, 62.3]},
+    {name:'奥地利',amount:8,jindu:[15.13, 57.3]},
     {name:'澳大利亚',amount:10,jindu:[128.39,-20.01]},
     {name:'俄罗斯',amount:55,jindu:[49.45,64.37]}
   ],
+  countryChange:''
  
 }
 const mutations = {
   setBoxKey: (state, boolean) => {
     state.boxKey = boolean
   },
+  setCountryChange:(state,string) => {
+    state.countryChange = string
+  }
 }
 const action = {
 

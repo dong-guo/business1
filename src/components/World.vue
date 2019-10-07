@@ -17,113 +17,156 @@ export default {
   },
   computed: {
     ...mapState({
-      drawCountryNumber: state => state.home.countryNumber
+      drawCountryNumber: state => state.home.countryNumber,
+      drawCountry: state => state.home.country,
     })
   },
   mounted() {
-    let dcn = this.drawCountryNumber
-    let countryNum=[];
+    let dcn = this.drawCountryNumber;
+    let countryNum = [];
     let otherStyle = [];
     let countryBigBall = [];
-    let countryMidBall =[];
-    let countrySmallBall =[];
+    let countryMidBall = [];
+    let countrySmallBall = [];
+    //显示浅蓝色国家
     for (let i = 0; i < dcn.length; i++) {
-      countryNum.push(String(dcn[i].amount))
-      otherStyle.push({ name: dcn[i].name, selected: true, emphasis:{itemStyle:{areaColor:'#33D8FA'}}});
+      countryNum.push(String(dcn[i].amount));
+      otherStyle.push({
+        name: dcn[i].name,
+        selected: false,
+        itemStyle: { areaColor: "#33D8FA" }
+      });
+      //气泡大小分级
       if (dcn[i].amount > 500) {
         countryBigBall.push({
           name: dcn[i].name,
           value: dcn[i].jindu,
-          color:'#333333',
+          color: "#333333",
           label: {
             show: true,
-            position: ['20%', '35%'],
-            fontSize:16,
-            rich:{
-              a:{
-                fontSize:30,
+            position: ["20%", "35%"],
+            fontSize: 16,
+            rich: {
+              a: {
+                fontSize: 30
               },
-              b:{
-                fontSize:15,
-                verticalAlign:'middle',
+              b: {
+                fontSize: 15,
+                verticalAlign: "middle"
               },
-              c:{
-                fontSize:20,
-                align:'center',
+              c: {
+                fontSize: 20,
+                align: "center"
               }
             },
             // formatter: `{b}`
-            formatter:countryNum[i]+ '家'+ '\n' +dcn[i].name,
-            formatter:[
-              '{a| '+countryNum[i]+ '}{b| 家}' +"\n" + '{c| ' + dcn[i].name + '}'
-            ].join('\n'),
+            formatter: countryNum[i] + "家" + "\n" + dcn[i].name,
+            formatter: [
+              "{a| " +
+                countryNum[i] +
+                "}{b| 家}" +
+                "\n" +
+                "{c| " +
+                dcn[i].name +
+                "}"
+            ].join("\n")
           }
         });
-      } else if (dcn[i].amount > 100 && dcn[i].amount <=500) {
+      } else if (dcn[i].amount > 100 && dcn[i].amount <= 500) {
         countryMidBall.push({
           name: dcn[i].name,
           value: dcn[i].jindu,
           label: {
             show: true,
-            position: ['20%', '30%'],
-            color: '#333333',
-            fontSize:16,
-            rich:{
-              a:{
-                fontSize:28,
+            position: ["20%", "30%"],
+            color: "#333333",
+            fontSize: 16,
+            rich: {
+              a: {
+                fontSize: 28
               },
-              b:{
-                fontSize:14,
-                verticalAlign:'middle'
+              b: {
+                fontSize: 14,
+                verticalAlign: "middle"
               },
-              c:{
-                fontSize:20,
+              c: {
+                fontSize: 20
               }
             },
             // formatter: `{b}`
-            formatter:[
-              '{a| '+countryNum[i]+ '}{b| 家}' +"\n" + '{c| ' + dcn[i].name + '}'
-            ].join('\n'),            
+            formatter: [
+              "{a| " +
+                countryNum[i] +
+                "}{b| 家}" +
+                "\n" +
+                "{c| " +
+                dcn[i].name +
+                "}"
+            ].join("\n")
           }
         });
       } else {
-          countrySmallBall.push({
-            name: dcn[i].name,
-            value: dcn[i].jindu,
-            label: {
-              show: true,
-              position: ['15%', '25%'],
-              color: "#333333",
-              fontSize:16,
-              rich:{
-                a:{
-                  fontSize:28,
-                },
-                b:{
-                  fontSize:14,
-                },
-                c:{
-                  align:'center',
-                }
+        countrySmallBall.push({
+          name: dcn[i].name,
+          value: dcn[i].jindu,
+          label: {
+            show: true,
+            position: ["15%", "25%"],
+            color: "#333333",
+            fontSize: 16,
+            rich: {
+              a: {
+                fontSize: 28
               },
-              // formatter: `{b}`
-              formatter:[
-                '{a| '+countryNum[i]+ '}{b| 家}' +"\n" + '{c| ' + dcn[i].name + '}'
-              ].join('\n'),              
-            }
-          });        
+              b: {
+                fontSize: 14
+              },
+              c: {
+                align: "center"
+              }
+            },
+            // formatter: `{b}`
+            formatter: [
+              "{a| " +
+                countryNum[i] +
+                "}{b| 家}" +
+                "\n" +
+                "{c| " +
+                dcn[i].name +
+                "}"
+            ].join("\n")
+          }
+        });
       }
     }
     axios.get("./geoJson/world.json").then(res => {
       let worldJson = res.data;
       echarts.registerMap("world", worldJson);
       this.myEcharts = echarts.init(document.getElementById("world_box"));
-      let option = this.worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall);
+      let option = this.worldOption(
+        otherStyle,
+        countryBigBall,
+        countryMidBall,
+        countrySmallBall
+      );
       this.myEcharts.setOption(option);
+      //中国地图
+      let country = this.drawCountry
+      this.myEcharts.on("click", param => {
+        for (let i = 0; i < dcn.length; i++) {
+          if (param.name == dcn[i].name) {
+            // showCountry(country[i],dcn[i])
+            // console.log(country[i])
+            this.$store.commit("home/setCountryChange", country[i]);
+            this.$router.push({ name: "china" });
+            break;
+          }
+        }
+      });
     });
   },
   methods: {
-    worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
+     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
       return {
         geo: {
           type: "map",
@@ -142,33 +185,32 @@ export default {
             shadowOffsetY: 2
           },
           nameMap: {
-            'China': "中国",
+            China: "中国",
             "United States of America": "美国",
-            'Australia': "澳大利亚",
-            'Japan': "日本",
-            'Germany': "德国",
-            'India': "印度",
+            Australia: "澳大利亚",
+            Japan: "日本",
+            Germany: "德国",
+            India: "印度",
             "South Africa": "南非",
-            'Brazil': "巴西",
-            'Argentina': "阿根廷",
-            'Slovakia': "斯洛伐克",
-            'Mexico': "墨西哥",
-            'Russia': "俄罗斯"
+            Brazil: "巴西",
+            Argentina: "阿根廷",
+            Slovakia: "斯洛伐克",
+            Mexico: "墨西哥",
+            Russia: "俄罗斯",
+            "Austria": '奥地利'
           },
+          regions: otherStyle,
           emphasis: {
             itemStyle: {
               areaColor: "#dcf5fa"
             },
             label: {
               color: "green"
-              // show:false
             }
           },
           label: {
-            fontSize: 16,
-            // color: "white"
-          },
-          regions: otherStyle
+            fontSize: 16
+          }
         },
         series: [
           {
@@ -177,8 +219,8 @@ export default {
             symbol: `image://${balloonIcon}`,
             symbolSize: [173, 200],
             // formatter: `{a}`,
-            label:{
-              fontSize:18,
+            label: {
+              fontSize: 18
             },
             data: countryBigBall
           },
@@ -187,8 +229,8 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [129, 149],
-            label:{
-              fontSize:18,
+            label: {
+              fontSize: 18
             },
             data: countryMidBall
           },
@@ -197,14 +239,14 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [86, 100],
-            label:{
-              fontSize:18,
+            label: {
+              fontSize: 18
             },
-            data: countrySmallBall    
+            data: countrySmallBall
           }
         ]
       };
-    }
+     },
   }
 };
 </script>

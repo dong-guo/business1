@@ -11,9 +11,9 @@
     </div>
     <div class="home_body_right_content" :class="{'changeContent':drawBoxKey}">
       <ul>
-        <li v-for="(item,index) in drawCountry" :key="item+index">
+        <li v-for="(item,index) in drawCountryNumber" :key="item+index">
           <div class="record">
-            <span class="record_country">{{item}}</span>
+            <span class="record_country">{{item.name}}</span>
             <span class="record_number">{{drawNumber[index]}}</span>
           </div>
           <div class="shop">
