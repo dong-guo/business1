@@ -18,7 +18,7 @@ export default {
   computed: {
     ...mapState({
       drawCountryNumber: state => state.home.countryNumber,
-      drawCountry: state => state.home.country,
+      drawCountry: state => state.home.country
     })
   },
   mounted() {
@@ -60,15 +60,7 @@ export default {
               }
             },
             // formatter: `{b}`
-            formatter: countryNum[i] + "家" + "\n" + dcn[i].name,
-            formatter: [
-              "{a| " +
-                countryNum[i] +
-                "}{b| 家}" +
-                "\n" +
-                "{c| " +
-                dcn[i].name +
-                "}"
+            formatter: ["{a| " + countryNum[i] +"}{b| 家}" + "\n" + "{c| " + dcn[i].name +"}"
             ].join("\n")
           }
         });
@@ -95,13 +87,7 @@ export default {
             },
             // formatter: `{b}`
             formatter: [
-              "{a| " +
-                countryNum[i] +
-                "}{b| 家}" +
-                "\n" +
-                "{c| " +
-                dcn[i].name +
-                "}"
+              "{a| " + countryNum[i] +"}{b| 家}" + "\n" + "{c| " + dcn[i].name +"}"
             ].join("\n")
           }
         });
@@ -127,13 +113,7 @@ export default {
             },
             // formatter: `{b}`
             formatter: [
-              "{a| " +
-                countryNum[i] +
-                "}{b| 家}" +
-                "\n" +
-                "{c| " +
-                dcn[i].name +
-                "}"
+              "{a| " + countryNum[i] +"}{b| 家}" + "\n" + "{c| " + dcn[i].name +"}"
             ].join("\n")
           }
         });
@@ -150,13 +130,11 @@ export default {
         countrySmallBall
       );
       this.myEcharts.setOption(option);
-      //中国地图
-      let country = this.drawCountry
+      //跳转中国地图
+      let country = this.drawCountry;
       this.myEcharts.on("click", param => {
         for (let i = 0; i < dcn.length; i++) {
           if (param.name == dcn[i].name) {
-            // showCountry(country[i],dcn[i])
-            // console.log(country[i])
             this.$store.commit("home/setCountryChange", country[i]);
             this.$router.push({ name: "china" });
             break;
@@ -166,7 +144,7 @@ export default {
     });
   },
   methods: {
-     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
+    worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
       return {
         geo: {
           type: "map",
@@ -197,7 +175,7 @@ export default {
             Slovakia: "斯洛伐克",
             Mexico: "墨西哥",
             Russia: "俄罗斯",
-            "Austria": '奥地利'
+            Austria: "奥地利"
           },
           regions: otherStyle,
           emphasis: {
@@ -246,7 +224,7 @@ export default {
           }
         ]
       };
-     },
+    }
   }
 };
 </script>

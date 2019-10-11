@@ -1,7 +1,7 @@
 const state = {
   boxKey:false,
   allNum:'5788',
-  country:['China','USA','Japan','Germany','India','South Africa','Brazil',' Argentina','','Australia','Russia'],
+  country:['China','USA','Japan','Germany','India','South Africa','Brazil',' Argentina','Austria','Australia','Russia'],
   number:[5700,223,45,67,17,133,65,72,8,10,55],
   jw:[
     [100.5, 50.48],
@@ -29,7 +29,11 @@ const state = {
     {name:'澳大利亚',amount:10,jindu:[128.39,-20.01]},
     {name:'俄罗斯',amount:55,jindu:[49.45,64.37]}
   ],
-  countryChange:''
+  countryChange:'China',
+  letterName:['anhui','aomen','fujian','gansu','guangdong','guangxi','guizhou','hainan','hebei','heilongjiang','henan','hubei','hunan','jiangsu','jiangxi','jilin','liaoning','neimenggu','ningxia','qinghai','shandong','shanxi','shanxi1','sichuan','xinjiang','xizang','yunnan','zhejiang'],
+  chinaName:['安徽','澳门','福建','甘肃','广东','广西','贵州','海南','河北','黑龙江','河南','湖北','湖南','江苏','江西','吉林','辽宁','内蒙古','宁夏','青海','山东','山西','陕西','四川','新疆','西藏','云南','浙江'],
+  provincialChange:'guangdong',
+  provincialChinaChange:'广东'
  
 }
 const mutations = {
@@ -38,6 +42,12 @@ const mutations = {
   },
   setCountryChange:(state,string) => {
     state.countryChange = string
+  },
+  setProvincialChange:(state,string) => {
+    state.provincialChange = string
+  },
+  setProvincialChinaChange:(state,string) => {
+    state.provincialChinaChange = string
   }
 }
 const action = {

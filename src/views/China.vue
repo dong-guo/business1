@@ -5,7 +5,8 @@
       <div class="countryTitleText">中国地图</div>
       <div class="countryTitleRightPic"></div>
    </div>
-   <country class="mapBox"></country>
+   <country class="chinaMapBox" v-show="key"></country>
+   <Other-Country class="otherMapBox" v-show="!key"></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
 </div>
 
@@ -18,13 +19,21 @@ import echarts from "echarts";
 import { mapState } from "vuex"
 
 import Country from "../components/Country.vue"
+import OtherCountry from "../components/OtherCountry.vue"
+
 import GlobalCountry from "../components/GlobalCountry.vue"
 
 
 export default {
   name:'china',
+  data(){
+    return{
+      key:true
+    }
+  },
   components:{
     Country,
+    OtherCountry,
     GlobalCountry
   },
   computed:{
@@ -32,12 +41,18 @@ export default {
        drawCountry: state => state.home.countryChange,
     })
   },
-  data(){
-    return{}
-  },
   mounted(){
+    this.selectCountry()
   },
   methods:{
+    selectCountry(){
+       console.log('drawCountry',this.drawCountry)
+       let country = this.drawCountry
+       if(country !== 'China'){
+         this.key = !this.key
+         console.log('key',this.key)
+       }
+    }
   }
 
 
@@ -51,10 +66,17 @@ export default {
   height:984px;
   position:relative;
 }
-.mapBox{
+.chinaMapBox{
   position:absolute;
   top:23px;
   left:454px;
+  /* border:1px solid yellow; */
+}
+.otherMapBox{
+  position:absolute;
+  top:123px;
+  left:254px;
+  /* border:1px solid red; */
 }
 .countryTitleBox{
   width:250px;
