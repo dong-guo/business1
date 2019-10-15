@@ -82,10 +82,9 @@ export default {
               padding:20,
               backgroundColor:'green',
               // backgroundColor:`image://${newsIcon}`,
-              backgroundColor:{
-               image:`image://${newsIcon}`,
-                  // image:weatherIcons.sunny
-              },
+              // backgroundColor:{
+              //  image:`image://${newsIcon}`,
+              // },
               // borderWidth:2,
               borderColor:'red',
               position:'right',
@@ -104,6 +103,7 @@ export default {
               {
                 type:'map',
                 map:'China',
+                // geoIndex:0,
                 zoom:1,
                 emphasis:{
                   label:{

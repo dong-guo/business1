@@ -33,8 +33,10 @@ const state = {
   letterName:['anhui','aomen','fujian','gansu','guangdong','guangxi','guizhou','hainan','hebei','heilongjiang','henan','hubei','hunan','jiangsu','jiangxi','jilin','liaoning','neimenggu','ningxia','qinghai','shandong','shanxi','shanxi1','sichuan','xinjiang','xizang','yunnan','zhejiang'],
   chinaName:['安徽','澳门','福建','甘肃','广东','广西','贵州','海南','河北','黑龙江','河南','湖北','湖南','江苏','江西','吉林','辽宁','内蒙古','宁夏','青海','山东','山西','陕西','四川','新疆','西藏','云南','浙江'],
   provincialChange:'guangdong',
-  provincialChinaChange:'广东'
- 
+  provincialChinaChange:'广东',
+  provincialZoom:'0.9',
+  cityChange:'',
+  cityChinaChange:'',
 }
 const mutations = {
   setBoxKey: (state, boolean) => {
@@ -48,6 +50,12 @@ const mutations = {
   },
   setProvincialChinaChange:(state,string) => {
     state.provincialChinaChange = string
+  },
+  setProvincialZoom:(state,number) => {
+    state.provincialZoom = number
+  },
+  setCityChange:(state,string) => {
+    state.cityChange = string
   }
 }
 const action = {

@@ -8,6 +8,9 @@
    </div>
    <provincial-box class="provincialMapBox"></provincial-box>
    <global-provincial class="globalProvincial"></global-provincial>
+   <provincialnews-box class="provincialnewsBox"></provincialnews-box>
+   <scaling-box class="scalingBox"></scaling-box>
+   <provincialshop-num class="provincialshopNum"></provincialshop-num>
 </div>
 
 </template>
@@ -19,6 +22,9 @@ import echarts from "echarts";
 import ProvincialBox from "../components/ProvincialBox.vue"
 import GlobalProvincial from "../components/GlobalProvincial"
 import ReachProvincial from "../components/ReachProvincial"
+import ProvincialnewsBox from  "../components/ProvincialnewsBox"
+import ProvincialshopNum from  "../components/ProvincialshopNum"
+import ScalingBox from "../components/ScalingBox"
 
 import { mapState } from "vuex";
 
@@ -31,6 +37,9 @@ export default {
     ProvincialBox,
     GlobalProvincial,
     ReachProvincial,
+    ProvincialnewsBox,
+    ProvincialshopNum,
+    ScalingBox
   },
   computed:{
     ...mapState({
@@ -105,5 +114,20 @@ export default {
   position:absolute;
   top:807px;
   left:44px;
+}
+.provincialnewsBox{
+  position:absolute;
+  left:1499px;
+  top:27px;
+}
+.scalingBox{
+  position:absolute;
+  left:1739px;
+  top:744px;
+}
+.provincialshopNum{
+  position:absolute;
+  left:1676px;
+  top:827px;
 }
 </style>
