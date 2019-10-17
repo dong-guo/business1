@@ -15,7 +15,7 @@
     </div>
     <div class="changeShop_content">
       <ul id="all">
-        <li v-for ="(item,index) in drawShopData" :key="item+index" class="all_list">
+        <li v-for ="(item,index) in totalPage" :key="item+index" class="all_list">
           <shop-list-item class="shopListItem" :item="item"></shop-list-item>
         </li>
       </ul>
@@ -63,8 +63,10 @@ export default {
             let pageNum = Math.ceil(itemListNum.length/pagesize)||1
             for(let i = 0; i<pageNum; i++){
               this.totalPage[i] = this.drawShopData.slice(pagesize*i,pagesize*(i+1))
-              console.log('totalPage',this.totalPage)
             }
+            console.log('totalPage',this.totalPage)
+            this.totalPage = this.totalPage[this.currentPage];
+            console.log('当前显示页',this.totalPage)
         }
       }
    }
