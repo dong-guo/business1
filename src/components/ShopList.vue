@@ -13,9 +13,9 @@
       </div>
       <div class="changeShop_title_corner"></div>
     </div>
-    <div class="changeShop_content">
-      <ul id="all">
-        <li v-for ="(item,index) in totalPage" :key="item+index" class="all_list">
+    <div class="changeShop_content" @click="changeCurrentPage">
+      <ul id="all" v-for="(item,index) in totalPage" :key="item+index">
+        <li v-for ="(item,index) in totalPage[index]" :key="item+index" class="all_list">
           <shop-list-item class="shopListItem" :item="item"></shop-list-item>
         </li>
       </ul>
@@ -39,6 +39,7 @@ export default {
        shopKey:true,
        totalPage:[],
        totalShow:[],
+       pageNum:'',
        currentPage:0
      }
    },
@@ -60,14 +61,23 @@ export default {
             let itemListNum = this.drawShopData
             let pageno = 1
             let pagesize = 6
-            let pageNum = Math.ceil(itemListNum.length/pagesize)||1
-            for(let i = 0; i<pageNum; i++){
+            this.pageNum = Math.ceil(itemListNum.length/pagesize)||1
+            for(let i = 0; i<this.pageNum; i++){
               this.totalPage[i] = this.drawShopData.slice(pagesize*i,pagesize*(i+1))
             }
             console.log('totalPage',this.totalPage)
-            this.totalPage = this.totalPage[this.currentPage];
-            console.log('当前显示页',this.totalPage)
+            this.totalShow = this.totalPage[this.currentPage];
+            console.log('当前显示页',this.totalShow)
         }
+      },
+      changeCurrentPage(){
+        // this.currentPage = this.currentPage +1
+        if(this.currentPage>=this.pageNum){
+          this.currentPage = this.pageNum-1
+        }
+        this.totalShow = this.totalPage[this.currentPage];
+        console.log('改变当前显示页',this.totalShow)
+        console.log('this.currentPage',this.currentPage)
       }
    }
 }
@@ -178,8 +188,8 @@ export default {
 }
 .changeShop_content{
   width:1514px;
-  height:859px;
-  /* background:lightblue; */
+  /* height:859px; */
+  background:lightblue;
 }
 .changeShop_content ul{
   display:flex;
@@ -188,10 +198,11 @@ export default {
   justify-content:flex-start;
   /* width:1452px; */
   margin:0 auto;
+  padding-top:69px;
   /* background-color:lightgrey; */
 }
 .changeShop_content ul li{
   margin:0 30px;
-  margin-top:82px;
+  margin-bottom:82px;
 }
 </style>
