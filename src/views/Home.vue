@@ -7,7 +7,7 @@
     </div> -->
     <div class="home_body">
       <world></world>
-      <reach></reach>
+      <reach class="reach"></reach>
       <global class="home_global"></global>
       <div class="home_body_top">
         <p>截止目前,全球共有门店<span>(家)</span></p>
@@ -151,6 +151,11 @@ export default {
   top: 843px;
   left:  44px;
   /* border:1px solid yellow; */
+}
+.reach{
+  position: absolute;
+  top: 130px;
+  left: 90px;
 }
 .router-view{
   color:brown;

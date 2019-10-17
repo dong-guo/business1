@@ -1,5 +1,5 @@
 <template>
-  <div class="reach">
+  <div class="reachBox">
     <ul>
       <li class="reach_after"  :class="{'textColor1':discColor1}">
         <div class="reach_after_disc" :class="{'activeColor1':discColor1}"></div>
@@ -41,13 +41,10 @@ export default {
 </script>
 
 <style scoped>
-.reach {
+.reachBox {
   /* background-color:saddlebrown; */
   width: 193px;
   height: 120px;
-  position: absolute;
-  top: 130px;
-  left: 90px;
   font-size: 30px;
   font-weight: 400;
   color: rgba(229, 229, 229, 1);

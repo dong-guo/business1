@@ -48,8 +48,8 @@ export default {
         geo: {
             type: "map",
             map: "cityChange",
-            zoom:1,
-            top: "80px",
+            zoom:1.2,
+            top: "60px",
             itemStyle: {
               areaColor: "#00083C",
               borderColor: "#2B3A7C",

@@ -1,12 +1,12 @@
 <template>
-<div class="provincialShop">
-  <div class="singleShop">
+<div class="cityShop">
+    <div class="singleShop">
     <div class="greenballoon"></div>
-    <p>单品店&nbsp;&nbsp;(55)</p>
+    <p>单品店&nbsp;&nbsp;(99)</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>
-      <p>综合店&nbsp;&nbsp;(8)</p>
+      <p>综合店&nbsp;&nbsp;(88)</p>
     </div>
 </div>
 
@@ -18,23 +18,24 @@ export default{
 </script>
 
 <style scoped>
-.provincialShop{
+.cityShop{
   width:220px;
   height:103px;
   /* background-color:green; */
 }
 .singleShop{
   /* display:flex; */
-  position:relative;
   /* background-color:burlywood; */
+  position:relative;
   height:40px;
   width:180px;
 }
 .greenballoon{
- margin-right:27px;
+ margin-right:17px;
  width:32px;
  height:40px;
  /* border:1px solid pink; */
+ box-sizing:border-box;
  background-image:url(../assets/images/greenBalloon@2x.png);
  background-repeat:no-repeat;
  background-size:cover;
@@ -43,8 +44,8 @@ export default{
   width:168px;
   height:40px;
   position:absolute;
-  top:0;
   left:53px;
+  top:0;
   /* border:1px solid red; */
   color:#00AF6D;
   font-size:30px;
@@ -54,7 +55,6 @@ export default{
   height:40px;
   width:180px;
   margin-top:23px;
-  /* display:flex; */
   position:relative;
   bottom:0;
   left:0;

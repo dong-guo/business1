@@ -30,7 +30,7 @@ export default {
    },
    created(){
      console.log('cityMap',cityMap)
-     console.log(Object.keys(cityMap))
+    //  console.log(Object.keys(cityMap))
    },
    mounted(){
       // let provincialChange = this.drawProvincialChange
@@ -76,9 +76,11 @@ export default {
             let cityAry = Object.keys(cityMap)
             for(let i = 0; i<cityAry.length; i++){
               if(params.name==cityAry[i]){
-                 console.log('cityMapNum',cityMap[cityAry[i]])
+                //  console.log('cityMapNum',cityMap[cityAry[i]])
+                 let cityname = params.name
+                 let city = cityname.substr(0,cityname.length-1)
                  this.$store.commit("home/setCityChange",cityMap[cityAry[i]])
-                 this.$store.commit
+                 this.$store.commit("home/setCityChinaChange",city)
                  this.$router.push({ name: "city" });
               }
             }
