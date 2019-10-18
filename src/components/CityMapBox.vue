@@ -17,23 +17,46 @@ export default {
   },
   computed:{
     ...mapState({
-      drawCityChange: state => state.home.cityChange
+      drawCityChange: state => state.home.cityChange,
+      drawCityZoom: state => state.home.cityZoom,
     })
+  },
+  watch:{
+    drawCityZoom:{
+         handler(newVal,oldVal){
+           this.actionCity()
+         },
+         deep:true
+    }
   },
   mounted(){
      console.log('城市代号',this.drawCityChange)
+    //  let cityZoom = this.drawCityZoom
+    //  let cityChange = this.drawCityChange
+    //   axios.get(`./geoJson/city/${cityChange}.json`)
+    //     .then(res => {
+    //       let cityChangeJson = res.data;
+    //       echarts.registerMap("cityChange", cityChangeJson);
+    //       this.myEcharts = echarts.init(document.getElementById("cityMap"));
+    //       let option = this.cityChangeOption(cityZoom);
+    //       this.myEcharts.setOption(option); 
+    //   })
+    this.actionCity();
+  },
+  methods:{
+  actionCity(){
+     let cityZoom = this.drawCityZoom
      let cityChange = this.drawCityChange
       axios.get(`./geoJson/city/${cityChange}.json`)
         .then(res => {
           let cityChangeJson = res.data;
           echarts.registerMap("cityChange", cityChangeJson);
           this.myEcharts = echarts.init(document.getElementById("cityMap"));
-          let option = this.cityChangeOption();
+          let option = this.cityChangeOption(cityZoom);
           this.myEcharts.setOption(option); 
       })
   },
-  methods:{
-   cityChangeOption(){
+   cityChangeOption(cityZoom){
      return{
         tooltip:{
             show:true,
@@ -48,7 +71,8 @@ export default {
         geo: {
             type: "map",
             map: "cityChange",
-            zoom:1.2,
+            roam:'move',
+            zoom:cityZoom,
             top: "60px",
             itemStyle: {
               areaColor: "#00083C",

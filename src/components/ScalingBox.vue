@@ -1,13 +1,16 @@
 <template>
 <div class="scalingContent">
   <div class="enlarge" @click="enlargeMap"></div>
-  <div class="reduce"></div>
+  <div class="reduce" @click="reduceMap"></div>
 </div>
 
 </template>
 <script>
 
 import { mapState } from "vuex"
+
+import axios from "axios";
+import echarts from "echarts";
 
 export default {
   name:'scalingbox',
@@ -16,18 +19,51 @@ export default {
   },
   computed:{
     ...mapState({
-      drawProvincialZoom: state => state.home.provincialZoom
+      drawProvincialZoom: state => state.home.provincialZoom,
+      drawCityZoom: state => state.home.cityZoom
     })
   },
   mounted(){
+    console.log('路由地址',this.$route.name)
   },
   methods:{
     enlargeMap(){
-      console.log('类型',typeof(this.drawProvincialZoom))
-      let zoom =Number(this.drawProvincialZoom)
-      zoom += 0.05
-      this.$store.commit("home/setProvincialZoom",zoom);
-      console.log('vuexzoom',this.drawProvincialZoom)
+      if(this.$route.name =='provincial'){
+          let provincialzoom =Number(this.drawProvincialZoom)
+          provincialzoom += 0.1
+          if(provincialzoom>2){
+            provincialzoom=2
+          }
+          this.$store.commit("home/setProvincialZoom",provincialzoom);
+          console.log('provincialzoom',this.drawProvincialZoom)
+      } else{
+          let cityzoom =Number(this.drawCityZoom)
+          cityzoom += 0.1
+          if(cityzoom>2){
+            cityzoom=2
+          }
+          this.$store.commit("home/setCityZoom",cityzoom);
+          console.log('cityzoom',this.drawCityZoom)        
+      }
+    },
+    reduceMap(){
+      if (this.$route.name == 'provincial'){
+          let provincialzoom =Number(this.drawProvincialZoom)
+          provincialzoom -= 0.1
+          if(provincialzoom<0.5){
+            provincialzoom=0.5
+          }
+          this.$store.commit("home/setProvincialZoom",provincialzoom);
+          console.log('provincialzoom',this.drawProvincialZoom) 
+      }  else{
+          let cityzoom =Number(this.drawCityZoom)
+          cityzoom -= 0.1
+          if(cityzoom < 0.5){
+            cityzoom = 0.5
+          }
+          this.$store.commit("home/setCityZoom",cityzoom);
+          console.log('cityzoom',this.drawCityZoom)         
+      }   
     }
   },
 

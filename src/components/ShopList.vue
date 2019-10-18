@@ -13,12 +13,14 @@
       </div>
       <div class="changeShop_title_corner"></div>
     </div>
-    <div class="changeShop_content" @click="changeCurrentPage">
-      <ul id="all" v-for="(item,index) in totalPage" :key="item+index">
-        <li v-for ="(item,index) in totalPage[index]" :key="item+index" class="all_list">
-          <shop-list-item class="shopListItem" :item="item"></shop-list-item>
-        </li>
-      </ul>
+    <div id="changeShop_content" class="swiper-container">
+      <div id="changeShop_content_listBox" class="swiper-wrapper">
+        <ul v-for="(item,index) in totalPage" :key="item+index" class="swiper-slide">
+          <li v-for ="(item,index) in totalPage[index]" :key="item+index" class="all_list">
+            <shop-list-item class="shopListItem" :item="item"></shop-list-item>
+          </li>
+        </ul>
+      </div>
     </div> 
   </div>
 </div>
@@ -26,13 +28,15 @@
 <script>
 
 import ShopListItem from "../components/ShopListItem.vue"
+import Swiper from 'swiper';
+import 'swiper/css/swiper.min.css';
 
 import { mapState } from "vuex"
 
 export default {
    name:'shopList',
    components:{
-     ShopListItem , 
+     ShopListItem ,
    },
    data(){
      return{
@@ -40,7 +44,8 @@ export default {
        totalPage:[],
        totalShow:[],
        pageNum:'',
-       currentPage:0
+       currentPage:0,
+       startPoint:0,
      }
    },
    computed:{
@@ -49,8 +54,20 @@ export default {
      })
    },
    mounted(){
+     new Swiper ('.swiper-container',{       
+          loop: true,
+          autoplay:{
+            delay:2000,
+          },
+          pagination: '.swiper-pagination',
+          observer:true,
+          observeParents:true,
+     })
+     
+    //  console.log('对象',Swiper)
    },
    methods:{
+     //开启店铺列表开关
      openShopKey(){
        this.shopKey = !this.shopKey
        this.openItem()
@@ -64,7 +81,7 @@ export default {
             this.pageNum = Math.ceil(itemListNum.length/pagesize)||1
             for(let i = 0; i<this.pageNum; i++){
               this.totalPage[i] = this.drawShopData.slice(pagesize*i,pagesize*(i+1))
-            }
+            }      
             console.log('totalPage',this.totalPage)
             this.totalShow = this.totalPage[this.currentPage];
             console.log('当前显示页',this.totalShow)
@@ -79,7 +96,7 @@ export default {
         console.log('改变当前显示页',this.totalShow)
         console.log('this.currentPage',this.currentPage)
       }
-   }
+     },
 }
 </script>
 
@@ -186,22 +203,33 @@ export default {
   top:0;
   right:0;
 }
-.changeShop_content{
+#changeShop_content{
   width:1514px;
-  /* height:859px; */
-  background:lightblue;
+  height:859px;
+  /* background:lightblue; */
+
 }
-.changeShop_content ul{
+#changeShop_content_listBox{
+  /* width:1514px; */
+  /* background:yellowgreen; */
+  /* opacity:0.5; */
+  /* position:absolute;
+  transition: top 1s; */
+}
+#changeShop_content ul{
   display:flex;
   flex-direction:row;
   flex-wrap:wrap;
   justify-content:flex-start;
-  /* width:1452px; */
+  width:1514px;
+  height:859px;
   margin:0 auto;
   padding-top:69px;
-  /* background-color:lightgrey; */
+  box-sizing:border-box;
+  /* background-color:blue; */
+  /* border:1px solid red; */
 }
-.changeShop_content ul li{
+#changeShop_content ul li{
   margin:0 30px;
   margin-bottom:82px;
 }

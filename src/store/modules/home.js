@@ -35,6 +35,7 @@ const state = {
   provincialChange:'guangdong',
   provincialChinaChange:'广东',
   provincialZoom:'0.9',
+  cityZoom:'1.2',
   cityChange:'441900',
   cityChinaChange:'',
 }
@@ -53,6 +54,9 @@ const mutations = {
   },
   setProvincialZoom:(state,number) => {
     state.provincialZoom = number
+  },
+  setCityZoom:(state,number) => {
+    state.cityZoom = number
   },
   setCityChange:(state,string) => {
     state.cityChange = string

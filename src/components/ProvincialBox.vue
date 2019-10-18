@@ -28,9 +28,13 @@ export default {
        drawProvincialZoom: state => state.home.provincialZoom,
      })
    },
-   created(){
-     console.log('cityMap',cityMap)
-    //  console.log(Object.keys(cityMap))
+   watch:{
+       drawProvincialZoom:{
+         handler(newVal,oldVal){
+           this.actionProvincial()
+         },
+         deep:true
+       }
    },
    mounted(){
       // let provincialChange = this.drawProvincialChange
@@ -66,10 +70,11 @@ export default {
           this.myEcharts = echarts.init(document.getElementById("provincialBox"));
           let option = this.provincialOption(provincialZoom);
           this.myEcharts.setOption(option); 
-          this.myEcharts.on('georoam',(params)=>{
-            this.$store.commit("home/setProvincialZoom",params.zoom);
-            console.log('roam',params)
-          })
+
+          // this.myEcharts.on('georoam',(params)=>{
+          //   this.$store.commit("home/setProvincialZoom",params.zoom);
+          //   console.log('roam',params)
+          // })
           //城市地图跳转
           this.myEcharts.on('click',(params) =>{
             console.log('city',params.name)
@@ -107,11 +112,11 @@ export default {
           geo: {
             type: "map",
             map: "provincialChange",
-            // roam:true,
-            // scaleLimit:{
-            //   min:0.6,
-            //   max:2,
-            // },
+            roam:'move',
+            scaleLimit:{
+              min:0.6,
+              max:2,
+            },
             zoom: provincialZoom,
             top: "1px",
             itemStyle: {

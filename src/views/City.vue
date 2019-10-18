@@ -10,6 +10,7 @@
   <shop-list class="shopList"></shop-list>
   <city-news-box class="cityNewsBox"></city-news-box>
   <global-city class="golbalCity"></global-city>
+  <scaling-box class="scalingBox"></scaling-box>
   <city-shop-num class="cityShopNum"></city-shop-num>
 </div>
 
@@ -21,6 +22,7 @@ import GlobalCity from "../components/GlobalCity.vue"
 import ShopList from "../components/ShopList.vue"
 import CityShopNum from "../components/CityShopNum.vue"
 import CityNewsBox from "../components/CityNewsBox.vue"
+import ScalingBox from "../components/ScalingBox"
 
 import axios from "axios";
 import echarts from "echarts";
@@ -36,7 +38,8 @@ export default {
       GlobalCity,
       ShopList,
       CityShopNum,
-      CityNewsBox
+      CityNewsBox,
+      ScalingBox
     }
 }
 </script>
@@ -115,6 +118,12 @@ export default {
   position:absolute;
   left:1499px;
   top:81px;
+}
+.scalingBox{
+  position:absolute;
+  left:1739px;
+  top:744px;
+  /* background:red; */
 }
 .cityShopNum{
   position:absolute;
