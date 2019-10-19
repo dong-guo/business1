@@ -73,30 +73,55 @@ export default {
   },
   methods: {
     countryOption(content) {
-      let weatherIcons = {
-        'sunny':'../assets/images/news@2x.png',
-      } 
       return {
           tooltip:{
               trigger:'item',
-              padding:20,
-              backgroundColor:'green',
-              // backgroundColor:`image://${newsIcon}`,
-              // backgroundColor:{
-              //  image:`image://${newsIcon}`,
-              // },
-              // borderWidth:2,
+              // padding:20,
+              position:'right',
               borderColor:'red',
               position:'right',
               // symbol:`image://${newsIcon}`,
-              formatter:[
-                "招商经理：刘建军" +'<br/>'+
-                "联系电话：13412345678"+'<br/>'+
-                "负责区域：青海、西藏、内蒙古、山西"
-              ].join("\n"),
+              // formatter:[
+              //   "招商经理：刘建军" +'<br/>'+
+              //   "联系电话：13412345678"+'<br/>'+
+              //   "负责区域：青海、西藏、内蒙古、山西"
+              // ].join("\n"),
+              // formatter:function(params){
+              //   let res = params.name+'<br/>';
+              //   let s = this.myEcharts.getOption()
+              //   if (params.name.substring(params.name.length-1)!='省'){
+              //     for(let j = 0; j<s.series[0].markPoint.data.length;j++){
+              //       if(s.series[0].markPoint.data[j].name==params.name){
+              //         res+="<img style='width:250px;height:150px;' src='"+s.series[0].markPoint.data[j].pic+"'/>"
+              //       }
+              //     }
+              //   }
+              //   return res;
+              // },
+              formatter:function(params){
+                console.log('formatter',params)
+                let myseries = params.dataIndex
+                console.log('myseries',myseries)
+                // let res = params.name
+                let res ="<img style='width:250px; height:150px;' src='../saaets/images/nesw.png'/>"
+                // let s = this.myEcharts.setOption(option);
+                return res;
+              },
               textStyle:{
-                color:'#fff',
+                color:'yellow',
                 fontSize:20,
+                width:1800,
+                height:300,
+                rich:{
+                  a:{
+                    color:'red',
+                    width:800,
+                    height:200,
+                    backgroundColor:{
+                      image:`image://${newsIcon}`
+                    }
+                  }
+                }
               }
           },
           series:[
@@ -108,7 +133,7 @@ export default {
                 emphasis:{
                   label:{
                     show:true,
-                    color:'#000001'
+                    color:'#000001',
                   },
                   itemStyle:{
                     areaColor:'#33D3F6'
@@ -133,7 +158,7 @@ export default {
                     }
                   ]
                 }
-              }
+              },
           ]
       };
     }

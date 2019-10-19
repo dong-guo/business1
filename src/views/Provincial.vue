@@ -6,7 +6,7 @@
       <div class="provincialTitleText">{{drawProvincialChinaChange}}加盟商分布</div>
       <div class="provincialTitleRightPic"></div>
    </div>
-   <provincial-box class="provincialMapBox"></provincial-box>
+   <provincial-map-box class="provincialMapBox"></provincial-map-box>
    <global-provincial class="globalProvincial"></global-provincial>
    <provincialnews-box class="provincialnewsBox"></provincialnews-box>
    <scaling-box class="scalingBox"></scaling-box>
@@ -19,7 +19,7 @@
 import axios from "axios";
 import echarts from "echarts";
 
-import ProvincialBox from "../components/ProvincialBox.vue"
+import ProvincialMapBox from "../components/ProvincialMapBox.vue"
 import GlobalProvincial from "../components/GlobalProvincial"
 import ReachProvincial from "../components/ReachProvincial"
 import ProvincialnewsBox from  "../components/ProvincialnewsBox"
@@ -34,7 +34,7 @@ export default {
     return{}
   },
   components:{
-    ProvincialBox,
+    ProvincialMapBox,
     GlobalProvincial,
     ReachProvincial,
     ProvincialnewsBox,

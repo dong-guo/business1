@@ -37,25 +37,6 @@ export default {
        }
    },
    mounted(){
-      // let provincialChange = this.drawProvincialChange
-      // let provincialZoom = this.drawProvincialZoom
-      // console.log('provincialChange',this.drawProvincialChange)
-      // axios.get(`./geoJson/province/${provincialChange}.json`)
-      // .then(res => {
-      //   let provincialChangeJson = res.data;
-      //   echarts.registerMap("provincialChange", provincialChangeJson);
-      //   this.myEcharts = echarts.init(document.getElementById("provincialBox"));
-      //   let option = this.provincialOption(provincialZoom);
-      //   this.myEcharts.setOption(option); 
-      //   this.myEcharts.on('georoam',(params)=>{
-      //     this.$store.commit("home/setProvincialZoom",params.zoom);
-      //     console.log('roam',params)
-      //   })
-      //   //地图跳转
-      //   this.myEcharts.on('click',(params) =>{
-      //     this.$router.push({ name: "city" });
-      //   })
-      // })  
       this.actionProvincial()
    },
    methods:{
@@ -98,12 +79,12 @@ export default {
             show:true,
             triger:'item',
             borderWidth:2,
-          //   formatter:[
-          //    "招商经理：刘建军" +'<br/>'+
-          //    "联系电话：13412345678"+'<br/>'+
-          //    "负责区域：青海、西藏、内蒙古、山西"
-          //  ].join("\n"),
-          formatter:'{a}',
+            formatter:[
+             "招商经理：刘建军" +'<br/>'+
+             "联系电话：13412345678"+'<br/>'+
+             "负责区域：青海、西藏、内蒙古、山西"
+           ].join("\n"),
+          // formatter:'{a}',
             textStyle:{
                   color:'#fff',
                   fontSize:20,

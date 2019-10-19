@@ -5,7 +5,7 @@
       <div class="countryTitleText">中国地图</div>
       <div class="countryTitleRightPic"></div>
    </div>
-   <country class="chinaMapBox" v-show="key"></country>
+   <country-map-box class="chinaMapBox" v-show="key"></country-map-box>
    <Other-Country class="otherMapBox" v-show="!key"></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
 </div>
@@ -18,7 +18,7 @@ import axios from "axios";
 import echarts from "echarts";
 import { mapState } from "vuex"
 
-import Country from "../components/Country.vue"
+import CountryMapBox from "../components/CountryMapBox.vue"
 import OtherCountry from "../components/OtherCountry.vue"
 
 import GlobalCountry from "../components/GlobalCountry.vue"
@@ -32,7 +32,7 @@ export default {
     }
   },
   components:{
-    Country,
+    CountryMapBox,
     OtherCountry,
     GlobalCountry
   },
