@@ -8,6 +8,7 @@ import echarts from "echarts";
 
 import { mapState } from "vuex";
 
+
 import cricleIcon from "../base64/cricle";
 import threadIcon from "../base64/thread";
 import thread2Icon from "../base64/thread2";
@@ -69,56 +70,44 @@ export default {
             }
       })
     })
-    
+    // console.log('countryOption',this.countryOption(content).series)
   },
   methods: {
     countryOption(content) {
       return {
           tooltip:{
               trigger:'item',
-              // padding:20,
+              padding:20,
               position:'right',
               borderColor:'red',
               position:'right',
               // symbol:`image://${newsIcon}`,
-              // formatter:[
-              //   "招商经理：刘建军" +'<br/>'+
-              //   "联系电话：13412345678"+'<br/>'+
-              //   "负责区域：青海、西藏、内蒙古、山西"
-              // ].join("\n"),
+              formatter:[
+                "招商经理：刘建军" +'<br/>'+
+                "联系电话：13412345678"+'<br/>'+
+                "负责区域：青海、西藏、内蒙古、山西"
+              ].join("\n"),
               // formatter:function(params){
-              //   let res = params.name+'<br/>';
-              //   let s = this.myEcharts.getOption()
-              //   if (params.name.substring(params.name.length-1)!='省'){
-              //     for(let j = 0; j<s.series[0].markPoint.data.length;j++){
-              //       if(s.series[0].markPoint.data[j].name==params.name){
-              //         res+="<img style='width:250px;height:150px;' src='"+s.series[0].markPoint.data[j].pic+"'/>"
-              //       }
-              //     }
-              //   }
+              //   console.log('formatter',params)
+              //   // let myseries = countryOption(content).series
+              //   // console.log('myseries',myseries)
+              //   // let res ="<img style='width:250px; height:150px; border-radius:20px;' src='../assets/image/news.png'/>"
+              //   let res = "<span style=' display:block;width:250px;height:150px;border:1px solid yellow;background-image:url(../assets/images/shop_list@2x.png);background-size:cover;'><span>"
               //   return res;
               // },
-              formatter:function(params){
-                console.log('formatter',params)
-                let myseries = params.dataIndex
-                console.log('myseries',myseries)
-                // let res = params.name
-                let res ="<img style='width:250px; height:150px;' src='../saaets/images/nesw.png'/>"
-                // let s = this.myEcharts.setOption(option);
-                return res;
-              },
               textStyle:{
                 color:'yellow',
                 fontSize:20,
                 width:1800,
                 height:300,
                 rich:{
-                  a:{
+                  img:{
                     color:'red',
                     width:800,
                     height:200,
                     backgroundColor:{
-                      image:`image://${newsIcon}`
+                      // image:`image://${newsIcon}`
+                      image:'../assets/image/news.png',
                     }
                   }
                 }
@@ -172,5 +161,11 @@ export default {
   width: 1012px;
   height: 836px;
   /* border:1px solid yellow; */
+}
+.bg-img{
+  background-image:url(../assets/images/news@2x.png);
+  height:100px;
+  width:200px;
+  border:1px solid yellow;
 }
 </style>

@@ -79,12 +79,18 @@ export default {
             show:true,
             triger:'item',
             borderWidth:2,
-            formatter:[
-             "招商经理：刘建军" +'<br/>'+
-             "联系电话：13412345678"+'<br/>'+
-             "负责区域：青海、西藏、内蒙古、山西"
-           ].join("\n"),
+            // formatter:[
+            //  "招商经理：刘建军" +'<br/>'+
+            //  "联系电话：13412345678"+'<br/>'+
+            //  "负责区域：青海、西藏、内蒙古、山西"
+            // ].join("\n"),
           // formatter:'{a}',
+            formatter:function(params,provincialChange){
+              console.log('provincial',params)
+              console.log('provincialChange',provincialChange)
+              let res = params.name
+              return res
+            },
             textStyle:{
                   color:'#fff',
                   fontSize:20,
@@ -132,7 +138,7 @@ export default {
                 },
                 label:{
                   color:'white',
-                }
+                },
               },
               {
                 name:'广州市',
@@ -152,6 +158,7 @@ export default {
               coordinateSystem: "geo",
               data:[
                   {
+                    name:'富都家私单品店',
                     value:[113,22.5],
                     symbol:`image://${yellowballoonIcon}`,
                     symbolSize: [32,40],
@@ -160,6 +167,7 @@ export default {
                     }
                   },
                   {
+                    name:'三环波及综合店',
                     value:[114,25],
                     symbol:`image://${greenballoonIcon}`,
                     symbolSize: [32,40],
@@ -172,6 +180,7 @@ export default {
             {
               type:'map',
               map:'provincialChange',
+              coordinateSystem: "geo",
               geoIndex:0,
               // zoom:0.9,
               // top: "1px",
