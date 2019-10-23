@@ -14,20 +14,24 @@
         <li v-for="(item,index) in drawCountryNumber" :key="item+index">
           <div class="record">
             <span class="record_country">{{item.name}}</span>
-            <span class="record_number">{{drawNumber[index]}}</span>
+            <span class="record_number">{{item.total}}</span>
           </div>
           <div class="shop">
             <div class="shop_franchser">
               <div class="shop_franchser_name">加盟店</div>
               <div class="shop_franchser_number">
-                {{drawNumber[index]}}
+                <!-- {{drawNumber[index]}} -->
+                {{item.franchiseStore}}
+                <!-- {{drawCountryNumber[index].franchiseStore}} -->
                 <span>家</span>
               </div>
             </div>
             <div class="shop_sony">
               <div class="shop_sony_name">直营店</div>
               <div class="shop_sony_number">
-                24<span>家</span>
+                {{item.directSaleStore}}
+                <!-- {{drawCountryNumber[index].directSaleStore}} -->
+                <span>家</span>
               </div>
             </div>
             <div class="shop_left"></div>
@@ -45,6 +49,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import { mapState } from "vuex";
 
 export default {
@@ -58,13 +63,14 @@ export default {
   computed: {
     ...mapState({
       drawBoxKey: state => state.home.boxKey,
-      drawNum: state => state.home.allNum,
+      drawNum: state => state.home.allTotal,
       drawCountry: state => state.home.country,
       drawNumber: state => state.home.number,
       drawCountryNumber: state => state.home.countryNumber
     })
   },
   mounted(){
+      console.log('drawCountryNumberShop',this.drawCountryNumber[0].franchiseStore)
   },
   methods: {
     change() {

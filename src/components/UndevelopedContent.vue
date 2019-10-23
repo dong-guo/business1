@@ -8,14 +8,55 @@
 
 </template>
 <script>
+import axios from "axios";
+import { mapState } from "vuex"
 export default {
     name:'undevelopedContent',
     data(){
        return {
         //  urbanArea:[],
-         urbanArea:['阳村市','五华县','惠来县','陆丰市','博社村','雷州市','龙门县','紫金县']
+         urbanArea:[]
+       }
+    },
+    computed:{
+      ...mapState({
+        drawValueCountry: state => state.succession.valueCountry,
+        drawValueProvincial: state => state.succession.valueProvincial,
+        drawValueCity: state => state.succession.valueCity
+      })
+    },
+    watch:{
+      drawValueCountry(newValue,oldValue){
+        //  console.log('unValueCountry',this.drawValueCountry)
+         this.urbanArea = []
+      },
+      // drawValueProvincial(newValue,oldValue){
+      //    console.log('unValueProvincial',this.drawValueProvincial)
+      // },
+      drawValueCity(newValue,oldValue){
+        //  console.log('unValueCity',this.drawValueCity)
+         this.showUndevelopedCity()
+  
+      },
+    },
+    mounted(){
+      // console.log('drawValueCountry',this.drawValueCountry)
+       this.showUndevelopedCity()
+    },
+    methods:{
+       showUndevelopedCity(){
+         let country = this.drawValueCountry
+         let province = this.drawValueProvincial
+         let city = this.drawValueCity
+         let contentType = 'text/plain'
+         axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getUndevelopedList",{params:{province:province,country:country,city:city},headers:{contentType:contentType}})
+         .then(res=>{
+           this.urbanArea = res.data.data
+           console.log('unCity',this.urbanArea)
+         })
        }
     }
+
 }
 </script>
 

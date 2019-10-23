@@ -9,7 +9,7 @@
         <ul>
           <li
             @click="getValueCountry(index,item)"
-            v-for="(item,index) in country"
+            v-for="(item,index) in drawCountry"
             :key="item.index"
           >{{item}}</li>
         </ul>
@@ -17,14 +17,14 @@
     </div>
     <div class="select_combobox_box">
       <div class="combobox" @click="openProvincial" id="combobox2">
-        <input type="text" v-model="valueProvincial" placeholder="省" />
+        <input type="text" v-model="valueProvincial" :placeholder="showPlaceHoleder" />
         <img src="../assets/images/iconfont-xiasanjiao@2x.png" alt />
       </div>
       <div class="list" v-show="showProvincial">
         <ul>
           <li
             @click="getProvincial(index,item)"
-            v-for="(item,index) in provincial"
+            v-for="(item,index) in drawProvincial"
             :key="item.index"
           >{{item}}</li>
         </ul>
@@ -37,32 +37,21 @@
       </div>
       <div class="list" v-show="showCity">
         <ul>
-          <li @click="getCity(index,item)" v-for="(item,index) in city" :key="item.index">{{item}}</li>
+          <li @click="getCity(index,item)" v-for="(item,index) in drawCity" :key="item.index">{{item}}</li>
         </ul>
       </div>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios"
+import { mapState } from "vuex";
+
 export default {
   name: "selectCombobox",
   data() {
     return {
-      country: [
-        "中国",
-        "美国",
-        "日本",
-        "澳大利亚",
-        "柬埔寨",
-        "德国",
-        "法国",
-        "印度",
-        "俄罗斯",
-        "英国",
-        "巴西"
-      ],
-      provincial: ["广东", "广西", "湖南", "福建", "山东"],
-      city: ["广州", "深圳", "佛山", "珠海", "东莞"],
+      showPlaceHoleder:'省',
       showCountry: false,
       showProvincial: false,
       showCity: false,
@@ -71,7 +60,71 @@ export default {
       valueCity: ""
     };
   },
+  mounted(){
+    this.requestCountry()
+  },
+  computed:{
+    ...mapState({
+      drawCountry: state => state.succession.country,
+      drawProvincial: state => state.succession.provincial,
+      drawCity: state => state.succession.city,
+    })
+  },
+  watch:{
+    valueCountry(newValue,oldValue){
+      console.log('valueCountry',newValue)
+      this.requestProvincial()
+    },
+    valueProvincial(newValue,oldValue){
+      console.log('75行valueProvincial',newValue)
+      this.requestCity()
+      this.valueCity =''
+    },
+  },
   methods: {
+    //请求国家
+    requestCountry(){
+      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryList").then(res =>{
+       let country = res.data.data
+        this.$store.commit("succession/setCountryChange",country)
+        console.log('selectCombobox-country',country)
+      })
+    },
+    //请求中国省份
+    requestProvincial(){
+      if(this.valueCountry == '中国'){
+        let country = this.valueCountry
+        console.log('country',country)
+        let contentType = 'text/plain'
+        let authorization = 'token'
+        console.log('this.valueCountry',country)
+        axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceList",{params:{country:country},headers:{contentType:contentType,authorization:authorization}})
+        .then(res =>{
+          let provincial =res.data.data
+          this.$store.commit("succession/setProvincialChange",provincial)
+          console.log('provincial-109',provincial)
+        }) 
+      } else{
+        this.valueProvincial=''
+        this.valueCity=''
+        let provincial = ''
+        this.$store.commit("succession/setProvincialChange",provincial)
+      }    
+    },
+    //请求城市
+    requestCity(){
+      let province = this.valueProvincial
+      let country = this.valueCountry
+      console.log('国家，省',country,province)
+      let authorization = 'token'
+      let contentType = 'form-data' 
+      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCityList",{params:{country:country,province:province},headers:{contentType:contentType}})
+      .then(res =>{
+         let city = res.data.data
+         this.$store.commit("succession/setCityChange",city)
+         console.log('city,116行',city)
+      })    
+    },
     openValueCountry() {
       this.showCountry = !this.showCountry;
       this.showProvincial = false;
@@ -79,25 +132,42 @@ export default {
     },
     getValueCountry(index, item) {
       this.valueCountry = item;
+      this.$store.commit("succession/setValueCountry",this.valueCountry)
       this.showCountry = false;
     },
     openProvincial() {
-      this.showProvincial = !this.showProvincial;
-      this.showCountry = false;
-      this.showCity = false;
+      if(this.valueCountry=='中国'){
+        this.showProvincial = !this.showProvincial;
+        this.showCountry = false;
+        this.showCity = false;
+      } else{
+        this.showProvincial = false
+      }
     },
     getProvincial(index, item) {
       this.valueProvincial = item;
+      this.$store.commit("succession/setValueProvincial",this.valueProvincial)
       this.showProvincial = false;
     },
     openCity() {
-      this.showCity = !this.showCity;
-      this.showCountry = false;
-      this.showProvincial = false;
+      if(this.valueCountry=='中国'){
+        this.showCity = !this.showCity;
+        this.showCountry = false;
+        this.showProvincial = false;        
+      }else{
+        this.showCity = false
+      }
     },
     getCity(index, item) {
       this.valueCity = item;
-      this.showCity = !this.showCity;
+      let undevelopedCity = this.valueCity
+      if(this.valueCountry == '中国'){
+        this.$store.commit("succession/setValueCity",undevelopedCity)
+        this.showCity = !this.showCity;
+      }else{
+        undevelopedCity = ''
+        this.$store.commit("succession/setValueCity",undevelopedCity)
+      }
     }
   }
 };

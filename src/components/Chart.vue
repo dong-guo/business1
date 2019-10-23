@@ -18,13 +18,23 @@ export default {
       drawProvincial: state => state.succession.provincial
     })
   }, 
+  watch:{
+    drawProvincial(newValue,oldValue){
+      console.log('chart检测',this.drawProvincial)
+      this.initChart()
+    }
+  },
   mounted(){
+   this.initChart()
+  },
+  methods:{
+   initChart(){
+    console.log('chart列表-32',this.drawProvincial)
     let Yprovincial=this.drawProvincial
     this.myEcharts = echarts.init(document.getElementById("chart_box"));
     let option = this.chartOption(Yprovincial);
     this.myEcharts.setOption(option);
-  },
-  methods:{
+   },
    chartOption (Yprovincial) {
      return{
         tooltip : {
@@ -117,7 +127,7 @@ export default {
                 itemStyle:{
                   color:'#005F64'
                 },
-                data: [320, 302, 301, 334, 390, 330, 320,100]
+                data: [320, 302, 301, 334, ]
               },
               {
                 name: '璞素',
@@ -131,7 +141,7 @@ export default {
                 itemStyle:{
                   color:'#00838F'
                 },
-                data: [120, 132, 101, 134, 90, 230, 0,900]
+                data: [120, 132, 101, ]
               },
               {
                 name: '0769',
@@ -145,7 +155,7 @@ export default {
                 itemStyle:{
                   color:'#0097A7'
                 },
-                data: [220, 182, 191, 234, 290, 330, 310,50]
+                data: [220, 182, 191, 234, ]
               },
               {
                 name: '慕思家纺',
@@ -159,7 +169,7 @@ export default {
                  itemStyle:{
                   color:'#00ADC1'
                 },
-                data: [150, 212, 201, 154, 190, 330, 410,15]
+                data: [150, 212, 201, 154, ]
               },
               {
                 name: '慕思儿童',
@@ -173,7 +183,7 @@ export default {
                 itemStyle:{
                   color:'#00BCD5'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 132,55]
+                data: [820, 832, 901, 934]
               },
               {
                 name: '慕思助眠',
@@ -187,7 +197,7 @@ export default {
                 itemStyle:{
                   color:'#24C5DA'
                 },
-                data: [820, 832, 901, 934, 0, 130, 132,87]
+                data: [820, 832, 901, 934, ]
               },
               {
                 name: '3D',
@@ -201,7 +211,7 @@ export default {
                 itemStyle:{
                   color:'#4CCFE1'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 132,500]
+                data: [820, 832, 901, 934, ]
               },
               {
                 name: '苏斯',
@@ -215,7 +225,7 @@ export default {
                 itemStyle:{
                   color:'#80DEEA'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 120,800]
+                data: [820, 832, 901, 934]
               },
               {
                 name: 'V6',
@@ -229,7 +239,7 @@ export default {
                 itemStyle:{
                   color:'#B2EAF2'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 1320,150]
+                data: [820, 832, 901, 934]
               },
               {
                 name: '名品汇',
@@ -243,7 +253,7 @@ export default {
                 itemStyle:{
                   color:'#E1F7FA'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 1320,901]
+                data: [820, 832, 901, 934]
               },
               {
                 name: '兰博基尼',
@@ -257,7 +267,7 @@ export default {
                 itemStyle:{
                   color:'#C5CCD2'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 1320,76]
+                data: [820, 832, 901, 934]
               },
               {
                 name: '歌蒂娅',
@@ -271,7 +281,7 @@ export default {
                 itemStyle:{
                   color:'#005F64'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 1320,95]
+                data: [820, 832, 901, 934]
               },
               {
                 name: '凯奇',
@@ -285,7 +295,7 @@ export default {
                 itemStyle:{
                   color:'#525252'
                 },
-                data: [820, 832, 901, 934, 1290, 1330, 13,799]
+                data: [820, 832, 901, 934]
               }
         ] 
      }

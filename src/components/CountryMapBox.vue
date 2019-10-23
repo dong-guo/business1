@@ -53,7 +53,7 @@ export default {
       let countryJson = res.data;
       echarts.registerMap("China", countryJson);
       this.myEcharts = echarts.init(document.getElementById("country_box"));
-      let option = this.countryOption(content);
+      let option = this.countryOption(content,newsIcon);
       this.myEcharts.setOption(option);
       //跳转到省内地图
       this.myEcharts.on('click',param =>{
@@ -73,7 +73,7 @@ export default {
     // console.log('countryOption',this.countryOption(content).series)
   },
   methods: {
-    countryOption(content) {
+    countryOption(content,newsIcon) {
       return {
           tooltip:{
               trigger:'item',
@@ -82,19 +82,20 @@ export default {
               borderColor:'red',
               position:'right',
               // symbol:`image://${newsIcon}`,
-              formatter:[
-                "招商经理：刘建军" +'<br/>'+
-                "联系电话：13412345678"+'<br/>'+
-                "负责区域：青海、西藏、内蒙古、山西"
-              ].join("\n"),
-              // formatter:function(params){
-              //   console.log('formatter',params)
-              //   // let myseries = countryOption(content).series
-              //   // console.log('myseries',myseries)
-              //   // let res ="<img style='width:250px; height:150px; border-radius:20px;' src='../assets/image/news.png'/>"
-              //   let res = "<span style=' display:block;width:250px;height:150px;border:1px solid yellow;background-image:url(../assets/images/shop_list@2x.png);background-size:cover;'><span>"
-              //   return res;
-              // },
+              // formatter:[
+              //   "招商经理：刘建军" +'<br/>'+
+              //   "联系电话：13412345678"+'<br/>'+
+              //   "负责区域：青海、西藏、内蒙古、山西"
+              // ].join("\n"),
+              formatter:function(params,){
+                console.log('formatter',params)
+                console.log(111,newsIcon)
+                // let myseries = countryOption(content).series
+                // console.log('myseries',myseries)
+                let res ="<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src=`${newsIcon}`/>"
+                // let res = "<div style='width:250px; height:150px; border-radius:10px; background:yellow; backgroundImage:url(newsIcon)'><div>"
+                return res;
+              },
               textStyle:{
                 color:'yellow',
                 fontSize:20,

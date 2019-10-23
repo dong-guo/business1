@@ -18,132 +18,152 @@ export default {
   computed: {
     ...mapState({
       drawCountryNumber: state => state.home.countryNumber,
-      drawCountry: state => state.home.country
+      drawCountry: state => state.home.country,
     })
   },
   mounted() {
-    let dcn = this.drawCountryNumber;
-    let countryNum = [];
-    let otherStyle = [];
-    let countryBigBall = [];
-    let countryMidBall = [];
-    let countrySmallBall = [];
-    //显示浅蓝色国家
-    for (let i = 0; i < dcn.length; i++) {
-      countryNum.push(String(dcn[i].amount));
-      otherStyle.push({
-        name: dcn[i].name,
-        selected: false,
-        itemStyle: { areaColor: "#33D8FA" }
-      });
-      //气泡大小分级
-      if (dcn[i].amount > 500) {
-        countryBigBall.push({
-          name: dcn[i].name,
-          value: dcn[i].jindu,
-          color: "#333333",
-          label: {
-            show: true,
-            position: ["20%", "35%"],
-            fontSize: 16,
-            rich: {
-              a: {
-                fontSize: 30
-              },
-              b: {
-                fontSize: 15,
-                verticalAlign: "middle"
-              },
-              c: {
-                fontSize: 20,
-                align: "center"
-              }
-            },
-            // formatter: `{b}`
-            formatter: ["{a| " + countryNum[i] +"}{b| 家}" + "\n" + "{c| " + dcn[i].name +"}"
-            ].join("\n")
-          }
-        });
-      } else if (dcn[i].amount > 100 && dcn[i].amount <= 500) {
-        countryMidBall.push({
-          name: dcn[i].name,
-          value: dcn[i].jindu,
-          label: {
-            show: true,
-            position: ["20%", "30%"],
-            color: "#333333",
-            fontSize: 16,
-            rich: {
-              a: {
-                fontSize: 28
-              },
-              b: {
-                fontSize: 14,
-                verticalAlign: "middle"
-              },
-              c: {
-                fontSize: 20
-              }
-            },
-            // formatter: `{b}`
-            formatter: [
-              "{a| " + countryNum[i] +"}{b| 家}" + "\n" + "{c| " + dcn[i].name +"}"
-            ].join("\n")
-          }
-        });
-      } else {
-        countrySmallBall.push({
-          name: dcn[i].name,
-          value: dcn[i].jindu,
-          label: {
-            show: true,
-            position: ["15%", "25%"],
-            color: "#333333",
-            fontSize: 16,
-            rich: {
-              a: {
-                fontSize: 28
-              },
-              b: {
-                fontSize: 14
-              },
-              c: {
-                align: "center"
-              }
-            },
-            // formatter: `{b}`
-            formatter: [
-              "{a| " + countryNum[i] +"}{b| 家}" + "\n" + "{c| " + dcn[i].name +"}"
-            ].join("\n")
-          }
-        });
+    axios.get('https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryDataList')
+    .then(res =>{
+      let countryName = res.data.data    
+      this.$store.commit("home/setAllTotal",countryName.total)
+      console.log('countryName1',countryName.country)
+      for(let i = 0; i<countryName.country.length; i++){
+        let index = i
+        let franchiseStoreNum = countryName.country[i].franchiseStore
+        let directSaleStoreNum = countryName.country[i].directSaleStore
+        let totalNum = countryName.country[i].total
+        this.$store.commit("home/setCountryNumberName",{'idx':index,'val':countryName.country[i].country})
+        this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
       }
-    }
-    axios.get("./geoJson/world.json").then(res => {
-      let worldJson = res.data;
-      echarts.registerMap("world", worldJson);
-      this.myEcharts = echarts.init(document.getElementById("world_box"));
-      let option = this.worldOption(
-        otherStyle,
-        countryBigBall,
-        countryMidBall,
-        countrySmallBall
-      );
-      this.myEcharts.setOption(option);
-      //跳转中国地图
-      let country = this.drawCountry;
-      this.myEcharts.on("click", param => {
-        for (let i = 0; i < dcn.length; i++) {
-          if (param.name == dcn[i].name) {
-            this.$store.commit("home/setCountryChange", country[i]);
-            this.$router.push({ name: "china" });
-            break;
-          }
-        }
-      });
-    });
+      console.log('drawCountryNumber',this.drawCountryNumber)
+      this.worldeSet();
+    })
+    // this.worldeSet();
   },
   methods: {
+    worldeSet() {
+      let dcn = this.drawCountryNumber;
+      console.log('dcn',dcn)
+      let countryShopNum = [];
+      let otherStyle = [];
+      let countryBigBall = [];
+      let countryMidBall = [];
+      let countrySmallBall = [];
+      //显示浅蓝色国家
+      for (let i = 0; i < dcn.length; i++) {
+        countryShopNum.push(String(dcn[i].amount));
+        otherStyle.push({
+          name: dcn[i].name,
+          selected: false,
+          itemStyle: { areaColor: "#33D8FA" }
+        });
+        //气泡大小分级
+        if (dcn[i].amount > 500) {
+          countryBigBall.push({
+            name: dcn[i].name,
+            value: dcn[i].jindu,
+            color: "#333333",
+            label: {
+              show: true,
+              position: ["20%", "35%"],
+              fontSize: 16,
+              rich: {
+                a: {
+                  fontSize: 30
+                },
+                b: {
+                  fontSize: 15,
+                  verticalAlign: "middle"
+                },
+                c: {
+                  fontSize: 20,
+                  align: "center"
+                }
+              },
+              // formatter: `{b}`
+              formatter: [
+                "{a| " + countryShopNum[i] + "}{b| 家}" + "\n" + "{c| " + dcn[i].name + "}"
+              ].join("\n")
+            }
+          });
+        } else if (dcn[i].amount > 100 && dcn[i].amount <= 500) {
+          countryMidBall.push({
+            name: dcn[i].name,
+            value: dcn[i].jindu,
+            label: {
+              show: true,
+              position: ["20%", "30%"],
+              color: "#333333",
+              fontSize: 16,
+              rich: {
+                a: {
+                  fontSize: 28
+                },
+                b: {
+                  fontSize: 14,
+                  verticalAlign: "middle"
+                },
+                c: {
+                  fontSize: 20,
+                  align:'center',
+                }
+              },
+              formatter: [
+                "{a| " + countryShopNum[i] +"}{b| 家}" + "\n" +"{c| " + dcn[i].name + "}"
+              ].join("\n")
+            }
+          });
+        } else {
+          countrySmallBall.push({
+            name: dcn[i].name,
+            value: dcn[i].jindu,
+            label: {
+              show: true,
+              position: ["15%", "25%"],
+              color: "#333333",
+              fontSize: 16,
+              rich: {
+                a: {
+                  fontSize: 28
+                },
+                b: {
+                  fontSize: 14
+                },
+                c: {
+                  align: "center",
+                }
+              },
+              formatter: [
+                "{a| " + countryShopNum[i] + "}{b| 家}" + "\n" + "{c| " + dcn[i].name + "}"
+              ].join("\n")
+            }
+          });
+        }
+      }
+      axios.get("./geoJson/world.json").then(res => {
+        let worldJson = res.data;
+        echarts.registerMap("world", worldJson);
+        this.myEcharts = echarts.init(document.getElementById("world_box"));
+        let option = this.worldOption(
+          otherStyle,
+          countryBigBall,
+          countryMidBall,
+          countrySmallBall
+        );
+        this.myEcharts.setOption(option);
+        //跳转中国地图
+        let country = this.drawCountry;
+        this.myEcharts.on("click", param => {
+          for (let i = 0; i < dcn.length; i++) {
+            if (param.name == dcn[i].name) {
+              this.$store.commit("home/setCountryChange", country[i]);
+              this.$router.push({ name: "china" });
+              break;
+            }
+          }
+        });
+      });
+    },
     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
       return {
         geo: {
@@ -175,7 +195,14 @@ export default {
             Slovakia: "斯洛伐克",
             Mexico: "墨西哥",
             Russia: "俄罗斯",
-            Austria: "奥地利"
+            Austria: "奥地利",
+            Canada:'加拿大',
+            "South Korea":'韩国',
+            Malaysia:'马来西亚',
+            Dubai:'迪拜',
+            "New Zealand":'新西兰',
+            Cambodia:'柬埔寨',
+            "United Arab Emirates":'迪拜'
           },
           regions: otherStyle,
           emphasis: {

@@ -50,7 +50,7 @@ export default {
   computed: {
     ...mapState({
       drawBoxKey: state => state.home.boxKey,
-      drawAllNum: state => state.home.allNum
+      drawAllNum: state => state.home.allTotal
     })
   },
   mounted() {
