@@ -14,7 +14,6 @@ export default {
     name:'undevelopedContent',
     data(){
        return {
-        //  urbanArea:[],
          urbanArea:[]
        }
     },
@@ -52,7 +51,7 @@ export default {
          axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getUndevelopedList",{params:{province:province,country:country,city:city},headers:{contentType:contentType}})
          .then(res=>{
            this.urbanArea = res.data.data
-           console.log('unCity',this.urbanArea)
+          //  console.log('unCity',this.urbanArea)
          })
        }
     }
@@ -84,5 +83,6 @@ export default {
   color:rgba(0,255,198,1);
   margin-bottom:20px;
   flex-shrink:0;
+  
 }
 </style>

@@ -87,7 +87,7 @@ export default {
       axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryList").then(res =>{
        let country = res.data.data
         this.$store.commit("succession/setCountryChange",country)
-        console.log('selectCombobox-country',country)
+        // console.log('selectCombobox-country',country)
       })
     },
     //请求中国省份

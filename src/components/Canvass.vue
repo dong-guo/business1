@@ -41,6 +41,8 @@
 </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
    data(){
      return{
@@ -57,9 +59,18 @@ export default {
      }
    },
    mounted(){
-
+     this.getManagerList()
    },
    methods:{
+     getManagerList(){
+       let page = 1
+       let limit = 2
+        axios.get("https://mobiletest.derucci.net/consumer-admin/merchants/merchantsShop/list",{headers:{page:page,limit:limit}})
+        .then(res=>{
+          let managerList = res.data
+          console.log('managerList',managerList)
+        })
+     },
      openCanvass(){
         this.canvassKey = !this.canvassKey
      }

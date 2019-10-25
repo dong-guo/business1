@@ -53,16 +53,18 @@ export default {
       drawAllNum: state => state.home.allTotal
     })
   },
+  watch:{
+    drawAllNum(newValue,oldValue){
+      console.log('AllNum',this.drawAllNum)
+      this.changeNum()
+    }
+  },
   mounted() {
     this.changeNum()
-    // console.log(555,this.stringNum)
-    // console.log(556,typeof(this.stringNum))
-
   },
   methods: {
     changeNum(){    
      this.stringNum = this.drawAllNum.toString()
-
     }
   }
 };
@@ -125,11 +127,15 @@ export default {
   background-size: 100%;
   position: relative;
   top: 46px;
+  /* background-color:green; */
 }
 .home_body_bg ul {
+  /* border:1px solid yellow; */
   height: 73px;
   width: 291px;
   margin-left:39px;
+  /* margin-left:50px;
+  width:278px; */
   position: relative;
   top:-23px;
 }

@@ -5,7 +5,7 @@ const state ={
      valueCountry:'',
      valueProvincial:'',
      valueCity:'',
-      
+     brandList:[],  
 }
 const mutations = {
    setCountryChange(state,array){
@@ -25,6 +25,9 @@ const mutations = {
    },
    setValueCity(state,string){
      state.valueCity = string
+   },
+   setBrandList(state,array){
+     state.brandList = array
    }
 }
 const action = {

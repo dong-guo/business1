@@ -24,7 +24,7 @@ export default {
   },
   mounted() {
     let country = this.drawCountryChange
-    console.log(110,country)
+    // console.log(110,country)
     axios.get(`./geoJson/country/${country}.json`).then(res => {
       let countryJson = res.data;
       echarts.registerMap("China", countryJson);

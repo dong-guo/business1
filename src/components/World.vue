@@ -19,31 +19,40 @@ export default {
     ...mapState({
       drawCountryNumber: state => state.home.countryNumber,
       drawCountry: state => state.home.country,
+
     })
+  },
+  created(){
+    this.getCountryList()
   },
   mounted() {
-    axios.get('https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryDataList')
-    .then(res =>{
-      let countryName = res.data.data    
-      this.$store.commit("home/setAllTotal",countryName.total)
-      console.log('countryName1',countryName.country)
-      for(let i = 0; i<countryName.country.length; i++){
-        let index = i
-        let franchiseStoreNum = countryName.country[i].franchiseStore
-        let directSaleStoreNum = countryName.country[i].directSaleStore
-        let totalNum = countryName.country[i].total
-        this.$store.commit("home/setCountryNumberName",{'idx':index,'val':countryName.country[i].country})
-        this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
-      }
-      console.log('drawCountryNumber',this.drawCountryNumber)
-      this.worldeSet();
-    })
-    // this.worldeSet();
+    // this.getCountryList()
   },
   methods: {
+    //请求后台国家数据
+    getCountryList(){
+      axios.get('https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryDataList')
+      .then(res =>{
+        let countryName = res.data.data
+        this.$store.commit("home/setAllTotal",countryName.total)
+        // console.log('countryName1',countryName.country,countryName.total)
+        //将国家前十名存入VUEX中
+        for(let i = 0; i<countryName.country.length-1 && i<10; i++){
+          let index = i
+          let franchiseStoreNum = countryName.country[i].franchiseStore
+          let directSaleStoreNum = countryName.country[i].directSaleStore
+          let totalNum = countryName.country[i].total
+          this.$store.commit("home/setCountryNumberName",{'idx':index,'val':countryName.country[i].country})
+          this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
+        }
+        // console.log('drawCountryNumber-38',this.drawCountryNumber)
+        this.worldeSet();
+      })
+    },
+    //设置散点气球样式
     worldeSet() {
       let dcn = this.drawCountryNumber;
-      console.log('dcn',dcn)
+      // console.log('dcn-46',dcn)
       let countryShopNum = [];
       let otherStyle = [];
       let countryBigBall = [];
@@ -51,14 +60,14 @@ export default {
       let countrySmallBall = [];
       //显示浅蓝色国家
       for (let i = 0; i < dcn.length; i++) {
-        countryShopNum.push(String(dcn[i].amount));
+        countryShopNum.push(String(dcn[i].total));
         otherStyle.push({
           name: dcn[i].name,
           selected: false,
           itemStyle: { areaColor: "#33D8FA" }
         });
         //气泡大小分级
-        if (dcn[i].amount > 500) {
+        if (dcn[i].total > 30) {
           countryBigBall.push({
             name: dcn[i].name,
             value: dcn[i].jindu,
@@ -86,7 +95,7 @@ export default {
               ].join("\n")
             }
           });
-        } else if (dcn[i].amount > 100 && dcn[i].amount <= 500) {
+        } else if (dcn[i].total > 1 && dcn[i].total <= 30) {
           countryMidBall.push({
             name: dcn[i].name,
             value: dcn[i].jindu,
@@ -151,13 +160,20 @@ export default {
           countrySmallBall
         );
         this.myEcharts.setOption(option);
-        //跳转中国地图
+        //跳转国家地图
         let country = this.drawCountry;
-        this.myEcharts.on("click", param => {
+        this.myEcharts.on("click", params => {
+          console.log('跳转名字',params.name)
+          //取得亮蓝色国家
           for (let i = 0; i < dcn.length; i++) {
-            if (param.name == dcn[i].name) {
-              this.$store.commit("home/setCountryChange", country[i]);
-              this.$router.push({ name: "china" });
+            if (params.name == dcn[i].name) {
+              //取得中英文名称对于数据
+              for(let i = 0; i < country.length; i++){
+                if(params.name ==country[i].ChinaName){
+                  this.$store.commit("home/setCountryChange", country[i].EnglishName);
+                  this.$router.push({ name: "china" });
+                }
+              }
               break;
             }
           }

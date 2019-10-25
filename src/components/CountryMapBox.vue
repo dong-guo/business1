@@ -41,38 +41,58 @@ export default {
       drawCountryChange: state => state.home.countryChange,
       drawProvincialChange: state => state.home.provincialChange,
       drawLetterName: state => state.home.letterName,
-      drawChinaName: state=> state.home.chinaName,
+      drawChinaName: state => state.home.chinaName,
+      drawCountry: state => state.home.country
     })
   },
   mounted() {
-    let country = this.drawCountryChange
-    let content = this.content
-    console.log(110,country)   
-    axios.get(`./geoJson/country/${country}.json`)
-    .then(res => {
-      let countryJson = res.data;
-      echarts.registerMap("China", countryJson);
-      this.myEcharts = echarts.init(document.getElementById("country_box"));
-      let option = this.countryOption(content,newsIcon);
-      this.myEcharts.setOption(option);
-      //跳转到省内地图
-      this.myEcharts.on('click',param =>{
-        let provincial = param.name
-        let letterName = this.drawLetterName
-        let chinaName = this.drawChinaName
-        console.log('param',provincial)
-            for(let i = 0; i<chinaName.length; i++){
-              if(provincial==chinaName[i]){
-                 this.$store.commit("home/setProvincialChange", letterName[i]);
-                 this.$store.commit("home/setProvincialChinaChange",param.name)
-                 this.$router.push({ name: "provincial" });
-              }
-            }
-      })
-    })
-    // console.log('countryOption',this.countryOption(content).series)
+    this.getCountryList()
+    this.getCountryMap()
   },
   methods: {
+    getCountryList(){
+      let contentType = 'text/plain'
+      let Authorization = 'token'
+      let country = ''
+      for(let i = 0; i<this.drawCountry.length; i++){
+        if(this.drawCountryChange == this.drawCountry[i].EnglishName){
+           country = this.drawCountry[i].ChinaName
+        }
+      }
+      console.log('country',country)
+      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceDataList",{params:{country:country},headers:{contentType:contentType,Authorization:Authorization}})
+      .then(res=>{
+        let countryList = res.data.data
+        console.log('countryList',countryList)
+      })
+    },
+    getCountryMap(){
+      let country = this.drawCountryChange
+      let content = this.content
+      console.log(111,country)   
+      axios.get(`./geoJson/country/${country}.json`)
+      .then(res => {
+        let countryJson = res.data;
+        echarts.registerMap("China", countryJson);
+        this.myEcharts = echarts.init(document.getElementById("country_box"));
+        let option = this.countryOption(content,newsIcon);
+        this.myEcharts.setOption(option);
+        //跳转到省内地图
+        this.myEcharts.on('click',param =>{
+          let provincial = param.name
+          let letterName = this.drawLetterName
+          let chinaName = this.drawChinaName
+          console.log('param',provincial)
+              for(let i = 0; i<chinaName.length; i++){
+                if(provincial==chinaName[i]){
+                  this.$store.commit("home/setProvincialChange", letterName[i]);
+                  this.$store.commit("home/setProvincialChinaChange",param.name)
+                  this.$router.push({ name: "provincial" });
+                }
+              }
+        })
+      })
+    },
     countryOption(content,newsIcon) {
       return {
           tooltip:{
@@ -87,15 +107,19 @@ export default {
               //   "联系电话：13412345678"+'<br/>'+
               //   "负责区域：青海、西藏、内蒙古、山西"
               // ].join("\n"),
-              formatter:function(params,){
-                console.log('formatter',params)
-                console.log(111,newsIcon)
-                // let myseries = countryOption(content).series
-                // console.log('myseries',myseries)
-                let res ="<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src=`${newsIcon}`/>"
-                // let res = "<div style='width:250px; height:150px; border-radius:10px; background:yellow; backgroundImage:url(newsIcon)'><div>"
-                return res;
-              },
+              formatter:[
+                "<p style='width:300px;height:200px;background:pink'>招商经理：刘建军<br/>联系电话：13412345678</p>"
+              ].join("\n"),
+              // formatter:function(params){
+              //   // console.log('formatter',params)
+              //   // console.log(111,newsIcon)
+              //   // let myseries = countryOption(content).series
+              //   // console.log('myseries',myseries)
+              //   let res ="<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src=`${newsIcon}`/>"
+              //   res +="<p style='position:absolute; top:0; left:0; '>ni</p>"
+              //   // let res = "<div style='width:250px; height:150px; border-radius:10px; background:yellow; backgroundImage:url(newsIcon)'><div>"
+              //   return res;
+              // },
               textStyle:{
                 color:'yellow',
                 fontSize:20,

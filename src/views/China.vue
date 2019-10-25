@@ -2,7 +2,7 @@
 <div class="country">
    <div class="countryTitleBox">
       <div class="countryTitleLeftPic"></div>
-      <div class="countryTitleText">中国地图</div>
+      <div class="countryTitleText">{{showCountry}}地图</div>
       <div class="countryTitleRightPic"></div>
    </div>
    <country-map-box class="chinaMapBox" v-show="key"></country-map-box>
@@ -28,7 +28,8 @@ export default {
   name:'china',
   data(){
     return{
-      key:true
+      key:true,
+      showCountry:''
     }
   },
   components:{
@@ -38,21 +39,33 @@ export default {
   },
   computed:{
     ...mapState({
-       drawCountry: state => state.home.countryChange,
+       drawCountryChange: state => state.home.countryChange,
+       drawCountry: state => state.home.country,
     })
   },
   mounted(){
     this.selectCountry()
+    this.matchingCountry()
   },
   methods:{
+    //通过v-if切换中国与其他国家样式地图
     selectCountry(){
-       console.log('drawCountry',this.drawCountry)
-       let country = this.drawCountry
+      //  console.log('drawCountryChange',this.drawCountryChange,this.drawCountry)
+       let country = this.drawCountryChange
        if(country !== 'China'){
          this.key = !this.key
-         console.log('key',this.key)
+        //  console.log('key',this.key)
        }
+    },
+    matchingCountry(){
+        for(let i = 0; i<this.drawCountry.length; i++){
+            if(this.drawCountryChange==this.drawCountry[i].EnglishName){
+              this.showCountry = this.drawCountry[i].ChinaName
+            }
+        }
+        // console.log('matchindCountry',this.matchingCountry)
     }
+
   }
 
 
