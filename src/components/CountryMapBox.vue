@@ -112,7 +112,6 @@ export default {
               position:'right',
               borderColor:'red',
               position:'right',
-              // symbol:`image://${newsIcon}`,
               // formatter:[
               //   "招商经理：刘建军" +'<br/>'+
               //   "联系电话：13412345678"+'<br/>'+
@@ -124,17 +123,32 @@ export default {
               //        联系电话：13412345678
               //    </p>`
               // ].join("\n"),
-              formatter:function(params,content){
-                console.log('formatter',params)
-                console.log(8089,content)
-                let res ="<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src=`${newsIcon}`/>"
-               res +=
-                `<div style='position:absolute; top:0; left:0;'>
-                  <p>${params.name}</p>
-                  <p>pu</p>
-                </div>`
-                return res;
+              formatter:function(params){
+                 let res =`<img style='width:250px; height:150px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                 res += 
+                 `<div style ='position:absolute; letf:0px; top:0px; width:300px; height:150px;' >
+                    <p style ='margin-left:-15px;'>${params.name}</p>
+                    <p style ='margin-left:-15px;'>${params.value}</p>
+                 </div>`
+                 return res
               },
+              // formatter:function(params){
+              //   console.log('formatter',params)
+              //   // let res =`<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src='${newsIcon}'/>`
+              //   let res = ''
+              //   res +=
+              //   `<div style='position:absolute; top:0; left:0px;width:300px; height:150px; background-image:url(${newsIcon});background-size:contain;background-repeat:no-repeat;'>
+              //     <p>${params.name}</p>
+              //     <p>pu</p>
+              //   </div>`
+              //   return res;
+              // },
+              // formatter:function(params,content){
+              //   console.log('formatter',content)
+              //   let res = '经销商经理:'+ content.data +'<br/>'
+              //   // res += '联系电话:' + params.data.phone
+              //   return res
+              // },
               textStyle:{
                 color:'yellow',
                 fontSize:20,
@@ -177,16 +191,7 @@ export default {
                   borderType:'solid',
                   borderWidth:2,
                   borderColor:'#283777',
-                  data:[
-                    // {
-                    //     name:'广东',
-                    //     value:[115,23.5],
-                    //     label:{
-                    //       show:true,
-                    //       color:'red'
-                    //     },
-                    // }
-                  ]
+                  data:content
                 }
               },
           ]

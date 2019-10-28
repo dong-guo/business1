@@ -29,7 +29,7 @@
           </div>
           <div class="canvass_body_barcode">
             <div class="body_barcode_QRcode">
-              <img src="item.profilePhoto.img" alt="">
+              <img src="item[index].profilePhoto" alt="">
             </div>
             <div class="body_barcode_text">扫一扫添加好友</div>
           </div>
@@ -70,6 +70,7 @@ export default {
    watch:{
      personal(newValue,oldValue){
        console.log('监测信息',this.personal)
+       console.log(767,this.personal[2].profilePhoto)
      }
    },
    methods:{
