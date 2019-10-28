@@ -14,25 +14,28 @@ import threadIcon from "../base64/thread";
 import thread2Icon from "../base64/thread2";
 import newsIcon from "../base64/news";
 
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
+
 export default {
   name: "country",
   data() {
     return {
       content:[
-        {
-          'name':'广东',
-          'value':[113.5,23.5],
-          'new1':'招商经理：刘建军,青海西藏,内蒙',
-          'new2':'联系电话：16789876565',
-          'new3':'负责区域：青海、西藏、内蒙古',
-        },
-        {
-          'name':'四川',
-          'value':[100.5,43.5],
-          'new1':'招商经理：刘笑话,',
-          'new2':'联系电话：16789876565',
-          'new3':'负责区域：青海、西藏、内蒙古',          
-        }
+        // {
+        //   'name':'广东',
+        //   'value':[113.5,23.5],
+        //   'new1':'招商经理：刘建军,青海西藏,内蒙',
+        //   'new2':'联系电话：16789876565',
+        //   'new3':'负责区域：青海、西藏、内蒙古',
+        // },
+        // {
+        //   'name':'四川',
+        //   'value':[100.5,43.5],
+        //   'new1':'招商经理：刘笑话,',
+        //   'new2':'联系电话：16789876565',
+        //   'new3':'负责区域：青海、西藏、内蒙古',          
+        // }
       ]
     };
   },
@@ -49,6 +52,12 @@ export default {
     this.getCountryList()
     this.getCountryMap()
   },
+  watch:{
+    content(newValue,oleValue){
+      console.log('监视content',this.content)
+      this.getCountryMap()
+    }
+  },
   methods: {
     getCountryList(){
       let contentType = 'text/plain'
@@ -60,16 +69,18 @@ export default {
         }
       }
       console.log('country',country)
-      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceDataList",{params:{country:country},headers:{contentType:contentType,Authorization:Authorization}})
+      // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceDataList",{params:{country:country},headers:{contentType:contentType,Authorization:Authorization}})
+      indexModel.getProvincialList(country)
       .then(res=>{
-        let countryList = res.data.data
-        console.log('countryList',countryList)
+        let provincialList = res.data.data
+        this.content = provincialList
+        console.log('provincialList',provincialList)
       })
     },
     getCountryMap(){
       let country = this.drawCountryChange
       let content = this.content
-      console.log(111,country)   
+      console.log(111,country,content)   
       axios.get(`./geoJson/country/${country}.json`)
       .then(res => {
         let countryJson = res.data;
@@ -107,19 +118,23 @@ export default {
               //   "联系电话：13412345678"+'<br/>'+
               //   "负责区域：青海、西藏、内蒙古、山西"
               // ].join("\n"),
-              formatter:[
-                "<p style='width:300px;height:200px;background:pink'>招商经理：刘建军<br/>联系电话：13412345678</p>"
-              ].join("\n"),
-              // formatter:function(params){
-              //   // console.log('formatter',params)
-              //   // console.log(111,newsIcon)
-              //   // let myseries = countryOption(content).series
-              //   // console.log('myseries',myseries)
-              //   let res ="<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src=`${newsIcon}`/>"
-              //   res +="<p style='position:absolute; top:0; left:0; '>ni</p>"
-              //   // let res = "<div style='width:250px; height:150px; border-radius:10px; background:yellow; backgroundImage:url(newsIcon)'><div>"
-              //   return res;
-              // },
+              // formatter:[
+              //   `<p style='width:300px;height:200px;background:pink'>
+              //        招商经理：刘建军 <br/> 
+              //        联系电话：13412345678
+              //    </p>`
+              // ].join("\n"),
+              formatter:function(params,content){
+                console.log('formatter',params)
+                console.log(8089,content)
+                let res ="<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src=`${newsIcon}`/>"
+               res +=
+                `<div style='position:absolute; top:0; left:0;'>
+                  <p>${params.name}</p>
+                  <p>pu</p>
+                </div>`
+                return res;
+              },
               textStyle:{
                 color:'yellow',
                 fontSize:20,
@@ -163,13 +178,14 @@ export default {
                   borderWidth:2,
                   borderColor:'#283777',
                   data:[
-                    {
-                        name:'广东',
-                        value:[115,23.5],
-                        label:{
-                          show:false,
-                        },
-                    }
+                    // {
+                    //     name:'广东',
+                    //     value:[115,23.5],
+                    //     label:{
+                    //       show:true,
+                    //       color:'red'
+                    //     },
+                    // }
                   ]
                 }
               },

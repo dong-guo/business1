@@ -47,6 +47,9 @@
 import axios from "axios"
 import { mapState } from "vuex";
 
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
+
 export default {
   name: "selectCombobox",
   data() {
@@ -84,7 +87,9 @@ export default {
   methods: {
     //请求国家
     requestCountry(){
-      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryList").then(res =>{
+      // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryList")
+      indexModel.selectCountry()
+      .then(res =>{
        let country = res.data.data
         this.$store.commit("succession/setCountryChange",country)
         // console.log('selectCombobox-country',country)
@@ -94,11 +99,11 @@ export default {
     requestProvincial(){
       if(this.valueCountry == '中国'){
         let country = this.valueCountry
-        console.log('country',country)
-        let contentType = 'text/plain'
-        let authorization = 'token'
-        console.log('this.valueCountry',country)
-        axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceList",{params:{country:country},headers:{contentType:contentType,authorization:authorization}})
+        console.log('country选择省份',country)
+        // let contentType = 'text/plain'
+        // let authorization = 'token'
+        // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceList",{params:{contentType:contentType,authorization:authorization,country:country}})
+        indexModel.selectProvincial(country)
         .then(res =>{
           let provincial =res.data.data
           this.$store.commit("succession/setProvincialChange",provincial)
@@ -115,10 +120,10 @@ export default {
     requestCity(){
       let province = this.valueProvincial
       let country = this.valueCountry
-      console.log('国家，省',country,province)
-      let authorization = 'token'
-      let contentType = 'form-data' 
-      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCityList",{params:{country:country,province:province},headers:{contentType:contentType}})
+      // let contentType = 'contentType'
+      console.log('国家，省',country,province) 
+      // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCityList",{params:{country:country,province:province,contentType:contentType}})
+      indexModel.selectCity(country,province)
       .then(res =>{
          let city = res.data.data
          this.$store.commit("succession/setCityChange",city)

@@ -21,14 +21,16 @@
                 <div class="personal_news_pic"></div>
                 <div class="personal_news_people"> 
                   <div class="news_people_manager">招商经理</div>
-                  <div class="news_people_name">{{item.name}}</div>
+                  <div class="news_people_name">{{item.managerName}}</div>
                 </div>
             </div>
-            <div class="body_personal_phone">联系电话: <span>{{item.number}}</span></div>
-            <div class="body_personal_adds">负责区域: <span>{{item.adds}}</span></div>
+            <div class="body_personal_phone">联系电话: <span>{{item.phone}}</span></div>
+            <div class="body_personal_adds">负责区域: <span>{{item.chargeProvince}}</span></div>
           </div>
           <div class="canvass_body_barcode">
-            <div class="body_barcode_QRcode"></div>
+            <div class="body_barcode_QRcode">
+              <img src="item.profilePhoto.img" alt="">
+            </div>
             <div class="body_barcode_text">扫一扫添加好友</div>
           </div>
         </li>
@@ -42,38 +44,49 @@
 </template>
 <script>
 
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
+
 import axios from "axios";
 export default {
    data(){
      return{
        canvassKey:true,
-       personal:[
-         {name:'樊建中',number:15912341234,adds:'河北、天津、北京'},
-         {name:'樊建大',number:15887654321,adds:'山东、青岛、秦皇岛'},
-         {name:'樊建小',number:15911223344,adds:'广东、广州、深圳'},
-         {name:'张小小',number:13212341234,adds:'广西、桂林、阳朔'},
-         {name:'樊大大',number:13544441234,adds:'湖北、武汉、宜昌'},
-         {name:'樊中中',number:15900998877,adds:'西川、成都、攀枝花'},
-         {name:'喜羊羊',number:15911111111,adds:'黑龙江、哈尔滨、沈阳'},
-       ]
+      //  personal:[
+      //    {name:'樊建中',number:15912341234,adds:'河北、天津、北京'},
+      //    {name:'樊建大',number:15887654321,adds:'山东、青岛、秦皇岛'},
+      //    {name:'樊建小',number:15911223344,adds:'广东、广州、深圳'},
+      //    {name:'张小小',number:13212341234,adds:'广西、桂林、阳朔'},
+      //    {name:'樊大大',number:13544441234,adds:'湖北、武汉、宜昌'},
+      //    {name:'樊中中',number:15900998877,adds:'西川、成都、攀枝花'},
+      //    {name:'喜羊羊',number:15911111111,adds:'黑龙江、哈尔滨、沈阳'},
+      //  ]
+       personal:[]
      }
    },
    mounted(){
      this.getManagerList()
    },
+   watch:{
+     personal(newValue,oldValue){
+       console.log('监测信息',this.personal)
+     }
+   },
    methods:{
      getManagerList(){
        let page = 1
        let limit = 2
-        axios.get("https://mobiletest.derucci.net/consumer-admin/merchants/merchantsManager/list?", {
-          params: {
-            page: page,
-            limit: limit
-          }
-        })
+        // axios.get("https://mobiletest.derucci.net/consumer-admin/merchants/merchantsManager/list?", {
+        //   params: {
+        //     page: page,
+        //     limit: limit
+        //   }
+        // })
+        indexModel.getCanvassList(page,limit)
         .then(res=>{
-          let managerList = res.data
+          let managerList = res.data.data
           console.log('managerList',managerList)
+          this.personal = managerList
         })
      },
      openCanvass(){

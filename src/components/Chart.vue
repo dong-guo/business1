@@ -6,6 +6,9 @@ import axios from "axios";
 import echarts from "echarts";
 import { mapState } from "vuex"
 
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
+
 export default {
   name:'chart',
   data() {
@@ -66,7 +69,9 @@ export default {
       let ContentType ='text/plain'
       let Authorization ='token'
       let country = this.drawValueCountry
-      axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getDevelopedList",{headers:{country:country},headers:{ContentType:'ContentType',Authorization:'Authorization'}}).then(res=>{
+      // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getDevelopedList",{headers:{country:country},headers:{ContentType:'ContentType',Authorization:'Authorization'}})
+      indexModel.getChartList(country)
+      .then(res=>{
         let date = res.data.data.brand
         let all = res.data.data
         // console.log('请求原始值',all)

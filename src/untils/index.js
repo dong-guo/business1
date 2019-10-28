@@ -14,6 +14,57 @@ class IndexModel extends Request {
       // }
     })
   }
+  selectCountry(){
+    return this.getList({
+      url:this.baseUrl +'/api/merchants/getCountryList',
+    })
+  }
+  selectProvincial(country){
+    return this.getParamsList({
+      url:this.baseUrl + '/api/merchants/getProvinceList',
+      params:{
+         contentType:'text/plain',
+         authorization:'token'  , 
+         country:country    
+      }
+    })
+  }
+  selectCity(country,province){
+    return this.getParamsList({
+      url:this.baseUrl + '/api/merchants/getCityList',
+      params :{
+        // contentType:'text/plain',
+        // authorization:'token', 
+        country:country,
+        province:province
+      }
+    })
+  }
+  getChartList(country){
+    return this.getParamsList({
+      url:this.baseUrl + '/api/merchants/getDevelopedList',
+      params:{
+        country:country
+      }
+    })
+  }
+  getCanvassList(page,limit){
+    return this.getParamsList({
+      url:this.baseUrl + '/api/merchants/getManagerList',
+      parmas:{
+        page:page,
+        limit:limit
+      }
+    })
+  }
+  getProvincialList(country){
+    return this.getParamsList({
+      url:this.baseUrl + '/api/merchants/getProvinceDataList',
+      params:{
+        country:country
+      }
+    })
+  }
 }
 
 export { IndexModel }
