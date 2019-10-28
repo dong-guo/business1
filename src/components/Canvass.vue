@@ -41,8 +41,8 @@
 </div>
 </template>
 <script>
-import axios from "axios";
 
+import axios from "axios";
 export default {
    data(){
      return{
@@ -65,7 +65,12 @@ export default {
      getManagerList(){
        let page = 1
        let limit = 2
-        axios.get("https://mobiletest.derucci.net/consumer-admin/merchants/merchantsShop/list",{headers:{page:page,limit:limit}})
+        axios.get("https://mobiletest.derucci.net/consumer-admin/merchants/merchantsManager/list?", {
+          params: {
+            page: page,
+            limit: limit
+          }
+        })
         .then(res=>{
           let managerList = res.data
           console.log('managerList',managerList)

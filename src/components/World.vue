@@ -8,6 +8,9 @@ import balloonIcon from "../base64/balloon";
 
 import { mapState } from "vuex";
 
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
+
 export default {
   name: "world",
   data() {
@@ -31,7 +34,8 @@ export default {
   methods: {
     //请求后台国家数据
     getCountryList(){
-      axios.get('https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryDataList')
+      // axios.get('https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryDataList')
+      indexModel.getCountry()
       .then(res =>{
         let countryName = res.data.data
         this.$store.commit("home/setAllTotal",countryName.total)
@@ -45,7 +49,6 @@ export default {
           this.$store.commit("home/setCountryNumberName",{'idx':index,'val':countryName.country[i].country})
           this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
         }
-        // console.log('drawCountryNumber-38',this.drawCountryNumber)
         this.worldeSet();
       })
     },
