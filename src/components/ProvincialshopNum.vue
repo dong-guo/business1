@@ -2,17 +2,49 @@
 <div class="provincialShop">
   <div class="singleShop">
     <div class="greenballoon"></div>
-    <p>单品店&nbsp;&nbsp;(55)</p>
+    <!-- <p>单品店&nbsp;&nbsp;({{drawAllCityList.shopTypeCount[0].single}})</p> -->
+    <p>单品店&nbsp;&nbsp;({{drawCityShopNumber.single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>
-      <p>综合店&nbsp;&nbsp;(8)</p>
+      <!-- <p>综合店&nbsp;&nbsp;({{drawAllCityList}})</p> -->
+      <p>综合店&nbsp;&nbsp;({{drawCityShopNumber.multiple}})</p>
     </div>
 </div>
 
 </template>
 <script>
-export default{
+import axios from "axios";
+import { mapState } from "vuex";
+
+export default {
+    name:'provincialShopNum',
+    data(){
+      return{
+        single:'',
+        multiple:'',
+      }
+    },
+    computed:{
+      ...mapState({
+        drawCityShopNumber: state => state.provincial.cityShopNumber,
+        drawAllCityList: state =>state.provincial.allCityList
+      })
+    },
+    watch:{
+      drawAllCityList(newValue,oldValue){
+        console.log('drawAllCityList-12',this.drawAllCityList)
+      },
+      drawCityShopNumber(newValue,oldValue){
+        console.log('drawCityShopNumber',this.drawCityShopNumber)
+      }
+    },
+    mounted(){
+      // this.single = this.drawAllCityList.shopTypeCount[0].single
+      // this.multiple = this.drawAllCityList.shopTypeCount[0].multiple
+      // console.log('drawCityShopNumber',this.drawCityShopNumber)
+      console.log('drawAllCityList-11',this.drawAllCityList,'hk')
+    }
 
 }
 </script>

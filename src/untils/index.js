@@ -65,6 +65,16 @@ class IndexModel extends Request {
       }
     })
   }
+  //省份地图经销商数据
+  getCityList(country,province){
+    return this.getParamsList({
+      url:this.baseUrl + '/api/merchants/getCityDataList',
+      params:{
+        country:country,
+        province:province
+      }
+    })
+  }
 }
 
 export { IndexModel }

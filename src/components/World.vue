@@ -39,7 +39,7 @@ export default {
       .then(res =>{
         let countryName = res.data.data
         this.$store.commit("home/setAllTotal",countryName.total)
-        // console.log('countryName1',countryName.country,countryName.total)
+        console.log('countryName1',countryName.country,countryName.total)
         //将国家前十名存入VUEX中
         for(let i = 0; i<countryName.country.length-1 && i<10; i++){
           let index = i

@@ -50,13 +50,13 @@ export default {
   },
   mounted() {
     this.getCountryList()
-    this.getCountryMap()
+    // this.getCountryMap()
   },
   watch:{
-    content(newValue,oleValue){
-      console.log('监视content',this.content)
-      this.getCountryMap()
-    }
+    // content(newValue,oleValue){
+    //   console.log('监视content',this.content)
+    //   this.getCountryMap()
+    // }
   },
   methods: {
     getCountryList(){
@@ -75,6 +75,7 @@ export default {
         let provincialList = res.data.data
         this.content = provincialList
         console.log('provincialList',provincialList)
+        this.getCountryMap()
       })
     },
     getCountryMap(){
@@ -117,20 +118,26 @@ export default {
               //   "联系电话：13412345678"+'<br/>'+
               //   "负责区域：青海、西藏、内蒙古、山西"
               // ].join("\n"),
-              // formatter:[
-              //   `<p style='width:300px;height:200px;background:pink'>
-              //        招商经理：刘建军 <br/> 
-              //        联系电话：13412345678
-              //    </p>`
-              // ].join("\n"),
               formatter:function(params){
-                 let res =`<img style='width:250px; height:150px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
-                 res += 
-                 `<div style ='position:absolute; letf:0px; top:0px; width:300px; height:150px;' >
-                    <p style ='margin-left:-15px;'>${params.name}</p>
-                    <p style ='margin-left:-15px;'>${params.value}</p>
-                 </div>`
-                 return res
+                // console.log(999,params)
+                // console.log(998,content)
+                let name=''
+                for(let i=0; i<content.length; i++){
+                  name = content[i].province.substring(0,content[i].province.length-1)
+                  if(params.name == name){
+
+                    let res =`<img style='width:370px; height:250px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                    res += 
+                    `<div style ='position:absolute; letf:0px; top:0px; width:300px; height:150px; padding:20px;' >
+                        <p style ='margin-left:-15px;height:36px;'>招商经理：${content[i].managerName}</p>
+                        <p style ='margin-left:-15px;height:36px;'>联系电话：${content[i].phone}</p>
+                        <p style ='margin-left:-15px;height:36px;'>负责区域：${content[i].chargeProvince}</p>
+                        <p style ='margin-left:-15px;height:36px;'>门店数量：${content[i].shopNumber}</p>
+                        <p style ='margin-left:-15px;height:36px; width:330px;'>加盟品牌：${content[i].brands}</p>
+                    </div>`
+                    return res                     
+                  }
+                }
               },
               // formatter:function(params){
               //   console.log('formatter',params)
@@ -152,26 +159,14 @@ export default {
               textStyle:{
                 color:'yellow',
                 fontSize:20,
-                width:1800,
-                height:300,
-                rich:{
-                  img:{
-                    color:'red',
-                    width:800,
-                    height:200,
-                    backgroundColor:{
-                      // image:`image://${newsIcon}`
-                      image:'../assets/image/news.png',
-                    }
-                  }
-                }
-              }
+              },
           },
           series:[
               {
                 type:'map',
                 map:'China',
                 // geoIndex:0,
+                data:content,
                 zoom:1,
                 emphasis:{
                   label:{
@@ -191,7 +186,6 @@ export default {
                   borderType:'solid',
                   borderWidth:2,
                   borderColor:'#283777',
-                  data:content
                 }
               },
           ]
