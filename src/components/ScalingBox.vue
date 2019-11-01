@@ -24,7 +24,7 @@ export default {
     })
   },
   mounted(){
-    console.log('路由地址',this.$route.name)
+    // console.log('路由地址',this.$route.name)
   },
   methods:{
     enlargeMap(){

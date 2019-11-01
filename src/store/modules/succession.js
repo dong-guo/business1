@@ -2,7 +2,7 @@ const state ={
      country:[],
      city:[],
      provincial:[],
-     valueCountry:'',
+     valueCountry:'中国',
      valueProvincial:'',
      valueCity:'',
      brandList:[],  

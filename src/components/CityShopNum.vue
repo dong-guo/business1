@@ -2,18 +2,36 @@
 <div class="cityShop">
     <div class="singleShop">
     <div class="greenballoon"></div>
-    <p>单品店&nbsp;&nbsp;(99)</p>
+    <p v-if="drawCityShopTypeCount">单品店&nbsp;&nbsp;({{drawCityShopTypeCount.single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>
-      <p>综合店&nbsp;&nbsp;(88)</p>
+      <p v-if="drawCityShopTypeCount">综合店&nbsp;&nbsp;({{drawCityShopTypeCount.multiple}})</p>
     </div>
 </div>
 
 </template>
 <script>
-export default{
+import { mapState } from 'vuex'
 
+export default {
+   name:'cityShopNum',
+   data(){
+     return{}
+   },
+   computed:{
+     ...mapState({
+       drawCityShopTypeCount:state => state.city.cityShopTypeCount
+     })
+   },
+   mounted(){
+      // console.log('cityShopNum-drawCityShopTypeCount',this.drawCityShopTypeCount)
+   },
+   watch:{
+     drawCityShopTypeCount(newValue,oldValue){
+      // console.log('cityShopNum-drawCityShopTypeCount检测',this.drawCityShopTypeCount)
+     }
+   }
 }
 </script>
 

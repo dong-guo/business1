@@ -75,6 +75,16 @@ class IndexModel extends Request {
       }
     })
   }
+  getDistrictList(country,province,city){
+    return this.getParamsList({
+      url:this.baseUrl+'/api/merchants/getDistrictDataList',
+      params:{
+        country,
+        province:province,
+        city:city
+      }
+    })
+  }
 }
 
 export { IndexModel }

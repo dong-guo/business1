@@ -1,11 +1,11 @@
 <template>
 <div class="listItem">
    <div class="pic"></div>
-   <div class="listItem_name">{{item.name}}</div>
-   <div class="listItem_add">{{item.add}}</div>
+   <div class="listItem_name">{{item.city}}</div>
+   <div class="listItem_add">{{item.address}}</div>
    <div class="listItem_title">经营品牌</div>
    <ul class="brandBox">
-     <li class="brand" v-for="(list,index) in item.brand" :key="list+index">{{list}}</li>
+     <li class="brand" v-for="(list,index) in item.brandList" :key="list+index">{{list}}</li>
    </ul>
 </div>
 
@@ -25,10 +25,13 @@ export default {
   },
   computed:{
     ...mapState({
-      drawShopData: state => state.shopList.shopData
+      drawShopData: state => state.shopList.shopData,
+      drawCityShopList: state => state.city.cityShopList,
     })
   },
   mounted(){
+    console.log('item',this.item)
+    // console.log('shopListItem-drawCityShopList',this.drawCityShopList)
   }
 }
 </script>
@@ -43,6 +46,7 @@ export default {
   position:relative;
   border-radius:4px;
   padding-left:17px;
+  /* border:1px solid yellow; */
 }
 .pic{
   width:180px;
@@ -61,6 +65,7 @@ export default {
   font-weight:300;
 }
 .listItem_add{
+  height:60px;
   margin-top:15px;
   color:#0E6DE9;
   line-height:30px;
@@ -71,6 +76,9 @@ export default {
 .listItem_title{
   color:#00FFC6;
   margin-top:20px;
+  /* position:absolute; */
+  /* top:200px; */
+  /* left:17px; */
   font-size:20px;
   font-weight:500;
   /* border:1px solid yellow; */
@@ -84,7 +92,10 @@ export default {
   display:flex;
 }
 .brand{
-  width:100px;
+  /* width:100px; */
+  width:auto;
+  min-width:100px;
+  padding:0 5px 0 5px;
   height:32px;
   background-color:rgba(0,255,198,0.2);
   border:1px solid rgba(0,255,198,1);

@@ -4,14 +4,14 @@
     <div class="content_contentPic"></div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
-       <P class="contentText_name">樊建中</P>
+       <P class="contentText_name">{{drawCityManager.managerName}}</P>
     </div>
   </div>
   <div class="phone">
-    <span>联系电话:</span>15099999999
+    <span>联系电话:</span>{{drawCityManager.phone}}
   </div>
   <div class="territory">
-    <span>负责区域:</span>河北、天津、北京
+    <span>负责区域:</span>{{drawCityManager.chargeProvince}}
   </div>
   <div class="QrcodeBox">
     <div class="qrcode"></div>
@@ -21,7 +21,27 @@
 
 </template>
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
+  name:'cityNewsBox',
+  data(){
+    return{}
+  },
+  computed:{
+    ...mapState({
+      drawCityManager:state =>state.city.cityManager
+    })
+  },
+  mounted(){
+    // console.log('CityNewsBox-drawCityManager',this.drawCityManager)
+  },
+  watch:{
+    drawCityManager(newValue,oldValue){
+      // console.log('CityNewsBox-drawCityManager-检测',this.drawCityManager)
+    }
+  }
 
 }
 </script>
@@ -48,7 +68,8 @@ export default {
   width:80px;
   height:80px;
   border-radius:50%;
-  background-color:wheat;
+  /* background-color:wheat; */
+  background-image:url(../assets/images/headPic.png);
 }
 .content_contentPic_contentText{
   margin-left:20px;

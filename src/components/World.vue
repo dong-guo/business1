@@ -41,7 +41,7 @@ export default {
         this.$store.commit("home/setAllTotal",countryName.total)
         console.log('countryName1',countryName.country,countryName.total)
         //将国家前十名存入VUEX中
-        for(let i = 0; i<countryName.country.length-1 && i<10; i++){
+        for(let i = 0; i< countryName.country.length-1 && i<10; i++){
           let index = i
           let franchiseStoreNum = countryName.country[i].franchiseStore
           let directSaleStoreNum = countryName.country[i].directSaleStore
@@ -50,11 +50,13 @@ export default {
           this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
         }
         this.worldeSet();
+        console.log('drawCountryNumber',this.drawCountryNumber)
       })
     },
     //设置散点气球样式
     worldeSet() {
       let dcn = this.drawCountryNumber;
+      let coordinate = this.drawCountry
       // console.log('dcn-46',dcn)
       let countryShopNum = [];
       let otherStyle = [];
@@ -69,11 +71,19 @@ export default {
           selected: false,
           itemStyle: { areaColor: "#33D8FA" }
         });
+        // console.log('颜色国家otherStyle',otherStyle)
         //气泡大小分级
+        let countryCoordinate = []
+        for(let index = 0; index < coordinate.length; index++){
+          if(dcn[i].name == coordinate[index].ChinaName){
+             countryCoordinate = coordinate[index].jindu
+          }
+        }
         if (dcn[i].total > 30) {
           countryBigBall.push({
-            name: dcn[i].name,
-            value: dcn[i].jindu,
+            // name: dcn[i].name,
+            // value: dcn[i].jindu,
+            value:countryCoordinate,
             color: "#333333",
             label: {
               show: true,
@@ -101,7 +111,8 @@ export default {
         } else if (dcn[i].total > 1 && dcn[i].total <= 30) {
           countryMidBall.push({
             name: dcn[i].name,
-            value: dcn[i].jindu,
+            // value: dcn[i].jindu,
+            value:countryCoordinate,
             label: {
               show: true,
               position: ["20%", "30%"],
@@ -128,7 +139,8 @@ export default {
         } else {
           countrySmallBall.push({
             name: dcn[i].name,
-            value: dcn[i].jindu,
+            // value: dcn[i].jindu,
+            value:countryCoordinate,
             label: {
               show: true,
               position: ["15%", "25%"],
@@ -156,12 +168,7 @@ export default {
         let worldJson = res.data;
         echarts.registerMap("world", worldJson);
         this.myEcharts = echarts.init(document.getElementById("world_box"));
-        let option = this.worldOption(
-          otherStyle,
-          countryBigBall,
-          countryMidBall,
-          countrySmallBall
-        );
+        let option = this.worldOption(otherStyle,countryBigBall,countryMidBall,countrySmallBall);
         this.myEcharts.setOption(option);
         //跳转国家地图
         let country = this.drawCountry;

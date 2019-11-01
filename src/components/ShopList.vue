@@ -50,7 +50,8 @@ export default {
   },
   computed: {
     ...mapState({
-      drawShopData: state => state.shopList.shopData
+      drawShopData: state => state.shopList.shopData,
+      drawCityShopList: state =>state.city.cityShopList
     })
   },
   mounted() {
@@ -68,8 +69,8 @@ export default {
       observer: true,
       observeParents: true
     });
-
-    //  console.log('对象',Swiper)
+    console.log('CITY-drawCityShopList',this.drawCityShopList)
+  
   },
   methods: {
     //开启店铺列表开关
@@ -79,20 +80,21 @@ export default {
     },
     openItem() {
       if (this.shopKey == false) {
-        console.log("drawShopData", this.drawShopData);
-        let itemListNum = this.drawShopData;
+        // console.log("drawShopData", this.drawShopData);
+        // let itemListNum = this.drawShopData;
+        let itemListNum = this.drawCityShopList
         let pageno = 1;
         let pagesize = 6;
         this.pageNum = Math.ceil(itemListNum.length / pagesize) || 1;
         for (let i = 0; i < this.pageNum; i++) {
-          this.totalPage[i] = this.drawShopData.slice(
+          this.totalPage[i] = itemListNum.slice(
             pagesize * i,
             pagesize * (i + 1)
           );
         }
-        console.log("totalPage", this.totalPage);
+        // console.log("totalPage", this.totalPage);
         this.totalShow = this.totalPage[this.currentPage];
-        console.log("当前显示页", this.totalShow);
+        // console.log("当前显示页", this.totalShow);
       }
     },
     changeCurrentPage() {
@@ -101,8 +103,8 @@ export default {
         this.currentPage = this.pageNum - 1;
       }
       this.totalShow = this.totalPage[this.currentPage];
-      console.log("改变当前显示页", this.totalShow);
-      console.log("this.currentPage", this.currentPage);
+      // console.log("改变当前显示页", this.totalShow);
+      // console.log("this.currentPage", this.currentPage);
     }
   }
 };

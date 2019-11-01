@@ -4,6 +4,7 @@ import home from './modules/home.js'
 import succession from './modules/succession.js'
 import shopList from './modules/shopList.js'
 import provincial from './modules/provincial.js'
+import city from './modules/city.js'
 Vue.use(Vuex)
 
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     home,
     succession,
     shopList,
-    provincial
+    provincial,
+    city
   }
 })

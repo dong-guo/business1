@@ -4,13 +4,13 @@ const state = {
   allcityList:{},
 }
 const mutations = {
-  setCityShopNumber(state,obj){
+  setCityShopNumber:(state,obj) =>{
     state.cityShopNumber = obj
   },
-  setAllCityList(state,obj){
+  setAllCityList:(state,obj) => {
     state.allCityList = obj
   },
-  setCityManager(state,obj){
+  setCityManager:(state,obj) => {
     state.cityManager = obj
   }
 }

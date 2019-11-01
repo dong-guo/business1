@@ -61,16 +61,21 @@ export default {
        let province = this.drawProvincialChinaChange + '省'
        indexModel.getCityList(country,province)
        .then(res=>{
-           this.allCityList = res.data.data
-           console.log('allCityList',this.allCityList)
-           this.cityShopNumber = this.allCityList.shopTypeCount[0]
-           this.cityManager = this.allCityList.manager
-           this.$store.commit("provincial/setCityShopNumber",this.cityShopNumber)
-           this.$store.commit("provincial/setAllCityList",this.allCityList)
-           this.$store.commit("provincial/setCityManager",this.cityManager)
-           console.log('cityList',this.allCityList,country,province)
-           this.actionProvincial()
-        //  console.log('cityShowNumber',this.cityShopNumber)
+         console.log('res.data',res.data)
+           if(res.data.status == 1 ){
+            this.allCityList = res.data.data
+            console.log('allCityList',this.allCityList)
+            this.cityShopNumber = this.allCityList.shopTypeCount[0]
+            this.cityManager = this.allCityList.manager
+            this.$store.commit("provincial/setCityShopNumber",this.cityShopNumber)
+            this.$store.commit("provincial/setAllCityList",this.allCityList)
+            this.$store.commit("provincial/setCityManager",this.cityManager)
+            //  console.log('cityList',this.allCityList,country,province)
+            this.actionProvincial()
+            console.log('cityShowNumber',this.cityShopNumber)
+           } else {
+            this.actionProvincial()
+           }
        })
      },
      //初始化省地图
@@ -84,7 +89,7 @@ export default {
         .then(res => {
           let developCity=this.gradeCity()
           let gradeBalloon = this.gradeBalloon()
-          console.log('66气球数据',gradeBalloon)
+          // console.log('66气球数据',gradeBalloon)
           let provincialChangeJson = res.data;
           echarts.registerMap("provincialChange", provincialChangeJson);
           this.myEcharts = echarts.init(document.getElementById("provincialBox"));
@@ -141,7 +146,7 @@ export default {
                               res += 
                                   `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:100px;padding-top:10px; font-size:20px;'>
                                     <p style ='margin-left:5px;height:36px;'>${params.name}</p>
-                                    <p style ='margin-left:5px;height:36px;'>暂无开发</p>
+                                    <p style ='margin-left:5px;height:36px;'>暂无数据</p>
                                   </div>`
                                return res
                           }

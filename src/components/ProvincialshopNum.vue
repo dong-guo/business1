@@ -3,12 +3,12 @@
   <div class="singleShop">
     <div class="greenballoon"></div>
     <!-- <p>单品店&nbsp;&nbsp;({{drawAllCityList.shopTypeCount[0].single}})</p> -->
-    <p>单品店&nbsp;&nbsp;({{drawCityShopNumber.single}})</p>
+    <p v-if="drawCityShopNumber">单品店&nbsp;&nbsp;({{drawCityShopNumber.single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>
       <!-- <p>综合店&nbsp;&nbsp;({{drawAllCityList}})</p> -->
-      <p>综合店&nbsp;&nbsp;({{drawCityShopNumber.multiple}})</p>
+      <p v-if="drawCityShopNumber">综合店&nbsp;&nbsp;({{drawCityShopNumber.multiple}})</p>
     </div>
 </div>
 
@@ -43,7 +43,7 @@ export default {
       // this.single = this.drawAllCityList.shopTypeCount[0].single
       // this.multiple = this.drawAllCityList.shopTypeCount[0].multiple
       // console.log('drawCityShopNumber',this.drawCityShopNumber)
-      console.log('drawAllCityList-11',this.drawAllCityList,'hk')
+      console.log('drawAllCityList-11',this.drawAllCityList,'provincialShopNum')
     }
 
 }

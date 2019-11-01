@@ -74,14 +74,14 @@ export default {
       .then(res=>{
         let provincialList = res.data.data
         this.content = provincialList
-        console.log('provincialList',provincialList)
+        // console.log('provincialList',provincialList)
         this.getCountryMap()
       })
     },
     getCountryMap(){
       let country = this.drawCountryChange
       let content = this.content
-      console.log(111,country,content)   
+      // console.log(111,country,content)   
       axios.get(`./geoJson/country/${country}.json`)
       .then(res => {
         let countryJson = res.data;
@@ -113,11 +113,6 @@ export default {
               position:'right',
               borderColor:'red',
               position:'right',
-              // formatter:[
-              //   "招商经理：刘建军" +'<br/>'+
-              //   "联系电话：13412345678"+'<br/>'+
-              //   "负责区域：青海、西藏、内蒙古、山西"
-              // ].join("\n"),
               formatter:function(params){
                 // console.log(999,params)
                 // console.log(998,content)
@@ -149,12 +144,6 @@ export default {
               //     <p>pu</p>
               //   </div>`
               //   return res;
-              // },
-              // formatter:function(params,content){
-              //   console.log('formatter',content)
-              //   let res = '经销商经理:'+ content.data +'<br/>'
-              //   // res += '联系电话:' + params.data.phone
-              //   return res
               // },
               textStyle:{
                 color:'yellow',
