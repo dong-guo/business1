@@ -5,29 +5,37 @@ const state ={
      valueCountry:'中国',
      valueProvincial:'',
      valueCity:'',
-     brandList:[],  
+     brandList:[],
+     yList:[],
+     echartRequestList:[]  
 }
 const mutations = {
-   setCountryChange(state,array){
+   setCountryChange:(state,array)=>{
       state.country = array
    },
-   setProvincialChange(state,array){
+   setProvincialChange:(state,array)=>{
       state.provincial = array
    },
-   setCityChange(state,array){
+   setCityChange:(state,array)=>{
      state.city = array
    },
-   setValueCountry(state,string){
+   setValueCountry:(state,string)=>{
      state.valueCountry = string
    },
-   setValueProvincial(state,string){
+   setValueProvincial:(state,string)=>{
      state.valueProvincial = string
    },
-   setValueCity(state,string){
+   setValueCity:(state,string)=>{
      state.valueCity = string
    },
-   setBrandList(state,array){
+   setBrandList:(state,array)=>{
      state.brandList = array
+   },
+   setYList:(state,array)=>{
+     state.yList = array
+   },
+   setEchartRequestList:(state,array)=>{
+     state.echartRequestList = array
    }
 }
 const action = {

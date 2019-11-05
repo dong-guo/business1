@@ -69,8 +69,8 @@ export default {
    },
    watch:{
      personal(newValue,oldValue){
-       console.log('监测信息',this.personal)
-       console.log(767,this.personal[2].profilePhoto)
+      //  console.log('监测信息',this.personal)
+      //  console.log(767,this.personal[2].profilePhoto)
      }
    },
    methods:{
@@ -86,7 +86,7 @@ export default {
         indexModel.getCanvassList(page,limit)
         .then(res=>{
           let managerList = res.data.data
-          console.log('managerList',managerList)
+          // console.log('managerList',managerList)
           this.personal = managerList
         })
      },
@@ -255,10 +255,12 @@ display:none
   /* display:inline-block; */
 }
 .personal_news_pic{
-  background-color:mediumvioletred;
+  /* background-color:mediumvioletred; */
   height:70px;
   width:70px;
   border-radius:100%;
+  background-image:url(../assets/images/headPic.png);
+  background-size:cover;
   
 }
 .personal_news_people{

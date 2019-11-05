@@ -58,26 +58,32 @@ export default {
       showCountry: false,
       showProvincial: false,
       showCity: false,
-      valueCountry: "",
+      valueCountry: "中国",
       valueProvincial: "",
       valueCity: ""
     };
   },
   mounted(){
+    this.getBrand()
     this.requestCountry()
+    this.requestProvincial()
   },
   computed:{
     ...mapState({
       drawCountry: state => state.succession.country,
       drawProvincial: state => state.succession.provincial,
       drawCity: state => state.succession.city,
+
+      drawValueCountry: state => state.succession.valueCountry,
     })
   },
   watch:{
+    //监视国家下拉框变化
     valueCountry(newValue,oldValue){
       console.log('valueCountry',newValue)
       this.requestProvincial()
     },
+    //监视省份下拉框变化
     valueProvincial(newValue,oldValue){
       console.log('75行valueProvincial',newValue)
       this.requestCity()
@@ -99,10 +105,7 @@ export default {
     requestProvincial(){
       if(this.valueCountry == '中国'){
         let country = this.valueCountry
-        console.log('country选择省份',country)
-        // let contentType = 'text/plain'
-        // let authorization = 'token'
-        // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceList",{params:{contentType:contentType,authorization:authorization,country:country}})
+        console.log('country省份所在国家',country)
         indexModel.selectProvincial(country)
         .then(res =>{
           let provincial =res.data.data
@@ -113,7 +116,13 @@ export default {
         this.valueProvincial=''
         this.valueCity=''
         let provincial = ''
-        this.$store.commit("succession/setProvincialChange",provincial)
+        let country = this.valueCountry
+        indexModel.selectProvincial(country)
+        .then(res =>{
+          let provincial =res.data.data
+          this.$store.commit("succession/setProvincialChange",provincial)
+          console.log('provincial-119',provincial)
+        }) 
       }    
     },
     //请求城市
@@ -127,19 +136,23 @@ export default {
       .then(res =>{
          let city = res.data.data
          this.$store.commit("succession/setCityChange",city)
-         console.log('city,116行',city)
+         console.log('city-请求回来城市列表',city)
       })    
     },
+    //打开国家下拉列表
     openValueCountry() {
       this.showCountry = !this.showCountry;
       this.showProvincial = false;
       this.showCity = false;
     },
+    //选择下拉列表国家
     getValueCountry(index, item) {
       this.valueCountry = item;
       this.$store.commit("succession/setValueCountry",this.valueCountry)
       this.showCountry = false;
+      this.getBrand()
     },
+    //打开省份下拉列表
     openProvincial() {
       if(this.valueCountry=='中国'){
         this.showProvincial = !this.showProvincial;
@@ -149,11 +162,13 @@ export default {
         this.showProvincial = false
       }
     },
+    //选择省份下拉列表省份
     getProvincial(index, item) {
       this.valueProvincial = item;
       this.$store.commit("succession/setValueProvincial",this.valueProvincial)
       this.showProvincial = false;
     },
+    //打开城市下拉列表
     openCity() {
       if(this.valueCountry=='中国'){
         this.showCity = !this.showCity;
@@ -163,6 +178,7 @@ export default {
         this.showCity = false
       }
     },
+    //选择城市下拉框城市
     getCity(index, item) {
       this.valueCity = item;
       let undevelopedCity = this.valueCity
@@ -173,7 +189,28 @@ export default {
         undevelopedCity = ''
         this.$store.commit("succession/setValueCity",undevelopedCity)
       }
-    }
+    },
+    //请求后台品牌
+    getBrand(){
+        let ContentType ='text/plain'
+        let Authorization ='token'
+        let country = this.drawValueCountry
+        indexModel.getChartList(country)
+        .then(res=>{
+          let date = res.data.data.brand
+          let all = res.data.data
+          console.log('请求原始值',all)
+          let chartBrandList = []
+          for(let i =0; i< date.length; i++){
+            chartBrandList.push({name:date[i].brand})
+          }
+          console.log('chartBrand-30',chartBrandList)
+          this.$store.commit("succession/setBrandList",chartBrandList)
+          let provincialTotal = res.data.data.developedProvince
+          this.$store.commit("succession/setEchartRequestList",provincialTotal)
+          // this.initChart()
+        })     
+    },
   }
 };
 </script>

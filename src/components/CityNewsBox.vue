@@ -4,13 +4,13 @@
     <div class="content_contentPic"></div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
-       <P class="contentText_name">{{drawCityManager.managerName}}</P>
+       <P v-if="drawCityManager" class="contentText_name">{{drawCityManager.managerName}}</P>
     </div>
   </div>
-  <div class="phone">
+  <div  v-if="drawCityManager" class="phone">
     <span>联系电话:</span>{{drawCityManager.phone}}
   </div>
-  <div class="territory">
+  <div v-if="drawCityManager" class="territory">
     <span>负责区域:</span>{{drawCityManager.chargeProvince}}
   </div>
   <div class="QrcodeBox">

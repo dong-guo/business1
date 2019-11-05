@@ -40,6 +40,7 @@ class IndexModel extends Request {
       }
     })
   }
+  //请求echarts列表国家数据
   getChartList(country){
     return this.getParamsList({
       url:this.baseUrl + '/api/merchants/getDevelopedList',
