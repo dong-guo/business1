@@ -2,6 +2,8 @@ const state ={
      country:[],
      city:[],
      provincial:[],
+     provincialCode:[],
+     provincialCodeChange:'',
      valueCountry:'中国',
      valueProvincial:'',
      valueCity:'',
@@ -36,6 +38,12 @@ const mutations = {
    },
    setEchartRequestList:(state,array)=>{
      state.echartRequestList = array
+   },
+   setProvincialCode:(state,array) => {
+     state.provincialCode = array
+   },
+   setProvincialCodeChange:(state,number)=>{
+     state.provincialCodeChange = array
    }
 }
 const action = {

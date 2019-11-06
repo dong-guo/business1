@@ -29,6 +29,15 @@ class IndexModel extends Request {
       }
     })
   }
+  selectProvincialOrCity(type,parentCode){
+    return this.getParamsList({
+      url:this.baseUrl +'/api/public/v1/region',
+      params:{
+        type:type,
+        parentCode:parentCode
+      }
+    })
+  }
   selectCity(country,province){
     return this.getParamsList({
       url:this.baseUrl + '/api/merchants/getCityList',
@@ -49,6 +58,7 @@ class IndexModel extends Request {
       }
     })
   }
+  //请求经销商数据
   getCanvassList(page,limit){
     return this.getParamsList({
       url:this.baseUrl + '/api/merchants/getManagerList',
@@ -83,6 +93,16 @@ class IndexModel extends Request {
         country,
         province:province,
         city:city
+      }
+    })
+  }
+  getUndevelopedCity(country,province,city){
+    return this.getParamsList({
+      url:this.baseUrl+'/api/merchants/getUndevelopedList',
+      params:{
+        country,
+        province:province,
+        city:city,
       }
     })
   }

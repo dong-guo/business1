@@ -10,6 +10,10 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex"
+
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
+
 export default {
     name:'undevelopedContent',
     data(){
@@ -41,17 +45,26 @@ export default {
     mounted(){
       // console.log('drawValueCountry',this.drawValueCountry)
        this.showUndevelopedCity()
+        // this.text()
     },
     methods:{
+      //请求未开发区县
        showUndevelopedCity(){
-         let country = this.drawValueCountry
-         let province = this.drawValueProvincial
-         let city = this.drawValueCity
-         let contentType = 'text/plain'
-         axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getUndevelopedList",{params:{province:province,country:country,city:city},headers:{contentType:contentType}})
+         let [country,province,city] = [this.drawValueCountry,this.drawValueProvincial,this.drawValueCity]
+        //  let contentType = 'text/plain'
+         indexModel.getUndevelopedCity(country,province,city)
          .then(res=>{
            this.urbanArea = res.data.data
           //  console.log('unCity',this.urbanArea)
+         })
+       },
+       text(){
+         let type = 'CITY'
+         let parentCode ='440000'
+         indexModel.selectProvincialOrCity(type,parentCode)
+         .then(res=>{
+            let pp = res.data.data
+            console.log('pp',pp)
          })
        }
     }
@@ -68,11 +81,15 @@ export default {
 .uncontent_allUrbanArea{
   display:flex;
   flex-wrap:wrap;
-  justify-content:space-between;
+  /* justify-content:space-between; */
 }
 .urbanArea{
-  width:100px;
+  /* width:100px; */
+  width:auto;
+  /* min-width:100px; */
+  padding:0 10px 0 10px;
   height:32px;
+  margin-right:15px;
   background:rgba(0,255,198,0.2);
   border:1px solid rgba(0,255,198,1);
   border-radius:4px;

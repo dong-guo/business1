@@ -1,5 +1,5 @@
 <template>
-  <div id="chart_box"></div>
+  <div v-if="List" id="chart_box"></div>
 </template>
 <script>
 import axios from "axios";
@@ -25,32 +25,38 @@ export default {
       drawValueCountry: state => state.succession.valueCountry,
       drawBrandList:state => state.succession.brandList,
       drawCity: state => state.succession.city,
-      drawEchartRequestList: state=>state.succession.echartRequestList
+      drawEchartRequestList: state=>state.succession.echartRequestList,
+      drawYList: state=>state.succession.yList
     })
   }, 
   watch:{
-    drawCity(newValue,oldValue){
-      // console.log('chart检测城市',this.drawCity)
-      this.List = this.drawCity
-      for(let i = 0; i<this.drawCity; i++){
-        this.List.push(this.drawCity[i])
-      }
-      // console.log('List',this.List)
-      this.initChart()      
-    },
-    drawProvincial(newValue,oldValue){
-      // console.log('chart检测省份',this.drawProvincial)
-      this.List = this.drawProvincial
-      for(let i = 0; i<this.drawProvincial; i++){
-        this.List.push(this.drawProvincial[i])
-      }
-      console.log('List',this.List)
+    drawYList(newValue,oleValue){
+      this.List = this.drawYList
+      console.log('list9900',this.list)
       this.initChart()
     },
-    drawValueCountry(newValue,oldValue){
-      // console.log('chart检测国家',this.drawValueCountry)
-      this.initChart()
-    },
+    // drawCity(newValue,oldValue){
+    //   // console.log('chart检测城市',this.drawCity)
+    //   this.List = this.drawCity
+    //   for(let i = 0; i<this.drawCity; i++){
+    //     this.List.push(this.drawCity[i])
+    //   }
+    //   // console.log('List',this.List)
+    //   this.initChart()      
+    // },
+    // drawProvincial(newValue,oldValue){
+    //   // console.log('chart检测省份',this.drawProvincial)
+    //   this.List = this.drawProvincial
+    //   for(let i = 0; i<this.drawProvincial; i++){
+    //     this.List.push(this.drawProvincial[i])
+    //   }
+    //   console.log('List',this.List)
+    //   this.initChart()
+    // },
+    // drawValueCountry(newValue,oldValue){
+    //   // console.log('chart检测国家',this.drawValueCountry)
+    //   this.initChart()
+    // },
     drawBrandList(newValue,oleValue){
       this.initChart()
     },
@@ -60,37 +66,40 @@ export default {
     }
   },
   mounted(){
-   this.provincialTotal = this.drawEchartRequestList
+  //  this.provincialTotal = this.drawEchartRequestList
   //  this.getBrand()
    this.initChart()
    console.log('this.provincialTotal',this.provincialTotal)
   },
   methods:{
    //请求后台品牌
-   getBrand(){
-      let ContentType ='text/plain'
-      let Authorization ='token'
-      let country = this.drawValueCountry
-      indexModel.getChartList(country)
-      .then(res=>{
-        let date = res.data.data.brand
-        let all = res.data.data
-        console.log('请求原始值',all)
-        let chartBrandList = []
-        for(let i =0; i< date.length; i++){
-           chartBrandList.push({name:date[i].brand})
-        }
-        console.log('chartBrand-30',chartBrandList)
-        this.$store.commit("succession/setBrandList",chartBrandList)
-        this.provincialTotal = res.data.data.developedProvince
-        console.log('请求原始值this.provincialTotal',this.provincialTotal)
-        this.initChart()
-      })     
-   },
+  //  getBrand(){
+  //     let ContentType ='text/plain'
+  //     let Authorization ='token'
+  //     let country = this.drawValueCountry
+  //     indexModel.getChartList(country)
+  //     .then(res=>{
+  //       let date = res.data.data.brand
+  //       let all = res.data.data
+  //       console.log('请求原始值',all)
+  //       let chartBrandList = []
+  //       for(let i =0; i< date.length; i++){
+  //          chartBrandList.push({name:date[i].brand})
+  //       }
+  //       console.log('chartBrand-30',chartBrandList)
+  //       this.$store.commit("succession/setBrandList",chartBrandList)
+  //       this.provincialTotal = res.data.data.developedProvince
+  //       console.log('请求原始值this.provincialTotal',this.provincialTotal)
+  //       this.initChart()
+  //     })     
+  //  },
    initChart(){
       // console.log('chart列表-32',this.drawProvincial,this.List)
-      // let Yprovincial=this.drawProvincial
       let Yprovincial = this.List
+      // let Yprovincial =[]
+      // for(let i=0; i<this.drawEchartRequestList.length;i++){
+      //   Yprovincial.push(this.drawEchartRequestList[i].province)
+      // }
       let drawBrandList = this.drawBrandList
       let provincialTotal = this.provincialTotal
       let seriesColor = ['#005F64','#00838F','#0097A7','#00ADC1','#00ADC1','#24C5DA','#4CCFE1','#80DEEA','#B2EAF2']

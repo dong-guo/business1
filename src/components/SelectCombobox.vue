@@ -26,6 +26,7 @@
             @click="getProvincial(index,item)"
             v-for="(item,index) in drawProvincial"
             :key="item.index"
+            class="provincialLi"
           >{{item}}</li>
         </ul>
       </div>
@@ -60,7 +61,9 @@ export default {
       showCity: false,
       valueCountry: "中国",
       valueProvincial: "",
-      valueCity: ""
+      valueCity: "",
+      yList:"",
+      provincialCode:''
     };
   },
   mounted(){
@@ -73,8 +76,9 @@ export default {
       drawCountry: state => state.succession.country,
       drawProvincial: state => state.succession.provincial,
       drawCity: state => state.succession.city,
-
       drawValueCountry: state => state.succession.valueCountry,
+      drawYList: state => state.succession.yList,
+      drawProvincialCode: state => state.succession.provincialCode
     })
   },
   watch:{
@@ -104,13 +108,25 @@ export default {
     //请求中国省份
     requestProvincial(){
       if(this.valueCountry == '中国'){
-        let country = this.valueCountry
-        console.log('country省份所在国家',country)
-        indexModel.selectProvincial(country)
+        // let country = this.valueCountry
+        // console.log('请求省份所在国家',country)
+        // indexModel.selectProvincial(country)
+        let type = 'PROVINCE'
+        indexModel.selectProvincialOrCity(type)
         .then(res =>{
-          let provincial =res.data.data
+          // let provincial =res.data.data
+          let arr = res.data.data
+          console.log('省份下拉框数据',arr)
+          let provincial = []
+          let provincialCode =[]
+          for(let i=0; i<arr.length;i++){
+            provincial.push(arr[i].name)
+            provincialCode.push(arr[i].code)
+          }
           this.$store.commit("succession/setProvincialChange",provincial)
-          console.log('provincial-109',provincial)
+          this.$store.commit("succession/setProvincialCode",provincialCode)
+          console.log('中国省份列表provincial-109',provincial)
+          console.log('中国省份列表码数provincialCode-110',provincialCode)
         }) 
       } else{
         this.valueProvincial=''
@@ -127,15 +143,22 @@ export default {
     },
     //请求城市
     requestCity(){
-      let province = this.valueProvincial
-      let country = this.valueCountry
-      // let contentType = 'contentType'
-      console.log('国家，省',country,province) 
-      // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getCityList",{params:{country:country,province:province,contentType:contentType}})
-      indexModel.selectCity(country,province)
+      // let province = this.valueProvincial
+      // let country = this.valueCountry
+      // console.log('国家，省',country,province)
+      // indexModel.selectCity(country,province)
+      console.log('城市请求数据',this.provincialCode)
+      let type = 'CITY'
+      let parentCode = this.provincialCode
+      indexModel.selectProvincialOrCity(type,parentCode) 
       .then(res =>{
-         let city = res.data.data
+         let cityBox = res.data.data
+         let city = []
+         for(let i=0;i<cityBox.length;i++){
+            city.push(cityBox[i].name)
+         }
          this.$store.commit("succession/setCityChange",city)
+         this.$store.commit("succession/setYList",city)
          console.log('city-请求回来城市列表',city)
       })    
     },
@@ -150,7 +173,10 @@ export default {
       this.valueCountry = item;
       this.$store.commit("succession/setValueCountry",this.valueCountry)
       this.showCountry = false;
+      this.valueProvincial = ''
       this.getBrand()
+      //echart容器Y轴数据
+      this.$store.commit("succession/setYList",this.drawProvincial)
     },
     //打开省份下拉列表
     openProvincial() {
@@ -165,12 +191,17 @@ export default {
     //选择省份下拉列表省份
     getProvincial(index, item) {
       this.valueProvincial = item;
+      this.provincialCode = this.drawProvincialCode[index]
+      console.log('code代码',this.provincialCode)
       this.$store.commit("succession/setValueProvincial",this.valueProvincial)
       this.showProvincial = false;
+      this.valueCity = ''
+      //容器echartY轴数据
+      this.$store.commit("succession/setYList",this.drawCity)
     },
     //打开城市下拉列表
     openCity() {
-      if(this.valueCountry=='中国'){
+      if(this.valueCountry=='中国' && this.valueProvincial){
         this.showCity = !this.showCity;
         this.showCountry = false;
         this.showProvincial = false;        
@@ -192,23 +223,30 @@ export default {
     },
     //请求后台品牌
     getBrand(){
-        let ContentType ='text/plain'
-        let Authorization ='token'
-        let country = this.drawValueCountry
+        let [ContentType,Authorization,country] = ['text/plain','token',this.drawValueCountry]
         indexModel.getChartList(country)
         .then(res=>{
-          let date = res.data.data.brand
-          let all = res.data.data
+          let all = res.data
           console.log('请求原始值',all)
+          let date = res.data.data.brand
           let chartBrandList = []
           for(let i =0; i< date.length; i++){
             chartBrandList.push({name:date[i].brand})
           }
-          console.log('chartBrand-30',chartBrandList)
+          // console.log('chartBrand-30',chartBrandList)
           this.$store.commit("succession/setBrandList",chartBrandList)
           let provincialTotal = res.data.data.developedProvince
+          let list =[]
+          for(let i=0; i<provincialTotal.length;i++){
+            list.push(provincialTotal[i].province)
+          }
+          //容器echartY轴数据
+          // this.$store.commit({
+          //   "succession/setYList":list,
+          //   "succession/setEchartRequestList":provincialTotal
+          // })
+          this.$store.commit("succession/setYList",list)
           this.$store.commit("succession/setEchartRequestList",provincialTotal)
-          // this.initChart()
         })     
     },
   }
@@ -270,7 +308,8 @@ export default {
   display: none;
 }
 .list ul li {
-  width: 100%;
+  /* width: 100%; */
+  /* width:auto; */
   height: 73px;
   font-size: 26px;
   text-indent: 18px;

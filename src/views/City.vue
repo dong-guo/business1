@@ -111,17 +111,18 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .city {
   width: 1920px;
   height: 984px;
   /* background-color:yellowgreen; */
   position: relative;
-}
-.cityMapBox {
-  position: absolute;
-  left: 589px;
-  top: 173px;
+  .cityMapBox {
+    position: absolute;
+    left: 589px;
+    top: 173px;
+    border-color: red!important;
+  }
 }
 .cityTitleBox {
   width: 400px;

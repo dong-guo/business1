@@ -53,16 +53,10 @@ export default {
         console.log('drawCountryNumber',this.drawCountryNumber)
       })
     },
-    //设置散点气球样式
+    //设置气泡图样式
     worldeSet() {
-      let dcn = this.drawCountryNumber;
-      let coordinate = this.drawCountry
-      // console.log('dcn-46',dcn)
-      let countryShopNum = [];
-      let otherStyle = [];
-      let countryBigBall = [];
-      let countryMidBall = [];
-      let countrySmallBall = [];
+      let [dcn,coordinate] =[this.drawCountryNumber,this.drawCountry]
+      let [countryShopNum,otherStyle,countryBigBall,countryMidBall,countrySmallBall] = [[],[],[],[],[]]
       //显示浅蓝色国家
       for (let i = 0; i < dcn.length; i++) {
         countryShopNum.push(String(dcn[i].total));
@@ -72,98 +66,47 @@ export default {
           itemStyle: { areaColor: "#33D8FA" }
         });
         // console.log('颜色国家otherStyle',otherStyle)
-        //气泡大小分级
+        //气泡中英文名字大小匹对
         let countryCoordinate = []
         for(let index = 0; index < coordinate.length; index++){
           if(dcn[i].name == coordinate[index].ChinaName){
              countryCoordinate = coordinate[index].jindu
           }
         }
-        if (dcn[i].total > 30) {
-          countryBigBall.push({
-            // name: dcn[i].name,
-            // value: dcn[i].jindu,
-            value:countryCoordinate,
-            color: "#333333",
-            label: {
-              show: true,
-              position: ["20%", "35%"],
-              fontSize: 16,
-              rich: {
-                a: {
-                  fontSize: 30
-                },
-                b: {
-                  fontSize: 15,
-                  verticalAlign: "middle"
-                },
-                c: {
-                  fontSize: 20,
-                  align: "center"
-                }
-              },
-              // formatter: `{b}`
-              formatter: [
-                "{a| " + countryShopNum[i] + "}{b| 家}" + "\n" + "{c| " + dcn[i].name + "}"
-              ].join("\n")
-            }
-          });
-        } else if (dcn[i].total > 1 && dcn[i].total <= 30) {
-          countryMidBall.push({
-            name: dcn[i].name,
-            // value: dcn[i].jindu,
-            value:countryCoordinate,
-            label: {
-              show: true,
-              position: ["20%", "30%"],
-              color: "#333333",
-              fontSize: 16,
-              rich: {
-                a: {
-                  fontSize: 28
-                },
-                b: {
-                  fontSize: 14,
-                  verticalAlign: "middle"
-                },
-                c: {
-                  fontSize: 20,
-                  align:'center',
-                }
-              },
-              formatter: [
-                "{a| " + countryShopNum[i] +"}{b| 家}" + "\n" +"{c| " + dcn[i].name + "}"
-              ].join("\n")
-            }
-          });
-        } else {
-          countrySmallBall.push({
-            name: dcn[i].name,
-            // value: dcn[i].jindu,
-            value:countryCoordinate,
-            label: {
-              show: true,
-              position: ["15%", "25%"],
-              color: "#333333",
-              fontSize: 16,
-              rich: {
-                a: {
-                  fontSize: 28
-                },
-                b: {
-                  fontSize: 14
-                },
-                c: {
-                  align: "center",
-                }
-              },
-              formatter: [
-                "{a| " + countryShopNum[i] + "}{b| 家}" + "\n" + "{c| " + dcn[i].name + "}"
-              ].join("\n")
-            }
-          });
-        }
+        //气泡图样式设置
+        let [obj,arr]=[dcn[i],countryShopNum[i]]
+        this.setBallnoonStyle(obj,countryBigBall,countryMidBall,countrySmallBall,countryCoordinate,arr,otherStyle)
       }
+      //请求世界地图
+      this.requestWorld(otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn)
+      // axios.get("./geoJson/world.json").then(res => {
+      //   let worldJson = res.data;
+      //   echarts.registerMap("world", worldJson);
+      //   this.myEcharts = echarts.init(document.getElementById("world_box"));
+      //   let option = this.worldOption(otherStyle,countryBigBall,countryMidBall,countrySmallBall);
+      //   this.myEcharts.setOption(option);
+      //   //跳转国家地图
+      //   let country = this.drawCountry;
+      //   this.myEcharts.on("click", params => {
+      //     console.log('跳转名字',params.name)
+      //     //取得亮蓝色国家
+      //     for (let i = 0; i < dcn.length; i++) {
+      //       if (params.name == dcn[i].name) {
+      //         //取得中英文名称对于数据
+      //         for(let i = 0; i < country.length; i++){
+      //           if(params.name ==country[i].ChinaName){
+      //             this.$store.commit("home/setCountryChange", country[i].EnglishName);
+      //             this.$router.push({ name: "china" });
+      //           }
+      //         }
+      //         break;
+      //       }
+      //     }
+      //   });
+      // });
+    },
+    //世界地图请求
+    requestWorld(otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn){
       axios.get("./geoJson/world.json").then(res => {
         let worldJson = res.data;
         echarts.registerMap("world", worldJson);
@@ -190,6 +133,7 @@ export default {
         });
       });
     },
+    //世界地图配置
     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
       return {
         geo: {
@@ -277,6 +221,94 @@ export default {
           }
         ]
       };
+    },
+    //气泡图样式设置函数
+    setBallnoonStyle(obj,countryBigBall,countryMidBall,countrySmallBall,countryCoordinate,arr,otherStyle){
+        if (obj.total > 30) {
+          countryBigBall.push({
+            name: obj.name,
+            // value: dcn[i].jindu,
+            value:countryCoordinate,
+            color: "#333333",
+            label: {
+              show: true,
+              position: ["20%", "35%"],
+              fontSize: 16,
+              rich: {
+                a: {
+                  fontSize: 30
+                },
+                b: {
+                  fontSize: 15,
+                  verticalAlign: "middle"
+                },
+                c: {
+                  fontSize: 20,
+                  align: "center"
+                }
+              },
+              // formatter: `{b}`
+              formatter: [
+                "{a| " + arr + "}{b| 家}" + "\n" + "{c| " + obj.name + "}"
+              ].join("\n")
+            }
+          });
+        } else if (obj.total > 1 && obj.total <= 30) {
+          countryMidBall.push({
+            name: obj.name,
+            // value: dcn[i].jindu,
+            value:countryCoordinate,
+            label: {
+              show: true,
+              position: ["20%", "30%"],
+              color: "#333333",
+              fontSize: 16,
+              rich: {
+                a: {
+                  fontSize: 28
+                },
+                b: {
+                  fontSize: 14,
+                  verticalAlign: "middle"
+                },
+                c: {
+                  fontSize: 20,
+                  align:'center',
+                }
+              },
+              formatter: [
+                "{a| " + arr +"}{b| 家}" + "\n" +"{c| " + obj.name + "}"
+              ].join("\n")
+            }
+          });
+        } else {
+          countrySmallBall.push({
+            name: obj.name,
+            // value: dcn[i].jindu,
+            value:countryCoordinate,
+            label: {
+              show: true,
+              position: ["15%", "25%"],
+              color: "#333333",
+              fontSize: 16,
+              rich: {
+                a: {
+                  fontSize: 28
+                },
+                b: {
+                  fontSize: 14
+                },
+                c: {
+                  align: "center",
+                }
+              },
+              formatter: [
+                "{a| " + arr + "}{b| 家}" + "\n" + "{c| " + obj.name + "}"
+              ].join("\n")
+            }
+          });
+        }
+        return{countryBigBall,countryMidBall,countrySmallBall}          
     }
   }
 };

@@ -60,9 +60,10 @@ export default {
   },
   methods: {
     getCountryList(){
-      let contentType = 'text/plain'
-      let Authorization = 'token'
-      let country = ''
+      // let contentType = 'text/plain'
+      // let Authorization = 'token'
+      // let country = ''
+      let [contentType,Authorization,country] = ['text/plain','token','']
       for(let i = 0; i<this.drawCountry.length; i++){
         if(this.drawCountryChange == this.drawCountry[i].EnglishName){
            country = this.drawCountry[i].ChinaName
