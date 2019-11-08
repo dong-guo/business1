@@ -7,6 +7,7 @@ const state ={
      valueCountry:'中国',
      valueProvincial:'',
      valueCity:'',
+     changeType:'',
      brandList:[],
      yList:[],
      echartRequestList:[]  
@@ -44,6 +45,9 @@ const mutations = {
    },
    setProvincialCodeChange:(state,number)=>{
      state.provincialCodeChange = array
+   },
+   setChangeType:(state,string) => {
+     state.changeType = string
    }
 }
 const action = {

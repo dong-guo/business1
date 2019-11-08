@@ -57,13 +57,13 @@ export default {
         //  console.log('key',this.key)
        }
     },
+    //将得到英文名字国家变成中文名称
     matchingCountry(){
         for(let i = 0; i<this.drawCountry.length; i++){
             if(this.drawCountryChange==this.drawCountry[i].EnglishName){
               this.showCountry = this.drawCountry[i].ChinaName
             }
         }
-        // console.log('matchindCountry',this.matchingCountry)
     }
 
   }

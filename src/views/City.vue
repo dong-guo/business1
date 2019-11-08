@@ -26,7 +26,7 @@ import ScalingBox from "../components/ScalingBox";
 import axios from "axios";
 import echarts from "echarts";
 
-import { mapState } from "vuex";
+import { mapState,mapMutations } from "vuex";
 
 import { IndexModel } from "../untils/index";
 const indexModel = new IndexModel();
@@ -70,26 +70,34 @@ export default {
      
   },
   methods: {
+    
+
     //請求县区参数
     requestDistrict() {
-      let country = this.showChinaCountry;
-      let provincial = this.drawProvincialChinaChange + '省'
-      let city = this.drawCityChinaChange + '市'
+      let [country,provincial,city] = [this.showChinaCountry,this.drawProvincialChinaChange + '省',this.drawCityChinaChange + '市']
       indexModel.getDistrictList(country,provincial,city)
       .then(res => {
         //求得数据拆分存入VUEX
         let district = res.data.data
-        console.log("district", district);
-        let districtList = res.data.data.districtList
-        let manager = res.data.data.manager
-        let shopList = res.data.data.shopList
-        let shopTypeCount = res.data.data.shopTypeCount[0]
+        console.log("总数据district", district);
+        let [districtList,manager,shopList,shopTypeCount] = [res.data.data.districtList,res.data.data.manager,res.data.data.shopList,res.data.data.shopTypeCount[0]]
         this.$store.commit("city/setCityDistrictList",districtList)
         this.$store.commit("city/setCityManager",manager)
         this.$store.commit("city/setCityShopList",shopList)
         this.$store.commit("city/setCityShopTypeCount",shopTypeCount)
-        // console.log("district", district);
+        // this.sendCommit()
+        console.log("district", district);
       });
+    },
+    sendCommit(){
+      return {
+        ...mapMutations({
+          "city/setCityDistrictList":districtList,
+          "city/setCityManager":manager,
+          "city/setCityShopList":shopList,
+          "city/setCityShopTypeCount":shopTypeCount
+        })
+      }
     },
     matchingCountry() {
       for (let i = 0; i < this.drawCountry.length; i++) {
@@ -98,14 +106,6 @@ export default {
         }
       }
     },
-    keepNews(){
-      if (sessionStorage.getItem("store") ) {
-        this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
-      }
-      window.addEventListener("beforeunload",()=>{
-        sessionStorage.setItem("store",JSON.stringify(this.$store.state))
-      })
-    }
   }
 };
 </script>

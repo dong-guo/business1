@@ -49,12 +49,15 @@ class IndexModel extends Request {
       }
     })
   }
-  //请求echarts列表国家数据
-  getChartList(country){
+  //请求echarts列表品牌数据
+  getChartList(country,type,province,city){
     return this.getParamsList({
       url:this.baseUrl + '/api/merchants/getDevelopedList',
       params:{
-        country:country
+        country:country,
+        province:province,
+        city:city,
+        type:type
       }
     })
   }
@@ -96,13 +99,15 @@ class IndexModel extends Request {
       }
     })
   }
-  getUndevelopedCity(country,province,city){
+  //未开发地区列表数据
+  getUndevelopedCity(country,province,city,type){
     return this.getParamsList({
       url:this.baseUrl+'/api/merchants/getUndevelopedList',
       params:{
         country,
         province:province,
         city:city,
+        type:type
       }
     })
   }

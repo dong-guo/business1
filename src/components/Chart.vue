@@ -32,7 +32,7 @@ export default {
   watch:{
     drawYList(newValue,oleValue){
       this.List = this.drawYList
-      console.log('list9900',this.list)
+      // console.log('监视Y轴数据变动',this.List)
       this.initChart()
     },
     // drawCity(newValue,oldValue){

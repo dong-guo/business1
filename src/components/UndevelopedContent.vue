@@ -25,48 +25,41 @@ export default {
       ...mapState({
         drawValueCountry: state => state.succession.valueCountry,
         drawValueProvincial: state => state.succession.valueProvincial,
-        drawValueCity: state => state.succession.valueCity
+        drawValueCity: state => state.succession.valueCity,
+
+        drawChangeType: state => state.succession.changeType
       })
     },
     watch:{
+      drawChangeType(newValue,oldValue){
+        console.log('this.drawChangeType',this.drawChangeType)
+        this.showUndevelopedCity()
+      },
       drawValueCountry(newValue,oldValue){
-        //  console.log('unValueCountry',this.drawValueCountry)
          this.urbanArea = []
       },
-      // drawValueProvincial(newValue,oldValue){
-      //    console.log('unValueProvincial',this.drawValueProvincial)
-      // },
+      drawValueProvincial(newValue,oldValue){
+        this.showUndevelopedCity()
+         console.log('unValueProvincial',this.drawValueProvincial)
+      },
       drawValueCity(newValue,oldValue){
         //  console.log('unValueCity',this.drawValueCity)
          this.showUndevelopedCity()
-  
       },
     },
     mounted(){
-      // console.log('drawValueCountry',this.drawValueCountry)
-       this.showUndevelopedCity()
-        // this.text()
     },
     methods:{
       //请求未开发区县
        showUndevelopedCity(){
-         let [country,province,city] = [this.drawValueCountry,this.drawValueProvincial,this.drawValueCity]
-        //  let contentType = 'text/plain'
-         indexModel.getUndevelopedCity(country,province,city)
+         let [country,province,city,type] = [this.drawValueCountry,this.drawValueProvincial,this.drawValueCity,this.drawChangeType]
+         console.log('国家，省，市，Type ',country,province,city,type)
+         indexModel.getUndevelopedCity(country,province,city,type)
          .then(res=>{
            this.urbanArea = res.data.data
           //  console.log('unCity',this.urbanArea)
          })
        },
-       text(){
-         let type = 'CITY'
-         let parentCode ='440000'
-         indexModel.selectProvincialOrCity(type,parentCode)
-         .then(res=>{
-            let pp = res.data.data
-            console.log('pp',pp)
-         })
-       }
     }
 
 }

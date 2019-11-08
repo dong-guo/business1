@@ -1,7 +1,9 @@
 <template>
 <div class="provincialBox">
   <div class="content">
-    <div class="content_contentPic"></div>
+    <div class="content_contentPic">
+      <img class="content_contentPic_photo" :src="drawCityManager.contactPhoto" alt="">
+    </div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
        <P v-if="drawCityManager" class="contentText_name">{{drawCityManager.managerName}}</P>
@@ -14,7 +16,9 @@
     <span>负责区域:</span>{{drawCityManager.chargeProvince}}
   </div>
   <div class="QrcodeBox">
-    <div class="qrcode"></div>
+    <div class="qrcode">
+      <img class="qrcode_photo" :src="drawCityManager.profilePhoto" alt="">
+    </div>
     <p>扫一扫添加好友</p>
   </div>
   <div class="divider"></div>
@@ -35,7 +39,7 @@ export default {
   name:'provincialNewsBox',
   data(){
     return{
-      develop :'廊坊市、承德市、邯郸市、秦皇岛市、迪拜、石家庄市、任丘市、北京市、河间市、张家口市、邢台市、沧州市、保定市、衡水市、北京市怀柔区、天津市市辖区、天津市直辖市、唐山市、深圳市、黄骅市',
+      // develop :'廊坊市、承德市、邯郸市、秦皇岛市、迪拜、石家庄市、任丘市、北京市、河间市、张家口市、邢台市、沧州市、保定市、衡水市、北京市怀柔区、天津市市辖区、天津市直辖市、唐山市、深圳市、黄骅市',
     }
   },
   computed:{
@@ -45,6 +49,7 @@ export default {
     })
   },
   mounted(){
+    console.log('省级经销商信息',this.drawCityManager)
     // console.log('23',this.drawCityList) 
     // console.log('11',this.drawCityManager)
     // console.log('26',this.drawCityManager)
@@ -80,6 +85,11 @@ export default {
   border-radius:50%;
   background-color:wheat;
   background-image:url(../assets/images/headPic.png);
+}
+.content_contentPic_photo{
+  width:80px;
+  height:80px;
+  border-radius:50%;
 }
 .content_contentPic_contentText{
   margin-left:20px;
@@ -121,6 +131,10 @@ export default {
   width:100px;
   height:100px;
   background-color:pink;
+}
+.qrcode_photo{
+  width:100px;
+  height:100px;
 }
 .QrcodeBox p{
   font-size:14px;

@@ -22,20 +22,6 @@ export default {
   data() {
     return {
       content:[
-        // {
-        //   'name':'广东',
-        //   'value':[113.5,23.5],
-        //   'new1':'招商经理：刘建军,青海西藏,内蒙',
-        //   'new2':'联系电话：16789876565',
-        //   'new3':'负责区域：青海、西藏、内蒙古',
-        // },
-        // {
-        //   'name':'四川',
-        //   'value':[100.5,43.5],
-        //   'new1':'招商经理：刘笑话,',
-        //   'new2':'联系电话：16789876565',
-        //   'new3':'负责区域：青海、西藏、内蒙古',          
-        // }
       ]
     };
   },
@@ -53,36 +39,26 @@ export default {
     // this.getCountryMap()
   },
   watch:{
-    // content(newValue,oleValue){
-    //   console.log('监视content',this.content)
-    //   this.getCountryMap()
-    // }
   },
   methods: {
     getCountryList(){
-      // let contentType = 'text/plain'
-      // let Authorization = 'token'
-      // let country = ''
       let [contentType,Authorization,country] = ['text/plain','token','']
       for(let i = 0; i<this.drawCountry.length; i++){
         if(this.drawCountryChange == this.drawCountry[i].EnglishName){
            country = this.drawCountry[i].ChinaName
         }
       }
-      console.log('country',country)
-      // axios.get("https://mobiletest.derucci.net/consumer-admin/api/merchants/getProvinceDataList",{params:{country:country},headers:{contentType:contentType,Authorization:Authorization}})
+      // console.log('country',country)
       indexModel.getProvincialList(country)
       .then(res=>{
         let provincialList = res.data.data
         this.content = provincialList
-        // console.log('provincialList',provincialList)
         this.getCountryMap()
       })
     },
+    //初始化国家地图函数
     getCountryMap(){
-      let country = this.drawCountryChange
-      let content = this.content
-      // console.log(111,country,content)   
+      let[country,content]  = [this.drawCountryChange,this.content]
       axios.get(`./geoJson/country/${country}.json`)
       .then(res => {
         let countryJson = res.data;
@@ -91,10 +67,13 @@ export default {
         let option = this.countryOption(content,newsIcon);
         this.myEcharts.setOption(option);
         //跳转到省内地图
+        this.jumpProvincial()
+      })
+    },
+    //跳转地图函数
+    jumpProvincial(){
         this.myEcharts.on('click',param =>{
-          let provincial = param.name
-          let letterName = this.drawLetterName
-          let chinaName = this.drawChinaName
+          let[provincial,letterName,chinaName] = [param.name,this.drawLetterName,this.drawChinaName]
           console.log('param',provincial)
               for(let i = 0; i<chinaName.length; i++){
                 if(provincial==chinaName[i]){
@@ -104,8 +83,8 @@ export default {
                 }
               }
         })
-      })
     },
+    //国家地图样式配置
     countryOption(content,newsIcon) {
       return {
           tooltip:{
@@ -114,27 +93,44 @@ export default {
               position:'right',
               borderColor:'red',
               position:'right',
+              label:{
+
+              },
               formatter:function(params){
                 // console.log(999,params)
                 // console.log(998,content)
                 let name=''
                 for(let i=0; i<content.length; i++){
-                  name = content[i].province.substring(0,content[i].province.length-1)
+                  //c处理最后一位带省去掉省
+                  let lastString = content[i].province.charAt(content[i].province.length-1)
+                  if(lastString == '省'){
+                    name = content[i].province.substring(0,content[i].province.length-1)
+                  } else{
+                    name = content[i].province
+                  }
                   if(params.name == name){
-
-                    let res =`<img style='width:370px; height:250px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                    console.log('所处于位置',content[i].brands.length,name)
+                    let arr = content[i].brands.split(",")
+                    let brand = '品牌加盟：'
+                    for(let i=0;i<arr.length;i++){
+                      brand += arr[i].toString()+','
+                      if(arr[i].length>8){
+                        brand += '<br/>'
+                      }
+                    }          
+                    let res =`<img style='width:400px; height:auto;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
                     res += 
-                    `<div style ='position:absolute; letf:0px; top:0px; width:300px; height:150px; padding:20px;' >
+                    `<div style ='position:absolute; letf:0px; top:0px; width:400px; height:auto; padding:20px;' >
                         <p style ='margin-left:-15px;height:36px;'>招商经理：${content[i].managerName}</p>
                         <p style ='margin-left:-15px;height:36px;'>联系电话：${content[i].phone}</p>
                         <p style ='margin-left:-15px;height:36px;'>负责区域：${content[i].chargeProvince}</p>
                         <p style ='margin-left:-15px;height:36px;'>门店数量：${content[i].shopNumber}</p>
-                        <p style ='margin-left:-15px;height:36px; width:330px;'>加盟品牌：${content[i].brands}</p>
+                        <p style ='margin-left:-15px;height:36px;'>${brand}</p>
                     </div>`
-                    return res                     
+                    return res            
                   }
                 }
-              },
+              },    
               // formatter:function(params){
               //   console.log('formatter',params)
               //   // let res =`<img style='width:250px; height:150px;margin:-20px -20px -20px -20px;' src='${newsIcon}'/>`

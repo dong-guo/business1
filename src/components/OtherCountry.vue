@@ -79,6 +79,6 @@ export default {
   background-color:linear-gradient(0deg,rgba(1,9,40,1),rgba(0,8,73,1));
   width: 1412px;
   height: 736px;
-  /* border:1px solid green; */
+  border:1px solid green;
 }
 </style>

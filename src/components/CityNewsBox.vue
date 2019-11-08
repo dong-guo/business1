@@ -1,7 +1,7 @@
 <template>
 <div class="cityBox">
   <div class="content">
-    <div class="content_contentPic"></div>
+    <div class="content_contentPic"><img style="width:80px;height:80px;border-radius:50%;" :src="drawCityManager.contactPhoto"/></div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
        <P v-if="drawCityManager" class="contentText_name">{{drawCityManager.managerName}}</P>
@@ -14,7 +14,9 @@
     <span>负责区域:</span>{{drawCityManager.chargeProvince}}
   </div>
   <div class="QrcodeBox">
-    <div class="qrcode"></div>
+    <div class="qrcode">
+      <img class="qrcode_photo" :src="drawCityManager.profilePhoto" alt="">
+    </div>
     <p>扫一扫添加好友</p>
   </div> 
 </div>
@@ -27,7 +29,8 @@ import { mapState } from 'vuex'
 export default {
   name:'cityNewsBox',
   data(){
-    return{}
+    return{
+    }
   },
   computed:{
     ...mapState({
@@ -39,7 +42,7 @@ export default {
   },
   watch:{
     drawCityManager(newValue,oldValue){
-      // console.log('CityNewsBox-drawCityManager-检测',this.drawCityManager)
+      console.log('CityNewsBox-drawCityManager-检测',this.drawCityManager)
     }
   }
 
@@ -111,6 +114,10 @@ export default {
   width:100px;
   height:100px;
   background-color:pink;
+}
+.qrcode_photo{
+  width:100px;
+  height:100px;  
 }
 .QrcodeBox p{
   font-size:14px;

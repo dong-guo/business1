@@ -52,9 +52,7 @@ export default {
   methods: {
     //初始化地图
     actionCity() {
-      let cityZoom = this.drawCityZoom;
-      let cityChange = this.drawCityChange;
-      let cityDistrictList = this.drawCityDistrictList;
+      let [cityZoom,cityChange,cityDistrictList] = [this.drawCityZoom,this.drawCityChange,this.drawCityDistrictList]
       let developDistrict = this.gradeDistrict();
       let gradeBalloon = this.gradeDistrictBalloon();
       console.log("developDistrict-气球",gradeBalloon);

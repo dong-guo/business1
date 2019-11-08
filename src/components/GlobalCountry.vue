@@ -7,15 +7,43 @@
     </router-link>  
     <router-link :to="{name:'china'}">
        <div class="choose_country">
-         <p>中国</p>
+         <p v-if="showCountry">{{showCountry}}</p>
        </div>
     </router-link>
 </div>
 
 </template>
 <script>
-export default{
 
+import { mapState } from "vuex";
+import axios from "axios";
+
+export default {
+    name:'globalCountry',
+    data(){
+      return{
+        showCountry:''
+      }
+    },
+    computed:{
+      ...mapState({
+        drawCountry: state => state.home.country,
+        drawCountryChange: state => state.home.countryChange,
+      })
+    },
+    mounted(){
+      this.matchingCountry()
+    },
+    methods:{
+        //将得到英文名字国家变成中文名称
+        matchingCountry(){
+            for(let i = 0; i<this.drawCountry.length; i++){
+                if(this.drawCountryChange==this.drawCountry[i].EnglishName){
+                  this.showCountry = this.drawCountry[i].ChinaName
+                }
+            }
+        }
+    }
 }
 </script>
 
