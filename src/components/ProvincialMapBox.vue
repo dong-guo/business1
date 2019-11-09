@@ -12,6 +12,7 @@ import yellowballoonIcon from "../base64/yellowballoon";
 import newsIcon from "../base64/news";
 import formatterleftIcon from "../base64/formatterleft";
 import formatterrightIcon from "../base64/formatterright";
+import formatterLeftAngleIcon from "../base64/formatterLeftAngle";
 
 import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
@@ -42,6 +43,7 @@ export default {
      })
    },
    watch:{
+     //监视省地图VUEX变量比例变化重新渲染
        drawProvincialZoom:{
          handler(newVal,oldVal){
            this.actionProvincial()
@@ -57,11 +59,10 @@ export default {
    methods:{
      //请求省内经销商数据
      requestCityList(){
-       let country = this.showChinaCountry
-       let province = this.drawProvincialChinaChange + '省'
+       let [country,province] = [this.showChinaCountry,this.drawProvincialChinaChange + '省']
        indexModel.getCityList(country,province)
        .then(res=>{
-         console.log('res.data',res.data)
+        //  console.log('res.data',res.data)
            if(res.data.status == 1 ){
             this.allCityList = res.data.data
             console.log('allCityList',this.allCityList)
@@ -71,23 +72,25 @@ export default {
             this.$store.commit("provincial/setAllCityList",this.allCityList)
             this.$store.commit("provincial/setCityManager",this.cityManager)
             //  console.log('cityList',this.allCityList,country,province)
+            //地图初始化
             this.actionProvincial()
-            console.log('cityShowNumber',this.cityShopNumber)
+            // console.log('cityShowNumber',this.cityShopNumber)
            } else {
+            //地图初始化
             this.actionProvincial()
            }
        })
      },
      //初始化省地图
      actionProvincial(){
-        let provincialChange = this.drawProvincialChange
-        let provincialZoom = this.drawProvincialZoom
-        let cityBrandList = this.allCityList.cityList
+        let [provincialChange,provincialZoom,cityBrandList] = [this.drawProvincialChange,this.drawProvincialZoom,this.allCityList.cityList]
         // console.log('provincialChange',this.drawProvincialChange)
         // console.log('cityBrandList转化嵌套',cityBrandList)
         axios.get(`./geoJson/province/${provincialChange}.json`)
         .then(res => {
+          //城市区分开发程度
           let developCity=this.gradeCity()
+          //区分气球颜色
           let gradeBalloon = this.gradeBalloon()
           // console.log('66气球数据',gradeBalloon)
           let provincialChangeJson = res.data;
@@ -96,21 +99,25 @@ export default {
           let option = this.provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon);
           this.myEcharts.setOption(option); 
           //城市地图跳转
-          this.myEcharts.on('click',(params) =>{
-            console.log('city',params.name)
-            let cityAry = Object.keys(cityMap)
-            for(let i = 0; i<cityAry.length; i++){
-              if(params.name==cityAry[i]){
-                //  console.log('cityMapNum',cityMap[cityAry[i]])
-                 let cityname = params.name
-                 let city = cityname.substr(0,cityname.length-1)
-                 this.$store.commit("home/setCityChange",cityMap[cityAry[i]])
-                 this.$store.commit("home/setCityChinaChange",city)
-                 this.$router.push({ name: "city" });
-              }
-            }
-          })
+          this.jumpCity()
         }) 
+     },
+     //城市跳转地图函数
+     jumpCity(){
+        this.myEcharts.on('click',(params) =>{
+          console.log('city',params.name)
+          let cityAry = Object.keys(cityMap)
+          for(let i = 0; i<cityAry.length; i++){
+            if(params.name==cityAry[i]){
+              //  console.log('cityMapNum',cityMap[cityAry[i]])
+                let cityname = params.name
+                let city = cityname.substr(0,cityname.length-1)
+                this.$store.commit("home/setCityChange",cityMap[cityAry[i]])
+                this.$store.commit("home/setCityChinaChange",city)
+                this.$router.push({ name: "city" });
+            }
+          }
+        })
      },
      //地图配置
      provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon){
@@ -135,6 +142,10 @@ export default {
                           }
                           if(brandListArray.length >0){
                               let res =`<img style='width:280px; height:300px;margin:-10px -10px -10px -10px; display:block;' src='${newsIcon}'/>`
+                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
+                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
+                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:270px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
+                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:270px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
                               res += 
                                   `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:206px;padding-top:10px; font-size:20px;' >
                                         <p style ='margin-left:5px;height:36px;'>${params.name}</p>
@@ -281,7 +292,7 @@ export default {
                 balloon.push({
                         name:list[i].shopList[index].address,
                         address:list[i].shopList[index].address,
-                        value:[114-index+6,24],
+                        value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
                         symbol:`image://${yellowballoonIcon}`,
                         symbolSize: [32,40],
                         itemStyle:{
@@ -292,7 +303,7 @@ export default {
                 balloon.push({
                         name:list[i].shopList[index].address,
                         address:list[i].shopList[index].address,
-                        value:[112.5-index+6,22],
+                        value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
                         symbol:`image://${greenballoonIcon}`,
                         symbolSize: [32,40],
                         itemStyle:{

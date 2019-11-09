@@ -23,13 +23,16 @@ import OtherCountry from "../components/OtherCountry.vue"
 
 import GlobalCountry from "../components/GlobalCountry.vue"
 
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
 
 export default {
   name:'china',
   data(){
     return{
       key:true,
-      showCountry:''
+      showCountry:'',
+      content:[],
     }
   },
   components:{
@@ -46,6 +49,7 @@ export default {
   mounted(){
     this.selectCountry()
     this.matchingCountry()
+    this.getCountryList()
   },
   methods:{
     //通过v-if切换中国与其他国家样式地图
@@ -64,8 +68,24 @@ export default {
               this.showCountry = this.drawCountry[i].ChinaName
             }
         }
-    }
-
+    },
+    getCountryList(){
+      let [contentType,Authorization,country] = ['text/plain','token','']
+      for(let i = 0; i<this.drawCountry.length; i++){
+        if(this.drawCountryChange == this.drawCountry[i].EnglishName){
+           country = this.drawCountry[i].ChinaName
+        }
+      }
+      console.log('country',country)
+      indexModel.getProvincialList(country)
+      .then(res=>{
+        let provincialList = res.data.data
+        console.log('国家主页请求的数据',provincialList)
+        this.content = provincialList
+        this.$store.commit("country/setProvincialList",provincialList)
+        // this.getCountryMap()
+      })
+    },
   }
 
 

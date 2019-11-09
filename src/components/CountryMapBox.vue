@@ -13,6 +13,7 @@ import cricleIcon from "../base64/cricle";
 import threadIcon from "../base64/thread";
 import thread2Icon from "../base64/thread2";
 import newsIcon from "../base64/news";
+import formatterLeftAngleIcon from "../base64/formatterLeftAngle";
 
 import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
@@ -27,6 +28,8 @@ export default {
   },
   computed:{
     ...mapState({
+      drawProvincialList: state =>state.country.provincialList,
+
       drawCountryChange: state => state.home.countryChange,
       drawProvincialChange: state => state.home.provincialChange,
       drawLetterName: state => state.home.letterName,
@@ -35,12 +38,20 @@ export default {
     })
   },
   mounted() {
-    this.getCountryList()
-    // this.getCountryMap()
+    this.content = this.drawProvincialList
+    // console.log('Couuntry主页传递过来的数据',this.content)
+    // this.getCountryList()
+    this.getCountryMap()
   },
   watch:{
+    drawProvincialList(newValue,oldValue){ 
+      this.content = this.drawProvincialList
+      console.log('Couuntry主页传递过来的数据-China检测',this.content)    
+      this.getCountryMap()
+    }
   },
   methods: {
+    //该请求数据函数转移到china主页上
     getCountryList(){
       let [contentType,Authorization,country] = ['text/plain','token','']
       for(let i = 0; i<this.drawCountry.length; i++){
@@ -52,8 +63,9 @@ export default {
       indexModel.getProvincialList(country)
       .then(res=>{
         let provincialList = res.data.data
+        console.log('provincialList中国数据',provincialList)
         this.content = provincialList
-        this.getCountryMap()
+        // this.getCountryMap()
       })
     },
     //初始化国家地图函数
@@ -114,11 +126,15 @@ export default {
                     let brand = '品牌加盟：'
                     for(let i=0;i<arr.length;i++){
                       brand += arr[i].toString()+','
-                      if(arr[i].length>8){
+                      if(brand.length-20>0&& i<5){
                         brand += '<br/>'
                       }
                     }          
                     let res =`<img style='width:400px; height:auto;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:240px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:240px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
                     res += 
                     `<div style ='position:absolute; letf:0px; top:0px; width:400px; height:auto; padding:20px;' >
                         <p style ='margin-left:-15px;height:36px;'>招商经理：${content[i].managerName}</p>

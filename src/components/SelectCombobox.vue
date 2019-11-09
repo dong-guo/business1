@@ -170,7 +170,9 @@ export default {
       this.$store.commit("succession/setValueCountry",this.valueCountry)
       this.showCountry = false;
       this.valueProvincial = ''
+      this.type = 'country'
       let  [type,country,province,city] = [this.type,this.drawValueCountry,this.valueProvincial,this.valueCity]
+      console.log('国家更改',type,country,province,city)
       this.getBrand(type,country,province,city)
     },
     //打开省份下拉列表

@@ -86,7 +86,6 @@ export default {
         this.$store.commit("city/setCityShopList",shopList)
         this.$store.commit("city/setCityShopTypeCount",shopTypeCount)
         // this.sendCommit()
-        console.log("district", district);
       });
     },
     sendCommit(){

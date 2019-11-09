@@ -5,6 +5,7 @@ import succession from './modules/succession.js'
 import shopList from './modules/shopList.js'
 import provincial from './modules/provincial.js'
 import city from './modules/city.js'
+import country from './modules/country.js'
 Vue.use(Vuex)
 
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     succession,
     shopList,
     provincial,
-    city
+    city,
+    country
   }
 })

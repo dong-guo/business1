@@ -27,7 +27,9 @@ export default {
     // console.log('路由地址',this.$route.name)
   },
   methods:{
+    //放大地图
     enlargeMap(){
+      //判断路由地址是省级还是城市级别
       if(this.$route.name =='provincial'){
           let provincialzoom =Number(this.drawProvincialZoom)
           provincialzoom += 0.1
@@ -39,14 +41,16 @@ export default {
       } else{
           let cityzoom =Number(this.drawCityZoom)
           cityzoom += 0.1
-          if(cityzoom>2){
-            cityzoom=2
+          if(cityzoom>2.5){
+            cityzoom=2.5
           }
           this.$store.commit("home/setCityZoom",cityzoom);
           console.log('cityzoom',this.drawCityZoom)        
       }
     },
+    //缩小地图
     reduceMap(){
+      //判断路由地址是省级还是城市级别
       if (this.$route.name == 'provincial'){
           let provincialzoom =Number(this.drawProvincialZoom)
           provincialzoom -= 0.1

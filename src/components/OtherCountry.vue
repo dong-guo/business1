@@ -9,6 +9,11 @@ import echarts from "echarts";
 
 import { mapState } from "vuex";
 
+import greenballoonIcon from "../base64/greenballoon";
+import yellowballoonIcon from "../base64/yellowballoon";
+
+import { IndexModel } from '../untils/index'
+const indexModel = new IndexModel()
 
 export default {
   name:'othercountry',
@@ -19,21 +24,52 @@ export default {
   },
   computed:{
     ...mapState({
+      drawProvincialList: state =>state.country.provincialList,
+
       drawCountryChange: state => state.home.countryChange,
+      drawCountry: state => state.home.country
     })
   },
   mounted() {
-    let country = this.drawCountryChange
-    // console.log(110,country)
-    axios.get(`./geoJson/country/${country}.json`).then(res => {
-      let countryJson = res.data;
-      echarts.registerMap("China", countryJson);
-      this.myEcharts = echarts.init(document.getElementById("otherCountry"));
-      let option = this.countryOption();
-      this.myEcharts.setOption(option);
-    });
+    this.content = this.drawProvincialList
+    this.getCountryMap()
+    // this.getCountryList()
+  },
+  watch:{
+    drawProvincialList(newValue,oldValue){ 
+      this.content = this.drawProvincialList
+      console.log('Couuntry主页传递过来的数据-otherCountry检测',this.content)    
+      this.getCountryMap()
+    }
   },
   methods:{
+    // getCountryList(){
+    //   let [contentType,Authorization,country] = ['text/plain','token','']
+    //   for(let i = 0; i<this.drawCountry.length; i++){
+    //     if(this.drawCountryChange == this.drawCountry[i].EnglishName){
+    //        country = this.drawCountry[i].ChinaName
+    //     }
+    //   }
+    //   console.log('country',country)
+    //   indexModel.getProvincialList(country)
+    //   .then(res=>{
+    //     let provincialList = res.data.data
+    //     console.log('其他国家的数据',provincialList)
+    //     this.content = provincialList
+    //     // this.getCountryMap()
+    //   })
+    // },
+    getCountryMap(){
+      let country = this.drawCountryChange
+      // console.log(110,country)
+      axios.get(`./geoJson/country/${country}.json`).then(res => {
+        let countryJson = res.data;
+        echarts.registerMap("China", countryJson);
+        this.myEcharts = echarts.init(document.getElementById("otherCountry"));
+        let option = this.countryOption();
+        this.myEcharts.setOption(option);
+      });
+    },
     countryOption() {
       return {
         geo: {

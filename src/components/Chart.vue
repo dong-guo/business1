@@ -53,10 +53,10 @@ export default {
     //   console.log('List',this.List)
     //   this.initChart()
     // },
-    // drawValueCountry(newValue,oldValue){
-    //   // console.log('chart检测国家',this.drawValueCountry)
-    //   this.initChart()
-    // },
+    drawValueCountry(newValue,oldValue){
+      // console.log('chart检测国家',this.drawValueCountry)
+      this.initChart()
+    },
     drawBrandList(newValue,oleValue){
       this.initChart()
     },

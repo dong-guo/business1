@@ -53,7 +53,9 @@ export default {
     //初始化地图
     actionCity() {
       let [cityZoom,cityChange,cityDistrictList] = [this.drawCityZoom,this.drawCityChange,this.drawCityDistrictList]
+      //区分开发县区等级
       let developDistrict = this.gradeDistrict();
+      //区分气球颜色
       let gradeBalloon = this.gradeDistrictBalloon();
       console.log("developDistrict-气球",gradeBalloon);
       let gradeDistrictBalloon = this.gradeDistrictBalloon;
@@ -65,6 +67,7 @@ export default {
         this.myEcharts.setOption(option);
       });
     },
+    //配置城市地图
     cityChangeOption(cityZoom,developDistrict,cityDistrictList,gradeBalloon){
       return {
         tooltip: {
@@ -218,11 +221,11 @@ export default {
       for (let i = 0; i < list.length; i++) {
         if (list[i].shopList.length > 0) {
           for (let index = 0; index<list[i].shopList.length; index++) {
-            if (list[i].shopList[index].id[18] > 5) {
+            if (list[i].shopList[index].id[18] > 6) {
               balloon.push({
                 name: list[i].shopList[index].address,
                 address: list[i].shopList[index].address,
-                value: [114.8, 23],
+                value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
                 symbol: `image://${yellowballoonIcon}`,
                 symbolSize: [32, 40],
                 itemStyle: {
@@ -233,7 +236,7 @@ export default {
               balloon.push({
                 name: list[i].shopList[index].address,
                 address: list[i].shopList[index].address,
-                value: [114.5, 23.2],
+                value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
                 symbol: `image://${greenballoonIcon}`,
                 symbolSize: [32, 40],
                 itemStyle: {
