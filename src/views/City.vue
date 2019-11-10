@@ -31,6 +31,7 @@ import { mapState,mapMutations } from "vuex";
 import { IndexModel } from "../untils/index";
 const indexModel = new IndexModel();
 
+
 export default {
   name: "city",
   data() {

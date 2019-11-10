@@ -39,19 +39,34 @@ export default {
   },
   mounted() {
     this.content = this.drawProvincialList
-    // console.log('Couuntry主页传递过来的数据',this.content)
     // this.getCountryList()
     this.getCountryMap()
+    // this.plain1().then(this.plain2)
   },
   watch:{
     drawProvincialList(newValue,oldValue){ 
-      this.content = this.drawProvincialList
-      console.log('Couuntry主页传递过来的数据-China检测',this.content)    
+      this.content = this.drawProvincialList   
+      // this.getCountryList() 
       this.getCountryMap()
+      // this.plain1().then(this.plain2)
     }
   },
   methods: {
-    //该请求数据函数转移到china主页上
+    plain1(){
+      let data = new Promise((resolve,reject)=>{
+         this.content = this.drawProvincialList 
+         console.log('操作一')
+         resolve()
+      })
+      return data
+    },
+    plain2(){
+      let data = new Promise((resolve,reject)=>{
+        this.getCountryMap()
+        console.log('操作二')
+      })
+    },
+    //该请求数据函数转移到china主页上,不用
     getCountryList(){
       let [contentType,Authorization,country] = ['text/plain','token','']
       for(let i = 0; i<this.drawCountry.length; i++){
@@ -59,13 +74,12 @@ export default {
            country = this.drawCountry[i].ChinaName
         }
       }
-      // console.log('country',country)
       indexModel.getProvincialList(country)
       .then(res=>{
         let provincialList = res.data.data
         console.log('provincialList中国数据',provincialList)
         this.content = provincialList
-        // this.getCountryMap()
+        this.getCountryMap()
       })
     },
     //初始化国家地图函数
@@ -87,13 +101,16 @@ export default {
         this.myEcharts.on('click',param =>{
           let[provincial,letterName,chinaName] = [param.name,this.drawLetterName,this.drawChinaName]
           console.log('param',provincial)
-              for(let i = 0; i<chinaName.length; i++){
-                if(provincial==chinaName[i]){
-                  this.$store.commit("home/setProvincialChange", letterName[i]);
-                  this.$store.commit("home/setProvincialChinaChange",param.name)
-                  this.$router.push({ name: "provincial" });
-                }
+            for(let i = 0; i<chinaName.length; i++){
+              if(provincial==chinaName[i]){
+                this.$store.commit("home/setProvincialChange", letterName[i]);
+                this.$store.commit("home/setProvincialChinaChange",param.name)
+                this.$router.push({ name: "provincial" });
+                // this.$router.push(route).catch(err=>{
+                //   console.log('输出报错',err)
+                // })
               }
+            }
         })
     },
     //国家地图样式配置

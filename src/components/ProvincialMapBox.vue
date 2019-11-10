@@ -17,7 +17,7 @@ import formatterLeftAngleIcon from "../base64/formatterLeftAngle";
 import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
 
-import { cityMap } from "../until/cityMap.js"
+import { cityMap } from "../untils/cityMap.js"
 
 import { mapState } from "vuex";
 

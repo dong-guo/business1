@@ -23,6 +23,7 @@
         </div>
         <div class="swiper-pagination"></div>
       </div>
+      <div class="changeShop_bottom_corner"></div>
     </div>
   </div>
 </template>
@@ -211,6 +212,17 @@ export default {
   transform: rotate(90deg);
   position: absolute;
   top: 0;
+  right: 0;
+}
+.changeShop_bottom_corner{
+  width: 30px;
+  height: 30px;
+  background-image: url(../assets/images/canvass_corner@2x.png); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);  
+  position: absolute;
+  bottom: 0;
   right: 0;
 }
 .swiper-container {

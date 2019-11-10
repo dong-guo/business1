@@ -19,7 +19,7 @@ export default {
   name:'othercountry',
   data(){
     return{
-
+      boxKey:true,
     }
   },
   computed:{
@@ -31,8 +31,10 @@ export default {
     })
   },
   mounted() {
+    // this.changeBox()
     this.content = this.drawProvincialList
     this.getCountryMap()
+    console.log('现在是什么国家drawCountry',this.drawCountryChange,this.boxKey)
     // this.getCountryList()
   },
   watch:{
@@ -40,25 +42,14 @@ export default {
       this.content = this.drawProvincialList
       console.log('Couuntry主页传递过来的数据-otherCountry检测',this.content)    
       this.getCountryMap()
+    },
+    drawCountry(newValue,oldValue){
+      this.content = this.drawProvincialList
+      this.getCountryMap()
     }
   },
   methods:{
-    // getCountryList(){
-    //   let [contentType,Authorization,country] = ['text/plain','token','']
-    //   for(let i = 0; i<this.drawCountry.length; i++){
-    //     if(this.drawCountryChange == this.drawCountry[i].EnglishName){
-    //        country = this.drawCountry[i].ChinaName
-    //     }
-    //   }
-    //   console.log('country',country)
-    //   indexModel.getProvincialList(country)
-    //   .then(res=>{
-    //     let provincialList = res.data.data
-    //     console.log('其他国家的数据',provincialList)
-    //     this.content = provincialList
-    //     // this.getCountryMap()
-    //   })
-    // },
+    //初始化地图
     getCountryMap(){
       let country = this.drawCountryChange
       // console.log(110,country)
@@ -70,6 +61,7 @@ export default {
         this.myEcharts.setOption(option);
       });
     },
+    //Echarts配置地图
     countryOption() {
       return {
         geo: {
@@ -105,6 +97,11 @@ export default {
           }
         }
       };
+    },
+    changeBox(){
+      if(this.drawCountry == 'India'){
+        this.boxKey = true
+      }
     }    
   }
 }
@@ -116,5 +113,10 @@ export default {
   width: 1412px;
   height: 736px;
   border:1px solid green;
+}
+.ckangeMapBox{
+  width:1000px;
+  height:730px;
+  border:1px solid yellow;
 }
 </style>
