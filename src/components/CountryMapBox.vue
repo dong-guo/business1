@@ -122,9 +122,6 @@ export default {
               position:'right',
               borderColor:'red',
               position:'right',
-              label:{
-
-              },
               formatter:function(params){
                 // console.log(999,params)
                 // console.log(998,content)

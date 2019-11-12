@@ -22,7 +22,8 @@ export default {
     name:'globalCountry',
     data(){
       return{
-        showCountry:''
+        showCountry:'',
+        pathkey:false,
       }
     },
     computed:{
@@ -49,11 +50,12 @@ export default {
 
 <style scoped>
 .global_country{
-  width:436px;
+  width:536px;
   height:173px;
   /* background-color:violet; */
+  /* position:relative; */
   display:flex;
-  justify-content:space-between;
+  /* justify-content:space-between; */
 }
 .global_world {
   height: 173px;
@@ -84,16 +86,22 @@ export default {
   background-image: url(../assets/images/choose@2x.png);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position:0px 4px;
   box-sizing: border-box;
   /* border:1px solid green; */
+  /* position:absolute;
+  top:-0px;
+  left:208px; */
 }
 .choose_country p {
   color: rgba(255, 255, 255, 1);
+  width:300px;
   font-size: 36px;
   font-weight: 400;
   line-height: 38px;
   padding-left: 74px;
   padding-top: 68px;
   letter-spacing:10px;
+  /* background-color:yellow; */
 }
 </style>

@@ -85,7 +85,7 @@ export default {
      actionProvincial(){
         let [provincialChange,provincialZoom,cityBrandList] = [this.drawProvincialChange,this.drawProvincialZoom,this.allCityList.cityList]
         // console.log('provincialChange',this.drawProvincialChange)
-        // console.log('cityBrandList转化嵌套',cityBrandList)
+        console.log('cityBrandList转化嵌套',cityBrandList)
         axios.get(`./geoJson/province/${provincialChange}.json`)
         .then(res => {
           //城市区分开发程度
@@ -254,6 +254,7 @@ export default {
      //城市区分开发程度函数
      gradeCity(){
        let list = this.allCityList.cityList
+       console.log('list',list)
        let grade =[]
        for(let i = 0; i < list.length; i++){
           if(list[i].developFlag == 0){

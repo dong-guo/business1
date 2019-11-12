@@ -34,19 +34,18 @@ export default {
   methods: {
     //请求后台国家数据
     getCountryList(){
-      // axios.get('https://mobiletest.derucci.net/consumer-admin/api/merchants/getCountryDataList')
       indexModel.getCountry()
       .then(res =>{
         let countryName = res.data.data
+        // countryName = this.deleteSpace(countryName)
         this.$store.commit("home/setAllTotal",countryName.total)
-        console.log('countryName1',countryName.country,countryName.total)
+        console.log('countryName数据',countryName.country,countryName.total)
         //将国家前十名存入VUEX中
-        for(let i = 0; i< countryName.country.length-1 && i<10; i++){
-          let index = i
-          let franchiseStoreNum = countryName.country[i].franchiseStore
-          let directSaleStoreNum = countryName.country[i].directSaleStore
-          let totalNum = countryName.country[i].total
-          this.$store.commit("home/setCountryNumberName",{'idx':index,'val':countryName.country[i].country})
+        for(let i = 0; i< countryName.country.length; i++){
+          let [index,franchiseStoreNum,directSaleStoreNum,totalNum] = [i,countryName.country[i].franchiseStore,countryName.country[i].directSaleStore,countryName.country[i].total]
+          //对国家名字左右两边去除空格
+          let deleteSpaceName = countryName.country[i].country.replace(/(^\s*)|(\s*$)/g,"")
+          this.$store.commit("home/setCountryNumberName",{'idx':index,'val':deleteSpaceName})
           this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
         }
         this.worldeSet();
@@ -58,7 +57,7 @@ export default {
       let [dcn,coordinate] =[this.drawCountryNumber,this.drawCountry]
       let [countryShopNum,otherStyle,countryBigBall,countryMidBall,countrySmallBall] = [[],[],[],[],[]]
       //显示浅蓝色国家
-      for (let i = 0; i < dcn.length; i++) {
+      for (let i = 0; i < dcn.length && dcn[i].name!=''; i++) {
         countryShopNum.push(String(dcn[i].total));
         otherStyle.push({
           name: dcn[i].name,
@@ -79,31 +78,6 @@ export default {
       }
       //请求世界地图
       this.requestWorld(otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn)
-      // axios.get("./geoJson/world.json").then(res => {
-      //   let worldJson = res.data;
-      //   echarts.registerMap("world", worldJson);
-      //   this.myEcharts = echarts.init(document.getElementById("world_box"));
-      //   let option = this.worldOption(otherStyle,countryBigBall,countryMidBall,countrySmallBall);
-      //   this.myEcharts.setOption(option);
-      //   //跳转国家地图
-      //   let country = this.drawCountry;
-      //   this.myEcharts.on("click", params => {
-      //     console.log('跳转名字',params.name)
-      //     //取得亮蓝色国家
-      //     for (let i = 0; i < dcn.length; i++) {
-      //       if (params.name == dcn[i].name) {
-      //         //取得中英文名称对于数据
-      //         for(let i = 0; i < country.length; i++){
-      //           if(params.name ==country[i].ChinaName){
-      //             this.$store.commit("home/setCountryChange", country[i].EnglishName);
-      //             this.$router.push({ name: "china" });
-      //           }
-      //         }
-      //         break;
-      //       }
-      //     }
-      //   });
-      // });
     },
     //世界地图请求
     requestWorld(otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn){
@@ -135,6 +109,8 @@ export default {
     },
     //世界地图配置
     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
+      console.log('otherStyle',otherStyle)
+      console.log('气泡图',countryBigBall, countryMidBall, countrySmallBall)
       return {
         geo: {
           type: "map",
@@ -175,6 +151,9 @@ export default {
             "United Arab Emirates":'迪拜'
           },
           regions: otherStyle,
+          // regions:[
+          //   {itemStyle: {areaColor: "#33D8FA"},name: "美国",selected: false}
+          // ],
           emphasis: {
             itemStyle: {
               areaColor: "#dcf5fa"
@@ -309,7 +288,7 @@ export default {
           });
         }
         return{countryBigBall,countryMidBall,countrySmallBall}          
-    }
+    },
   }
 };
 </script>
