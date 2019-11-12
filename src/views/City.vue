@@ -16,8 +16,8 @@
 </template>
 <script>
 import Reach from "../components/Reach.vue";
-import CityMapBox from "../components/CityMapBox.vue";
-import GlobalCity from "../components/GlobalCity.vue";
+import CityMapBox from "./../components/cityModul/CityMapBox.vue";
+import GlobalCity from "./../components/cityModul/GlobalCity.vue";
 import ShopList from "../components/ShopList.vue";
 import CityShopNum from "../components/CityShopNum.vue";
 import CityNewsBox from "../components/CityNewsBox.vue";

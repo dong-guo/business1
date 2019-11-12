@@ -27,7 +27,8 @@
             v-for="(item,index) in drawProvincial"
             :key="item.index"
             class="provincialLi"
-          >{{item}}</li>
+          >{{item}}
+          </li>
         </ul>
       </div>
     </div>
@@ -131,8 +132,7 @@ export default {
       } else{
         this.valueProvincial=''
         this.valueCity=''
-        let provincial = ''
-        let country = this.valueCountry
+        let [provincial,country] = ['',this.valueCountry]
         indexModel.selectProvincial(country)
         .then(res =>{
           let provincial =res.data.data
@@ -144,8 +144,7 @@ export default {
     //请求城市列表
     requestCity(){
       console.log('城市请求数据所属省份code',this.provincialCode)
-      let type = 'CITY'
-      let parentCode = this.provincialCode
+      let [type,parentCode] = ['CITY',this.provincialCode]
       indexModel.selectProvincialOrCity(type,parentCode) 
       .then(res =>{
          let cityBox = res.data.data
@@ -324,6 +323,12 @@ export default {
   background-color: rgba(14, 109, 233, 0.9);
   border-bottom: 1px solid rgba(14, 109, 233, 1);
   box-sizing: border-box;
+  word-break:keep-all;
+  overflow-x:scroll;
+  overflow-y:hidden;
+}
+.list ul li::-webkit-scrollbar{
+   display: none; 
 }
 .list ul li:hover {
   background-color: rgb(95, 160, 245);

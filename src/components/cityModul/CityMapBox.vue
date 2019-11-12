@@ -7,11 +7,11 @@ import echarts from "echarts";
 
 import { mapState } from "vuex";
 
-import newsIcon from "../base64/news";
-import greenballoonIcon from "../base64/greenballoon";
-import yellowballoonIcon from "../base64/yellowballoon";
-import formatterleftIcon from "../base64/formatterleft";
-import formatterrightIcon from "../base64/formatterright";
+import newsIcon from "../../base64/news";
+import greenballoonIcon from "../../base64/greenballoon";
+import yellowballoonIcon from "../../base64/yellowballoon";
+import formatterleftIcon from "../../base64/formatterleft";
+import formatterrightIcon from "../../base64/formatterright";
 
 export default {
   name: "citymapbox",
@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     console.log("城市代号", this.drawCityChange);
-    console.log("city-map-box-drawCityDistrictList", this.drawCityDistrictList);
+    // console.log("city-map-box-drawCityDistrictList", this.drawCityDistrictList);
     this.actionCity();
     this.gradeDistrictBalloon();
   },
@@ -74,7 +74,6 @@ export default {
           show: true,
           triger: "item",
           borderWidth: 2,
-          formatter: "{a}",
           textStyle: {
             color: "#fff",
             fontSize: 20
@@ -151,6 +150,7 @@ export default {
             // name:'provincialChange',
             type: "scatter",
             coordinateSystem: "geo",
+            symbolOffset:[0,'-50%'],
             data: gradeBalloon
             // data:[
             //   {

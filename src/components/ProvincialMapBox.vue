@@ -230,6 +230,7 @@ export default {
               // name:'provincialChange',
               type:'scatter',
               coordinateSystem: "geo",
+              symbolOffset:[0,'-50%'],
               data:gradeBalloon,
             },
             {

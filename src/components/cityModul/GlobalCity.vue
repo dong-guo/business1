@@ -55,7 +55,7 @@ export default {
 .globalWorld {
   height: 173px;
   width: 208px;
-  background-image: url(../assets/images/superior@2x.png);
+  background-image: url(../../assets/images/superior@2x.png);
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;
@@ -78,7 +78,7 @@ export default {
 .chooseCountry{
   height: 173px;
   width: 208px;
-  background-image: url(../assets/images/superior@2x.png);
+  background-image: url(../../assets/images/superior@2x.png);
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;
@@ -99,7 +99,7 @@ export default {
 .chooseProvincial{
   height: 173px;
   width: 208px;
-  background-image: url(../assets/images/superior@2x.png);
+  background-image: url(../../assets/images/superior@2x.png);
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;
@@ -120,7 +120,7 @@ export default {
 .chooseCity{
   height: 173px;
   width: 208px;
-  background-image: url(../assets/images/choose@2x.png);
+  background-image: url(../../assets/images/choose@2x.png);
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;  
