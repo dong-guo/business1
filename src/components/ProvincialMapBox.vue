@@ -121,6 +121,7 @@ export default {
      },
      //地图配置
      provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon){
+       console.log('balloon',gradeBalloon)
        return{
           tooltip:{
             show:true,
@@ -290,7 +291,7 @@ export default {
        for(let i=0; i<list.length; i++){
          if(list[i].shopList.length > 0){
             for(let index=0; index<list[i].shopList.length;index++){
-              if(list[i].shopList[index].city =='佛山市'){
+              if(list[i].shopList[index].nature =='Dealer'){
                 balloon.push({
                         name:list[i].shopList[index].address,
                         address:list[i].shopList[index].address,

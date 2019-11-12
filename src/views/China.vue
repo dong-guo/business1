@@ -1,9 +1,13 @@
 <template>
 <div class="country">
    <div class="countryTitleBox">
-      <div class="countryTitleLeftPic"></div>
-      <div class="countryTitleText">{{showCountry}}地图</div>
-      <div class="countryTitleRightPic"></div>
+      <!-- <div class="countryTitleLeftPic"></div> -->
+      <div class="countryTitleText">
+        <div class="countryTitleLeftPic"></div>
+        <p>{{showCountry}}地图</p>
+        <div class="countryTitleRightPic"></div>
+      </div>
+      <!-- <div class="countryTitleRightPic"></div> -->
    </div>
    <country-map-box class="chinaMapBox" v-show="key"></country-map-box>
    <Other-Country class="otherMapBox" v-show="!key"></Other-Country>
@@ -112,29 +116,42 @@ export default {
   /* border:1px solid red; */
 }
 .countryTitleBox{
-  width:250px;
+  width:350px;
   height:11px;
-  /* background-color:pink; */
   position:absolute;
   top:38px;
-  left:835px;
-  display:flex;
+  left:41%;
 }
 .countryTitleText{
-  /* width:140px; */
+  /* width:300px; */
+  /* width:auto; */
   height:35px;
   /* background-color:yellowgreen; */
-  position:absolute;
-  top:-12px;
-  left:58px;
+  position:relative;
+  left:50%;
+  transform:translateX(-50%);
+  display:inline-block;
+  /* align-items:center; */
+}
+.countryTitleText p{
   color:rgba(255,255,255,1);
   font-size:30px;
   font-weight:400;
   line-height:35px;
-  letter-spacing:5px;
+  letter-spacing:5px; 
+  white-space:nowrap;
   text-align:center;
+  padding-left:6px;
+  box-sizing:border-box;
+  float:left;
+  margin-top:-13px;
+  /* background:red; */
+  
 }
 .countryTitleLeftPic{
+  float:left;
+  /* margin-top:13px; */
+  vertical-align:middle;
   height:11px;
   width:40px;
   /* background:yellowgreen; */
@@ -143,15 +160,27 @@ export default {
   background-size:cover;
 }
 .countryTitleRightPic{
+  float:left;
+  /* margin-top:13px; */
   height:11px;
   width:40px;
   /* background:rgb(205, 169, 50); */
   background-image:url(../assets/images/country_title_right@2x.png);
   background-repeat:no-repeat;
   background-size:cover;
-  position:absolute;
+  /* position:absolute;
   right:0;
-  top:0;
+  top:0; */
+}
+.clearfix:after{
+  content:'';
+  height:0;
+  line-height:0;
+  display:block;
+  clear:both;
+}
+.clearfix{
+  zoom:1;
 }
 .GlobalCountryBox{
   position:absolute;

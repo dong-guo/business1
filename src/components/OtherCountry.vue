@@ -142,7 +142,7 @@ export default {
               color:'green'
             },
             itemStyle:{
-              areaColor:'rgba(51,216,250,1)',
+              areaColor:'#dcf5fa',
             }
           },
         },
