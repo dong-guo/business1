@@ -18,6 +18,9 @@
         </div>
       </div>
       <body-right></body-right>
+      <div id='stars'></div>
+      <div id='stars2'></div>
+      <div id='stars3'></div>
     </div>
     <router-view></router-view>
   </div>
@@ -69,37 +72,21 @@ export default {
   }
 };
 </script>
-<style scoped>
+
+<style scoped >
+@import '../styleCss/background.css';
+
 .home {
   /* width: 1920px; */
   /* background-color:#2B3A7C; */
   /* background-image: url(../assets/images/background@2x.png); */
 }
-/* .home_head {
-  height: 96px;
-  width: 1920px;
-  background-image: url(../assets/images/home_head@2x.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-} */
-/* .home_head p {
-  width: 797px;
-  height: 228px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 46px;
-  font-weight: medium;
-  color: #fff;
-  background-image: url(../assets/images/home_head_change@2x.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-.home_head_change {
-  text-shadow: 2px 2px 9px rgba(1, 21, 59, 1);
-} */
+
 .home_body {
   height: 984px;
   width: 1920px;
+  /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); */
+  overflow:hidden;
 }
 .home_body_top {
   height: 132px;

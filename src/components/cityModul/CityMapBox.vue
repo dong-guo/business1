@@ -227,7 +227,7 @@ export default {
                 address: list[i].shopList[index].address,
                 value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
                 symbol: `image://${yellowballoonIcon}`,
-                symbolSize: [32, 40],
+                symbolSize: [24, 30],
                 itemStyle: {
                   color: "#EEC947"
                 }
@@ -238,7 +238,7 @@ export default {
                 address: list[i].shopList[index].address,
                 value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
                 symbol: `image://${greenballoonIcon}`,
-                symbolSize: [32, 40],
+                symbolSize: [24, 30],
                 itemStyle: {
                   color: "#2CC68B"
                 }
