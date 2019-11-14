@@ -117,7 +117,7 @@ export default {
             for(let k=0; k<provincialTotal.length;k++){
               if(Yprovincial[z]==provincialTotal[k].province){
                 for(let n=0;n<provincialTotal[k].brands.length;n++){
-                  if(drawBrandList[j].name==provincialTotal[k].brands[n].brand){
+                  if(drawBrandList[j].name==provincialTotal[k].brands[n].aliasBrand){
                       total[m].push(provincialTotal[k].brands[n].total)
                   }
                 }

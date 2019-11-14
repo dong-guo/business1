@@ -1,8 +1,8 @@
 <template>
 <div>
   <div class="canvass" @click="openCanvass" v-if="canvassKey"></div>
-  <div class="changeCanvass"  @click="openCanvass" v-else>
-    <div class="canvass_num">
+  <div class="changeCanvass" v-else>
+    <div class="canvass_num" @click="openCanvass">
       <div class="canvass_one"></div>
       <div class="canvass_two"></div>
       <div class="canvass_three"></div>
@@ -102,10 +102,14 @@ export default {
   z-index:2;
   position:absolute;
   top:0;
-  left:1318px;
+  right:0;
+  /* left:1318px; */
   background: rgba(0, 7, 17, 0.9);
   border:1px solid rgba(55, 85, 218, 0.3);
   box-sizing:border-box;
+  -webkit-transition-property: width;
+  -webkit-transition-duration: 2.5s;
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 .canvass_num{
   /* background-color:greenyellow; */
@@ -126,6 +130,19 @@ export default {
   background-image: url(../assets/images/1@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  -webkit-animation: myone 0.5s infinite linear;
+  -webkit-animation-delay: 0.1s; 
+}
+@keyframes myone {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .canvass_two{
   /* float: left; */
@@ -138,6 +155,19 @@ export default {
   background-image: url(../assets/images/2@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  -webkit-animation: mytwo 0.5s infinite linear;
+  -webkit-animation-delay: 0.05s; 
+}
+@keyframes mytwo {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .canvass_three{
   /* float: left; */
@@ -149,6 +179,19 @@ export default {
   background-image: url(../assets/images/3@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  -webkit-animation: mythree 0.5s infinite linear;
+  -webkit-animation-delay: 0s; 
+}
+@keyframes mythree {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .canvass_title{
   width:100%；;

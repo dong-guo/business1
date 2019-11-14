@@ -8,10 +8,10 @@
     </div>
   </div>
   <div  v-if="drawCityManager" class="phone">
-    <span>联系电话:</span>{{drawCityManager.phone}}
+    <span>联系电话&nbsp;:&nbsp;</span>{{drawCityManager.phone}}
   </div>
   <div v-if="drawCityManager" class="territory">
-    <span>负责区域:</span>{{drawCityManager.chargeProvince}}
+    <span>负责区域&nbsp;:&nbsp;</span>{{drawCityManager.chargeProvince}}
   </div>
   <div class="QrcodeBox">
     <div class="qrcode">

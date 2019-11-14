@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="shop" v-show="shopKey" @click="openShopKey"></div>
-    <div class="changeShop" v-show="!shopKey">
+  <div class="box">
+    <div class="shop" v-if="shopKey" @click="openShopKey"></div>
+    <div class="changeShop" v-else>
       <div class="shop_num" @click="openShopKey">
         <div class="shop_one"></div>
         <div class="shop_two"></div>
@@ -112,6 +112,9 @@ export default {
 </script>
 
 <style scoped type="text/css">
+.box{
+  position:relative;
+}
 .shop {
   width: 103px;
   height: 246px;
@@ -129,19 +132,23 @@ export default {
   /* background-color:coral; */
   background-color: rgba(0, 7, 17, 0.9);
   /* border:1px solid goldenrod; */
-
   position: absolute;
+  /* position:relative; */
   top: 23px;
   left: 0;
   z-index: 1;
+  -webkit-transition-property: width;
+  -webkit-transition-duration: 2.5s;
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 .shop_num {
   /* background-color:greenyellow; */
-  height: 903px;
+  height: 100%;
   width: 40px;
   position: absolute;
   top: 0;
-  left: 1514px;
+  right:-40px;
+  /* left: 1514px; */
 }
 .shop_one {
   height: 300px;
@@ -152,6 +159,19 @@ export default {
   background-image: url(../assets/images/1@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  -webkit-animation: myone 0.5s infinite linear;
+  -webkit-animation-delay: 0.1s;  
+}
+@keyframes myone {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .shop_two {
   height: 400px;
@@ -162,6 +182,19 @@ export default {
   background-image: url(../assets/images/2@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  -webkit-animation: mytwo 0.5s infinite linear;
+  -webkit-animation-delay: 0.05s;  
+}
+@keyframes mytwo {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .shop_three {
   height: 508px;
@@ -172,6 +205,19 @@ export default {
   background-image: url(../assets/images/3@2x.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  -webkit-animation: mythree 0.5s infinite linear;
+  -webkit-animation-delay: 0s;  
+}
+@keyframes mythree {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .changeShop_title {
   width: 100%；;
@@ -226,8 +272,10 @@ export default {
   right: 0;
 }
 .swiper-container {
-  width: 1514px;
-  height: 859px;
+  /* width: 1514px;
+  height: 859px; */
+  margin:auto;
+  height:auto;
   /* background:lightblue; */
 }
 #changeShop_content_listBox {

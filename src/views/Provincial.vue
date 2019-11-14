@@ -11,6 +11,9 @@
    <provincialnews-box class="provincialnewsBox"></provincialnews-box>
    <scaling-box class="scalingBox"></scaling-box>
    <provincialshop-num class="provincialshopNum"></provincialshop-num>
+   <div id='stars'></div>
+   <div id='stars2'></div>
+   <div id='stars3'></div>
 </div>
 
 </template>
@@ -57,11 +60,13 @@ export default {
 </script>
 
 <style scoped>
+@import '../styleCss/background.css';
 #provincial{
   width:1920px;
   height:984px;
   /* background-color:yellowgreen; */
   position:relative;
+  overflow:hidden;
 }
 .provincialMapBox{
   position:absolute;

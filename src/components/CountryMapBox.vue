@@ -120,8 +120,7 @@ export default {
               trigger:'item',
               padding:20,
               position:'right',
-              borderColor:'red',
-              position:'right',
+              // borderColor:'red',
               formatter:function(params){
                 // console.log(999,params)
                 // console.log(998,content)
@@ -173,7 +172,9 @@ export default {
               //   return res;
               // },
               textStyle:{
-                color:'yellow',
+                color:'rgba(122,180,251,1)',
+                // color:'yellow',
+                fontWeight:400,
                 fontSize:20,
               },
           },
@@ -183,7 +184,7 @@ export default {
                 map:'China',
                 // geoIndex:0,
                 data:content,
-                zoom:1,
+                zoom:1.25,
                 emphasis:{
                   label:{
                     show:true,
@@ -214,7 +215,7 @@ export default {
 <style scoped>
 #country_box {
   background-color:linear-gradient(0deg,rgba(1,9,40,1),rgba(0,8,73,1));
-  width: 1012px;
+  width: 1102px;
   height: 836px;
   /* border:1px solid yellow; */
 }

@@ -1,5 +1,5 @@
 <template>
-<div id="otherCountry">
+<div id="otherCountry" :style='otherCountryStyle'>
 </div>
 
 </template>
@@ -24,6 +24,13 @@ export default {
   data(){
     return{
       boxKey:true,
+      otherCountryStyle:{
+          "width": "1312px",
+          "height": "736px",
+          "padding-left":"0px",
+          "background-color":"linear-gradient(0deg,rgba(1,9,40,1),rgba(0,8,73,1))",
+          // "border":"1px solid yellow",
+      }
     }
   },
   computed:{
@@ -35,11 +42,11 @@ export default {
     })
   },
   mounted() {
-    // this.changeBox()
-    this.content = this.drawProvincialList
-    this.getCountryMap()
+    // this.content = this.drawProvincialList
+    // this.getCountryMap()
     console.log('现在是什么国家drawCountry',this.drawCountryChange,this.boxKey)
     // this.getCountryList()
+    this.judgeCountry()
   },
   watch:{
     drawProvincialList(newValue,oldValue){ 
@@ -50,6 +57,11 @@ export default {
     drawCountry(newValue,oldValue){
       this.content = this.drawProvincialList
       this.getCountryMap()
+    },
+    //监视什么国家英文名
+    drawCountryChange(newValue,oldValue){
+      console.log('监视',this.drawCountryChange)
+      this.judgeCountry()
     }
   },
   methods:{
@@ -109,7 +121,7 @@ export default {
               }
             },    
             textStyle:{
-              color:'yellow',
+              color:'rgba(122,180,251,1);',
               fontSize:20,
             },
         },        
@@ -171,10 +183,19 @@ export default {
       }
       return grade
     },
-    changeBox(){
-      if(this.drawCountry == 'India'){
-        this.boxKey = true
-      }
+    //判断是什么国家
+    judgeCountry(){
+      if(this.drawCountryChange == 'Australia'||this.drawCountryChange == 'India'){
+        this.otherCountryStyle.width = '1000px'
+        this.otherCountryStyle.paddingLeft = '250px'
+        this.content = this.drawProvincialList
+        this.getCountryMap()
+        console.log('成功执行')
+      }else{
+        this.content = this.drawProvincialList
+        this.getCountryMap()
+        console.log('失败执行')
+      }      
     }    
   }
 }
@@ -185,7 +206,7 @@ export default {
   background-color:linear-gradient(0deg,rgba(1,9,40,1),rgba(0,8,73,1));
   width: 1312px;
   height: 736px;
-  border:1px solid green;
+  /* border:1px solid green; */
 }
 .ckangeMapBox{
   width:1000px;

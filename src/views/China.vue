@@ -12,6 +12,9 @@
    <country-map-box class="chinaMapBox" v-show="key"></country-map-box>
    <Other-Country class="otherMapBox" v-show="!key"></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
+   <div id='stars'></div>
+   <div id='stars2'></div>
+   <div id='stars3'></div>
 </div>
 
 </template>
@@ -49,6 +52,8 @@ export default {
        drawCountryChange: state => state.home.countryChange,
        drawCountry: state => state.home.country,
     })
+  },
+  wathc:{
   },
   mounted(){
     this.selectCountry()
@@ -97,10 +102,12 @@ export default {
 </script>
 
 <style scoped>
+@import '../styleCss/background.css';
 .country{
   /* background-color:yellow; */
   width:1920px;
   height:984px;
+  overflow:hidden;
   position:relative;
 }
 .chinaMapBox{
@@ -114,6 +121,11 @@ export default {
   top:123px;
   left:254px;
   /* border:1px solid red; */
+}
+.countryBox{
+  position:absolute;
+  top:123px;
+  left:404px;
 }
 .countryTitleBox{
   width:350px;

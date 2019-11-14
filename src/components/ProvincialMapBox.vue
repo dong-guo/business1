@@ -142,13 +142,13 @@ export default {
                             list += `<p style ='margin-left:5px;height:36px;'>${brandListArray[index].brand}：${brandListArray[index].total}</p>`
                           }
                           if(brandListArray.length >0){
-                              let res =`<img style='width:280px; height:300px;margin:-10px -10px -10px -10px; display:block;' src='${newsIcon}'/>`
+                              let res =`<img style='width:280px; height:380px;margin:-15px -10px -15px -10px; display:block;' src='${newsIcon}'/>`
                               res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
                               res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
-                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:270px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
-                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:270px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
+                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:340px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
+                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:340px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
                               res += 
-                                  `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:206px;padding-top:10px; font-size:20px;' >
+                                  `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:206px;padding-top:10px;' >
                                         <p style ='margin-left:5px;height:36px;'>${params.name}</p>
                                         ${list}
                                   </div>`    
@@ -160,7 +160,7 @@ export default {
                                     <p style ='margin-left:5px;height:36px;'>${params.name}</p>
                                     <p style ='margin-left:5px;height:36px;'>暂无数据</p>
                                   </div>`
-                               return res
+                              return res
                           }
                     }
                 }
@@ -186,8 +186,8 @@ export default {
 
             },
             textStyle:{
-                  color:'#fff',
-                  fontSize:10,
+              color:'rgba(122,180,251,1)',
+              fontSize:18,
             }
           },
           geo: {
@@ -196,7 +196,7 @@ export default {
             roam:'move',
             scaleLimit:{
               min:0.6,
-              max:2,
+              max:2.5,
             },
             zoom: provincialZoom,
             top: "1px",
@@ -233,6 +233,14 @@ export default {
               coordinateSystem: "geo",
               symbolOffset:[0,'-50%'],
               data:gradeBalloon,
+              itemStyle:{
+                opacity:0.4
+              },
+              emphasis:{
+                itemStyle:{
+                  opacity:1
+                },                
+              }
             },
             {
               type:'map',
@@ -297,7 +305,7 @@ export default {
                         address:list[i].shopList[index].address,
                         value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
                         symbol:`image://${yellowballoonIcon}`,
-                        symbolSize: [24,30],
+                        symbolSize: [16,20],
                         itemStyle:{
                           color:'#EEC947'
                         }
@@ -308,7 +316,7 @@ export default {
                         address:list[i].shopList[index].address,
                         value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
                         symbol:`image://${greenballoonIcon}`,
-                        symbolSize: [24,30],
+                        symbolSize: [16,20],
                         itemStyle:{
                           color:'#2CC68B'
                         }
@@ -327,7 +335,7 @@ export default {
 #provincialBox{
   height: 717px;
   width: 929px;
-  border:1px solid yellow;
+  /* border:1px solid yellow; */
   /* background-color:yellow; */
 }
 </style>

@@ -39,7 +39,7 @@ export default {
 <style scoped>
 .listItem{
   width:444px;
-  height:328px;
+  height:348px;
   border:1px solid #0E6DE9;
   background:rgba(14,109,233,0.2);
   box-sizing:border-box;
@@ -75,7 +75,7 @@ export default {
 }
 .listItem_title{
   color:#00FFC6;
-  margin-top:20px;
+  margin-top:15px;
   /* position:absolute; */
   /* top:200px; */
   /* left:17px; */
@@ -85,17 +85,20 @@ export default {
   box-sizing:border-box;
 }
 .brandBox{
-  height:32px;
-  width:409px;
+  /* height:32px; */
+  height:68px;
+  width:420px;
   /* background:yellow; */
   margin-top:18px;
   display:flex;
+  flex-wrap:wrap;
 }
 .brand{
   /* width:100px; */
   width:auto;
   min-width:100px;
   padding:0 5px 0 5px;
+  margin-bottom:4px;
   height:32px;
   background-color:rgba(0,255,198,0.2);
   border:1px solid rgba(0,255,198,1);

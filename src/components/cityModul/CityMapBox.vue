@@ -111,8 +111,12 @@ export default {
           itemStyle: {
             areaColor: "#00083C",
             borderColor: "#2B3A7C",
+            // borderColor:'yellow',
             borderType: "solid",
-            borderWidth: 1
+            borderWidth: 3,
+            // shadowBlur:2,
+            // shadowOffsetX:2,
+            // shadowOffsetY:2,
           },
           label: {
             show: true,
@@ -151,6 +155,14 @@ export default {
             type: "scatter",
             coordinateSystem: "geo",
             symbolOffset:[0,'-50%'],
+            itemStyle:{
+              opacity:0.5
+            },
+            emphasis:{
+              itemStyle:{
+                opacity:1
+              },              
+            },
             data: gradeBalloon
             // data:[
             //   {
@@ -162,15 +174,6 @@ export default {
             //       color:'#EEC947'
             //     }
             //   },
-            //   {
-            //     name:'惠城',
-            //     value:[114.4,23.1],
-            //     symbol:`image://${greenballoonIcon}`,
-            //     symbolSize: [32,40],
-            //     itemStyle:{
-            //       color:'#EEC947'
-            //     }
-            //   }
             // ]
           },
           {
@@ -257,6 +260,6 @@ export default {
 #cityMap {
   width: 743px;
   height: 548px;
-  border: 1px solid yellowgreen;
+  /* border: 1px solid yellowgreen; */
 }
 </style>

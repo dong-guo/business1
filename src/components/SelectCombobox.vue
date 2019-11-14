@@ -236,7 +236,7 @@ export default {
           let date = res.data.data.brand
           let chartBrandList = []
           for(let i =0; i< date.length; i++){
-            chartBrandList.push({name:date[i].brand})
+            chartBrandList.push({name:date[i].alias_brand})
           }
           this.$store.commit("succession/setBrandList",chartBrandList)
           let provincialTotal = res.data.data.developedProvince

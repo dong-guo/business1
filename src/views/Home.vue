@@ -94,6 +94,7 @@ export default {
   position: absolute;
   top: 126px;
   left: 747px;
+  /* background:yellow; */
 }
 .home_body_top p {
   width: 432px;
@@ -114,17 +115,22 @@ export default {
   background-size: 100%;
   position: relative;
   top: 46px;
+  left:30px;
   /* background-color:green; */
 }
 .home_body_bg ul {
   /* border:1px solid yellow; */
   height: 73px;
-  width: 291px;
-  margin-left:39px;
+  /* width: 291px; */
+  width:262px;
+  margin-left:59px;
+  /* margin-left:39px; */
   /* margin-left:50px;
   width:278px; */
   position: relative;
   top:-23px;
+  display:flex;
+  justify-content:space-between;
 }
 .home_body_top li {
   float: left;
@@ -132,7 +138,7 @@ export default {
   width: 50px;
   background-image: url(../assets/images/number_border@2x.png);
   background-size: 100%;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   text-align: center;
   line-height: 64px;
   font-size: 43px;

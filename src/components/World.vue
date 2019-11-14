@@ -39,7 +39,7 @@ export default {
         let countryName = res.data.data
         // countryName = this.deleteSpace(countryName)
         this.$store.commit("home/setAllTotal",countryName.total)
-        console.log('countryName数据',countryName.country,countryName.total)
+        // console.log('countryName数据',countryName.country,countryName.total)
         //将国家前十名存入VUEX中
         for(let i = 0; i< countryName.country.length; i++){
           let [index,franchiseStoreNum,directSaleStoreNum,totalNum] = [i,countryName.country[i].franchiseStore,countryName.country[i].directSaleStore,countryName.country[i].total]
@@ -49,7 +49,7 @@ export default {
           this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
         }
         this.worldeSet();
-        console.log('drawCountryNumber',this.drawCountryNumber)
+        // console.log('drawCountryNumber',this.drawCountryNumber)
       })
     },
     //设置气泡图样式
@@ -109,8 +109,8 @@ export default {
     },
     //世界地图配置
     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
-      console.log('otherStyle',otherStyle)
-      console.log('气泡图',countryBigBall, countryMidBall, countrySmallBall)
+      // console.log('otherStyle',otherStyle)
+      // console.log('气泡图',countryBigBall, countryMidBall, countrySmallBall)
       return {
         geo: {
           type: "map",
@@ -133,15 +133,15 @@ export default {
             "United States of America": "美国",
             Australia: "澳大利亚",
             Japan: "日本",
-            Germany: "德国",
+            // Germany: "德国",
             India: "印度",
-            "South Africa": "南非",
-            Brazil: "巴西",
-            Argentina: "阿根廷",
-            Slovakia: "斯洛伐克",
-            Mexico: "墨西哥",
-            Russia: "俄罗斯",
-            Austria: "奥地利",
+            // "South Africa": "南非",
+            // Brazil: "巴西",
+            // Argentina: "阿根廷",
+            // Slovakia: "斯洛伐克",
+            // Mexico: "墨西哥",
+            // Russia: "俄罗斯",
+            // Austria: "奥地利",
             Canada:'加拿大',
             "South Korea":'韩国',
             Malaysia:'马来西亚',
@@ -159,7 +159,7 @@ export default {
               areaColor: "#dcf5fa"
             },
             label: {
-              color: "green"
+              color: "blue"
             }
           },
           label: {
@@ -173,9 +173,6 @@ export default {
             symbol: `image://${balloonIcon}`,
             symbolSize: [173, 200],
             // formatter: `{a}`,
-            label: {
-              fontSize: 18
-            },
             data: countryBigBall
           },
           {
@@ -183,9 +180,6 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [129, 149],
-            label: {
-              fontSize: 18
-            },
             data: countryMidBall
           },
           {
@@ -193,9 +187,6 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [86, 100],
-            label: {
-              fontSize: 18
-            },
             data: countrySmallBall
           }
         ]
@@ -208,25 +199,27 @@ export default {
             name: obj.name,
             // value: dcn[i].jindu,
             value:countryCoordinate,
-            color: "#333333",
             label: {
               show: true,
-              position: ["20%", "35%"],
+              position: ["25%", "35%"],
               fontSize: 16,
               rich: {
                 a: {
-                  fontSize: 30
+                  fontSize: 30,
+                  align:'center',
+                  color:'#333333',
                 },
                 b: {
                   fontSize: 15,
-                  verticalAlign: "middle"
+                  verticalAlign: "middle",
+                  color:'#333333',
                 },
                 c: {
                   fontSize: 20,
-                  align: "center"
+                  align: "center",
+                  color:'#333333',
                 }
               },
-              // formatter: `{b}`
               formatter: [
                 "{a| " + arr + "}{b| 家}" + "\n" + "{c| " + obj.name + "}"
               ].join("\n")
@@ -239,12 +232,14 @@ export default {
             value:countryCoordinate,
             label: {
               show: true,
-              position: ["20%", "30%"],
-              color: "#333333",
+              position: ["10%", "30%"],
               fontSize: 16,
+              width:100,
+              height:100,
               rich: {
                 a: {
-                  fontSize: 28
+                  fontSize: 28,
+                  align: "center"
                 },
                 b: {
                   fontSize: 14,
@@ -267,18 +262,23 @@ export default {
             value:countryCoordinate,
             label: {
               show: true,
-              position: ["15%", "25%"],
-              color: "#333333",
+              position: ["0%", "25%"],
+              width:80,
+              height:80,
               fontSize: 16,
               rich: {
                 a: {
-                  fontSize: 28
+                  fontSize: 28,
+                  align: "center",
+                  color:'#333333',
                 },
                 b: {
-                  fontSize: 14
+                  fontSize: 14,
+                  color:'#333333',
                 },
                 c: {
                   align: "center",
+                  color:'#333333',
                 }
               },
               formatter: [

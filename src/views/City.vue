@@ -12,6 +12,9 @@
     <global-city class="golbalCity"></global-city>
     <scaling-box class="scalingBox"></scaling-box>
     <city-shop-num class="cityShopNum"></city-shop-num>
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>    
   </div>
 </template>
 <script>
@@ -112,16 +115,18 @@ export default {
 
 
 <style scoped lang="scss">
+@import '../styleCss/background.css';
 .city {
   width: 1920px;
   height: 984px;
+  overflow: hidden;
   /* background-color:yellowgreen; */
   position: relative;
   .cityMapBox {
     position: absolute;
     left: 589px;
     top: 173px;
-    border-color: red!important;
+    // border-color: red!important;
   }
 }
 .cityTitleBox {

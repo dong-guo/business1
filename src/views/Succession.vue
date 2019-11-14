@@ -23,6 +23,9 @@
   <undeveloped-content class="undevelopedContent"></undeveloped-content>
   <canvass></canvass>
   <global class="succession_link"></global>
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div> 
 </div>
 
 </template>
@@ -50,10 +53,12 @@ export default {
 </script>
 
 <style scoped>
+@import '../styleCss/background.css';
 .succession_body{
   height: 984px;
   width:1920px;
   position:absolute;
+  overflow: hidden;
   /* background-color:lawngreen; */
   /* border:1px solid #3B5AC8;
   box-sizing: border-box; */
