@@ -92,20 +92,29 @@ export default {
         this.myEcharts.on("click", params => {
           console.log('跳转名字',params.name)
           //取得亮蓝色国家
-          for (let i = 0; i < dcn.length; i++) {
-            if (params.name == dcn[i].name) {
-              //取得中英文名称对于数据
-              for(let i = 0; i < country.length; i++){
-                if(params.name ==country[i].ChinaName){
-                  this.$store.commit("home/setCountryChange", country[i].EnglishName);
-                  this.$router.push({ name: "china" });
-                }
-              }
-              break;
-            }
-          }
+          this.getblueCountry(dcn,params,country)
         });
       });
+    },
+    //取得亮蓝色国家
+    getblueCountry(dcn,params,country){
+        for (let i = 0; i < dcn.length; i++) {
+          if (params.name == dcn[i].name) {
+            //取得中英文名称匹对数据
+            for(let i = 0; i < country.length; i++){
+              if(params.name ==country[i].ChinaName){
+                if(params.name == '中国'){
+                  this.$store.commit("home/setCountryChange", country[i].EnglishName);
+                  this.$router.push({ name: "china" });
+                }else{
+                  this.$store.commit("home/setCountryChange", country[i].EnglishName);
+                  this.$router.push({ name: "other" });                  
+                }
+              }
+            }
+            break;
+          }
+        }
     },
     //世界地图配置
     worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {

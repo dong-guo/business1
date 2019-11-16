@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import China from './views/China.vue'
+import Other from './views/Other.vue'
 import Provincial from './views/Provincial.vue'
 import Succession from './views/Succession.vue'
 import City from './views/City.vue'
@@ -30,6 +31,11 @@ export default new Router({
       path: '/china',
       name: 'china',
       component: China
+    },
+    {
+      path: '/other',
+      name: 'other',
+      component: Other      
     },
     {
       path:'/provincial',

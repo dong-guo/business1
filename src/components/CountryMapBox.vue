@@ -34,7 +34,7 @@ export default {
       drawProvincialChange: state => state.home.provincialChange,
       drawLetterName: state => state.home.letterName,
       drawChinaName: state => state.home.chinaName,
-      drawCountry: state => state.home.country
+      drawCountry: state => state.home.country,
     })
   },
   mounted() {
@@ -77,7 +77,7 @@ export default {
       indexModel.getProvincialList(country)
       .then(res=>{
         let provincialList = res.data.data
-        console.log('provincialList中国数据',provincialList)
+        // console.log('provincialList中国数据',provincialList)
         this.content = provincialList
         this.getCountryMap()
       })
@@ -85,6 +85,7 @@ export default {
     //初始化国家地图函数
     getCountryMap(){
       let[country,content]  = [this.drawCountryChange,this.content]
+      // console.log('初始化国家地图参数country,content:',country,content)
       axios.get(`./geoJson/country/${country}.json`)
       .then(res => {
         let countryJson = res.data;

@@ -121,7 +121,7 @@ export default {
 .home_body_bg ul {
   /* border:1px solid yellow; */
   height: 73px;
-  /* width: 291px; */
+  /* width: 302px; */
   width:262px;
   margin-left:59px;
   /* margin-left:39px; */
@@ -130,7 +130,7 @@ export default {
   position: relative;
   top:-23px;
   display:flex;
-  justify-content:space-between;
+  justify-content:space-around;
 }
 .home_body_top li {
   float: left;

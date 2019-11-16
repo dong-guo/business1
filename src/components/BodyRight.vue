@@ -7,7 +7,7 @@
     </div>
     <div class="border_title">
       <span>门店分布</span>
-      {{drawNum}}
+      <!-- {{drawNum}} -->
     </div>
     <div class="home_body_right_content" :class="{'changeContent':drawBoxKey}">
       <ul>

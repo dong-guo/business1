@@ -1,16 +1,15 @@
 <template>
 <div class="country">
    <div class="countryTitleBox">
-      <!-- <div class="countryTitleLeftPic"></div> -->
       <div class="countryTitleText">
         <div class="countryTitleLeftPic"></div>
         <p>{{showCountry}}地图</p>
         <div class="countryTitleRightPic"></div>
       </div>
-      <!-- <div class="countryTitleRightPic"></div> -->
    </div>
-   <country-map-box class="chinaMapBox" v-if="key"></country-map-box>
-   <Other-Country class="otherMapBox" v-else></Other-Country>
+   <reach class="reach"></reach>
+   <other-shop-num class="otherShopNum"></other-shop-num>
+   <Other-Country class="otherMapBox"></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
    <div id='stars'></div>
    <div id='stars2'></div>
@@ -25,6 +24,8 @@ import axios from "axios";
 import echarts from "echarts";
 import { mapState } from "vuex"
 
+import Reach from "../components/Reach.vue";
+import OtherShopNum from "../components/OtherShopNum.vue";
 import CountryMapBox from "../components/CountryMapBox.vue"
 import OtherCountry from "../components/OtherCountry.vue"
 
@@ -34,7 +35,7 @@ import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
 
 export default {
-  name:'china',
+  name:'other',
   data(){
     return{
       key:true,
@@ -45,40 +46,24 @@ export default {
   components:{
     CountryMapBox,
     OtherCountry,
-    GlobalCountry
+    GlobalCountry,
+    Reach,
+    OtherShopNum,
   },
   computed:{
     ...mapState({
        drawCountryChange: state => state.home.countryChange,
        drawCountry: state => state.home.country,
-       drawCountryBoxMapKey:state=>state.country.countryBoxMapKey
     })
   },
   wathc:{
   },
   mounted(){
-    console.log('盒子开关drawCountryBoxMapKey:',this.drawCountryBoxMapKey)
-    this.selectCountry()
-    // this.openKey()
+    // this.selectCountry()
     this.matchingCountry()
     this.getCountryList()
   },
   methods:{
-    //vuex地图开关盒子控制
-    openKey(){
-      if(this.drawCountryBoxMapKey == false){
-         this.key = !this.key
-      }
-    },
-    //通过v-if切换中国与其他国家样式地图
-    selectCountry(){
-      //  console.log('drawCountryChange',this.drawCountryChange,this.drawCountry)
-       let country = this.drawCountryChange
-       if(country !== 'China'){
-         this.key = !this.key
-        //  console.log('key',this.key)
-       }
-    },
     //将得到英文名字国家变成中文名称
     matchingCountry(){
         for(let i = 0; i<this.drawCountry.length; i++){
@@ -124,6 +109,16 @@ export default {
   overflow:hidden;
   position:relative;
 }
+.reach {
+  position: absolute;
+  top: 28px;
+  left: 60px;
+}
+.otherShopNum{
+  position: absolute;
+  top: 688px;
+  left: 60px;  
+}
 .chinaMapBox{
   position:absolute;
   top:23px;
@@ -135,11 +130,6 @@ export default {
   top:123px;
   left:254px;
   /* border:1px solid red; */
-}
-.countryBox{
-  position:absolute;
-  top:123px;
-  left:404px;
 }
 .countryTitleBox{
   width:350px;
