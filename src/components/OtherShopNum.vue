@@ -2,11 +2,11 @@
 <div class="cityShop">
     <div class="singleShop">
     <div class="greenballoon"></div>
-    <p>单品店&nbsp;&nbsp;({{0.0}})</p>
+    <p v-if="drawOtherShopList">单品店&nbsp;&nbsp;({{drawOtherShopList[0].single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>
-      <p>综合店&nbsp;&nbsp;({{0.0}})</p>
+      <p v-if="drawOtherShopList">综合店&nbsp;&nbsp;({{drawOtherShopList[0].multiple}})</p>
     </div>
 </div>
 
@@ -21,7 +21,7 @@ export default {
    },
    computed:{
      ...mapState({
-
+        drawOtherShopList: state => state.country.otherShopList
      })
    },
    mounted(){

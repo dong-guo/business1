@@ -43,7 +43,8 @@ export default {
       drawCountry: state => state.home.country,
       drawCountryBoxMapKey:state=>state.country.countryBoxMapKey,
 
-      drawOtherList: state => state.country.otherList
+      drawOtherList: state => state.country.otherList,
+      drawOtherShopList: state => state.country.otherShopList
     })
   },
   mounted() {
@@ -230,11 +231,11 @@ export default {
         this.otherCountryStyle.paddingLeft = '270px'
         this.content = this.drawProvincialList
         this.getCountryMap()
-        console.log('成功执行')
+        // console.log('成功执行')
       }else{
         this.content = this.drawProvincialList
         this.getCountryMap()
-        console.log('失败执行')
+        // console.log('失败执行')
       }      
     },
     gradeBalloon(){

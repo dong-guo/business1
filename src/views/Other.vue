@@ -84,13 +84,15 @@ export default {
       console.log('country',country)
       indexModel.getProvincialList(country)
       .then(res=>{
-        let [provincialList,otherList] = [res.data.data.provinceDataList,res.data.data]        
+        let [provincialList,otherList,shopList] = [res.data.data.provinceDataList,res.data.data,res.data.data.shopTypeCount]        
         console.log('国家主页请求的数据.provinceDataList:',provincialList)
         console.log('国家主页请求的数据.otherList:',otherList)
+        console.log('国家主页请求的数据.shopList:',shopList)
         this.content = provincialList
         this.$store.commit("country/setProvincialList",provincialList)
         //此值只在非中国国家使用
         this.$store.commit("country/setOtherList",otherList)
+        this.$store.commit("country/setOtherShopList",shopList)
         // this.getCountryMap()
       })
     },

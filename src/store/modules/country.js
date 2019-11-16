@@ -1,6 +1,7 @@
 const state ={
     provincialList:[],
     otherList:[],
+    otherShopList:[],
     countryBoxMapKey:true,
 }
 const mutations = {
@@ -12,6 +13,9 @@ const mutations = {
     },
     setcountryBoxMapKey:(state,boolean) => {
       state.countryBoxMapKey = boolean
+    },
+    setOtherShopList:(state,array) => {
+      state.otherShopList = array
     }
 }
 const action = {
