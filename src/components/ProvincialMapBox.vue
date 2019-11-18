@@ -71,7 +71,7 @@ export default {
             this.$store.commit("provincial/setCityShopNumber",this.cityShopNumber)
             this.$store.commit("provincial/setAllCityList",this.allCityList)
             this.$store.commit("provincial/setCityManager",this.cityManager)
-            //  console.log('cityList',this.allCityList,country,province)
+             console.log('this.cityManager',this.cityManager)
             //地图初始化
             this.actionProvincial()
             // console.log('cityShowNumber',this.cityShopNumber)
@@ -194,10 +194,10 @@ export default {
             type: "map",
             map: "provincialChange",
             roam:'move',
-            scaleLimit:{
-              min:0.6,
-              max:2.5,
-            },
+            // scaleLimit:{
+            //   min:0.6,
+            //   max:5.5,
+            // },
             zoom: provincialZoom,
             top: "1px",
             itemStyle: {
@@ -334,7 +334,8 @@ export default {
 <style scoped>
 #provincialBox{
   height: 717px;
-  width: 929px;
+  /* width: 929px; */
+  width:1329px;
   /* border:1px solid yellow; */
   /* background-color:yellow; */
 }

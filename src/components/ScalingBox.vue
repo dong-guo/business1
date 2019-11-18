@@ -32,17 +32,17 @@ export default {
       //判断路由地址是省级还是城市级别
       if(this.$route.name =='provincial'){
           let provincialzoom =Number(this.drawProvincialZoom)
-          provincialzoom += 0.5
-          if(provincialzoom > 2.4){
-            provincialzoom = 2.4
+          provincialzoom += 2
+          if(provincialzoom > 9.9){
+            provincialzoom = 9.9
           }
           this.$store.commit("home/setProvincialZoom",provincialzoom);
           console.log('provincialzoom',this.drawProvincialZoom)
       } else{
           let cityzoom =Number(this.drawCityZoom)
-          cityzoom += 0.5
-          if(cityzoom>2.7){
-            cityzoom = 2.7
+          cityzoom += 2
+          if(cityzoom>10.2){
+            cityzoom = 10.2
           }
           this.$store.commit("home/setCityZoom",cityzoom);
           console.log('cityzoom',this.drawCityZoom)        
@@ -54,18 +54,18 @@ export default {
       if (this.$route.name == 'provincial'){
           let provincialzoom =Number(this.drawProvincialZoom)
           //以原始设定值每次变大0.5倍
-          provincialzoom -= 0.5
-          if(provincialzoom < 0.4){
-            provincialzoom = 0.4
+          provincialzoom -= 2
+          if(provincialzoom < 1){
+            provincialzoom = 1
           }
           this.$store.commit("home/setProvincialZoom",provincialzoom);
           console.log('provincialzoom',this.drawProvincialZoom) 
       }  else{
         //以原始设定值每次缩小0.5倍
           let cityzoom =Number(this.drawCityZoom)
-          cityzoom -= 0.5
-          if(cityzoom < 0.7){
-            cityzoom = 0.7
+          cityzoom -= 2
+          if(cityzoom < 1.2){
+            cityzoom = 1.2
           }
           this.$store.commit("home/setCityZoom",cityzoom);
           console.log('cityzoom',this.drawCityZoom)         

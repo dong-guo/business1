@@ -6,7 +6,7 @@ const state = {
     {EnglishName:'USA',ChinaName:'美国',jindu:[-100.5, 48.48]},
     {EnglishName:'Japan',ChinaName:'日本',jindu:[140.54,54.5]},
     {EnglishName:'India',ChinaName:'印度',jindu:[79.5,35.4]},
-    {EnglishName:'United Arab Emirates',ChinaName:'迪拜',jindu:[53.13, 32.8]},
+    {EnglishName:'United Arab Emirates',ChinaName:'迪拜',jindu:[53.13, 31.2]},
     {EnglishName:'Australia',ChinaName:'澳大利亚',jindu:[134.53,-15]},
     {EnglishName:'Canada',ChinaName:'加拿大',jindu:[-80.39,65.01]},
     {EnglishName:'Cambodia',ChinaName:'柬埔寨',jindu:[-90.22,45.13]},
@@ -29,15 +29,15 @@ const state = {
     // {name:'',amount:55,jindu:[113.45,11.37],directSaleStore:1,franchiseStore:0,total:1}
   ],
   selectCountry:[],
-  countryChange:'USA',
+  countryChange:'China',
   letterName:['anhui','aomen','fujian','gansu','guangdong','guangxi','guizhou','hainan','hebei','heilongjiang','henan','hubei','hunan','jiangsu','jiangxi','jilin','liaoning','neimenggu','ningxia','qinghai','shandong','shanxi','shanxi1','sichuan','xinjiang','xizang','yunnan','zhejiang','beijing','shanghai','chongqing','tianjin','xianggang'],
   chinaName:['安徽','澳门','福建','甘肃','广东','广西','贵州','海南','河北','黑龙江','河南','湖北','湖南','江苏','江西','吉林','辽宁','内蒙古','宁夏','青海','山东','山西','陕西','四川','新疆','西藏','云南','浙江','北京','上海','重庆','天津','香港'],
   provincialChange:'guangdong',
   provincialChinaChange:'广东',
   provincialZoom:'0.9',
   cityZoom:'1.2',
-  cityChange:'441300',
-  cityChinaChange:'惠州',
+  cityChange:'441900',
+  cityChinaChange:'东莞',
 }
 const mutations = {
   setBoxKey: (state, boolean) => {

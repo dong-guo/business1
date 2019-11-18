@@ -30,7 +30,7 @@ export default {
     })
   },
   mounted(){
-    console.log('item',this.item)
+    // console.log('item',this.item)
     // console.log('shopListItem-drawCityShopList',this.drawCityShopList)
   }
 }
@@ -85,8 +85,8 @@ export default {
   box-sizing:border-box;
 }
 .brandBox{
-  /* height:32px; */
-  height:68px;
+  height:32px;
+  /* height:68px; */
   width:420px;
   /* background:yellow; */
   margin-top:18px;
@@ -94,8 +94,8 @@ export default {
   flex-wrap:wrap;
 }
 .brand{
-  /* width:100px; */
-  width:auto;
+  width:100px;
+  /* width:auto; */
   min-width:100px;
   padding:0 5px 0 5px;
   margin-bottom:4px;

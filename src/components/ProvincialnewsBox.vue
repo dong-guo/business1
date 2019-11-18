@@ -2,7 +2,7 @@
 <div class="provincialBox">
   <div class="content">
     <div class="content_contentPic">
-      <img class="content_contentPic_photo" :src="drawCityManager.contactPhoto" alt="">
+      <img class="content_contentPic_photo" :src="drawCityManager.profilePhoto" alt="">
     </div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
@@ -17,7 +17,7 @@
   </div>
   <div class="QrcodeBox">
     <div class="qrcode">
-      <img class="qrcode_photo" :src="drawCityManager.profilePhoto" alt="">
+      <img class="qrcode_photo" :src="drawCityManager.contactPhoto" alt="">
     </div>
     <p>扫一扫添加好友</p>
   </div>
@@ -39,7 +39,6 @@ export default {
   name:'provincialNewsBox',
   data(){
     return{
-      // develop :'廊坊市、承德市、邯郸市、秦皇岛市、迪拜、石家庄市、任丘市、北京市、河间市、张家口市、邢台市、沧州市、保定市、衡水市、北京市怀柔区、天津市市辖区、天津市直辖市、唐山市、深圳市、黄骅市',
     }
   },
   computed:{

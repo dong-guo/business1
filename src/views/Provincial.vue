@@ -71,7 +71,8 @@ export default {
 .provincialMapBox{
   position:absolute;
   top:85px;
-  left:496px;
+  /* left:496px; */
+  left:296px;
 }
 .provincialTitleBox{
   width:349px;

@@ -180,7 +180,7 @@ export default {
             coordinateSystem: "geo",
             type: "scatter",
             symbol: `image://${balloonIcon}`,
-            symbolSize: [173, 200],
+            symbolSize: [173, 173],
             // formatter: `{a}`,
             data: countryBigBall
           },
@@ -188,14 +188,14 @@ export default {
             coordinateSystem: "geo",
             type: "scatter",
             symbol: `image://${balloonIcon}`,
-            symbolSize: [129, 149],
+            symbolSize: [129, 129],
             data: countryMidBall
           },
           {
             coordinateSystem: "geo",
             type: "scatter",
             symbol: `image://${balloonIcon}`,
-            symbolSize: [86, 100],
+            symbolSize: [86, 86],
             data: countrySmallBall
           }
         ]

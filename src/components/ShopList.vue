@@ -15,7 +15,7 @@
       </div>
       <div id="changeShop_content" class="swiper-container">
         <div id="changeShop_content_listBox" class="swiper-wrapper">
-          <ul v-for="(item,index) in totalPage" :key="item+index" class="swiper-slide">
+          <ul totalPage v-for="(item,index) in totalPage" :key="item+index" class="swiper-slide">
             <li v-for="(item,index) in totalPage[index]" :key="item+index" class="all_list">
               <shop-list-item class="shopListItem" :item="item"></shop-list-item>
             </li>
@@ -55,30 +55,65 @@ export default {
       drawCityShopList: state =>state.city.cityShopList
     })
   },
+  watch:{
+    totalShow(newValue,oldValue){
+        // this.$nextTick(()=>{
+        //   this.swiper()
+        // })    
+    }
+  },
   mounted() {
-    new Swiper(".swiper-container", {
-      loop: true,
-      autoplay: {
-        delay: 2000
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        type:'bullets',
-        clickable: true,
-        // bulletClass:'my-bullet',
-      },
-      observer: true,
-      observeParents: true
-    });
-    console.log('CITY-drawCityShopList',this.drawCityShopList)
-  
+    // this.swiper()
+    // new Swiper(".swiper-container", {
+    //   loop: true,
+    //   autoplay: {
+    //     delay: 2000
+    //   },
+    //   pagination: {
+    //     el: ".swiper-pagination",
+    //     type:'bullets',
+    //     clickable: true,
+    //     bulletElement : 'li',
+    //     // hideOnClick :true,
+    //     // bulletClass:'my-bullet',
+    //   },
+    //   observer: true,
+    //   observeParents: true
+    // });
+    console.log('CITY-drawCityShopList',this.drawCityShopList) 
   },
   methods: {
+    //设置swiper组件api
+    swiper(){
+      new Swiper(".swiper-container", {
+        // loop: true,
+        // autoplay: {
+        //   delay: 2000
+        // },
+        pagination: {
+          el: ".swiper-pagination",
+          type:'bullets',
+          clickable: true,
+          // bulletElement : 'li',
+          hideOnClick :true,
+          // bulletClass:'my-bullet',
+        },
+        observer: true,
+        observeParents: true,
+          onSlideChangeEnd: function(swiper){
+          　　　swiper.update();  
+          　　　mySwiper.startAutoplay();
+          　　   mySwiper.reLoop();  
+          }      
+      }); 
+      console.log('运行')     
+    },
     //开启店铺列表开关
     openShopKey() {
       this.shopKey = !this.shopKey;
       this.openItem();
     },
+    //打开盒子 刷新数据到totalShow
     openItem() {
       if (this.shopKey == false) {
         // console.log("drawShopData", this.drawShopData);
@@ -96,6 +131,9 @@ export default {
         // console.log("totalPage", this.totalPage);
         this.totalShow = this.totalPage[this.currentPage];
         // console.log("当前显示页", this.totalShow);
+        this.$nextTick(()=>{
+          this.swiper()
+        }) 
       }
     },
     changeCurrentPage() {
@@ -128,18 +166,18 @@ export default {
 }
 .changeShop {
   width: 1514px;
-  height: 903px;
+  height: 953px;
   /* background-color:coral; */
   background-color: rgba(0, 7, 17, 0.9);
   /* border:1px solid goldenrod; */
   position: absolute;
   /* position:relative; */
-  top: 23px;
+  top: 13px;
   left: 0;
   z-index: 1;
-  -webkit-transition-property: width;
-  -webkit-transition-duration: 2.5s;
-  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  /* -webkit-transition-property: width;
+  -webkit-transition-duration: 1.5s;
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1); */
 }
 .shop_num {
   /* background-color:greenyellow; */
@@ -278,20 +316,14 @@ export default {
   height:auto;
   /* background:lightblue; */
 }
-#changeShop_content_listBox {
-  /* width:1514px; */
-  /* background:yellowgreen; */
-  /* opacity:0.5; */
-  /* position:absolute;
-  transition: top 1s; */
-}
 .swiper-container ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 1514px;
-  height: 859px;
+  /* height: 859px; */
+  height:auto;
   margin: 0 auto;
   padding-top: 69px;
   box-sizing: border-box;
@@ -300,10 +332,12 @@ export default {
 }
 .swiper-container ul li {
   margin: 0 30px;
-  margin-bottom: 82px;
+  margin-bottom: 72px;
 }
 .swiper-container {
   --swiper-pagination-color: #025a9e;
+  /* height:20px;
+  width:20px; */
 }
 .my-bullet{
   --swiper-pagination-color: #025a9e;

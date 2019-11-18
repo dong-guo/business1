@@ -44,7 +44,6 @@ export default {
       drawCountryBoxMapKey:state=>state.country.countryBoxMapKey,
 
       drawOtherList: state => state.country.otherList,
-      drawOtherShopList: state => state.country.otherShopList
     })
   },
   mounted() {

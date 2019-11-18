@@ -258,8 +258,9 @@ export default {
 
 <style scoped>
 #cityMap {
-  width: 743px;
-  height: 548px;
+  /* width: 943px; */
+  width:1143px;
+  height: 748px;
   /* border: 1px solid yellowgreen; */
 }
 </style>

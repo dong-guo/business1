@@ -124,8 +124,8 @@ export default {
   position: relative;
   .cityMapBox {
     position: absolute;
-    left: 589px;
-    top: 173px;
+    left: 389px;
+    top: 73px;
     // border-color: red!important;
   }
 }
@@ -181,11 +181,11 @@ export default {
   top: 807px;
   left: 44px;
 }
-.shopList {
-  /* position:absolute;
-  top:249px;
-  left:0; */
-}
+// .shopList {
+//   /* position:absolute;
+//   top:249px;
+//   left:0; 
+// }
 .cityNewsBox {
   position: absolute;
   left: 1499px;
