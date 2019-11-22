@@ -42,7 +42,7 @@ export default {
   },
   watch:{
     drawCityManager(newValue,oldValue){
-      console.log('CityNewsBox-drawCityManager-检测',this.drawCityManager)
+      // console.log('CityNewsBox-drawCityManager-检测',this.drawCityManager)
     }
   }
 

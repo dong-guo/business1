@@ -84,7 +84,7 @@ export default {
         //求得数据拆分存入VUEX
         let district = res.data.data
         console.log("总数据district", district);
-        let [districtList,manager,shopList,shopTypeCount] = [res.data.data.districtList,res.data.data.manager,res.data.data.shopList,res.data.data.shopTypeCount[0]]
+        let [districtList,manager,shopList,shopTypeCount] = [res.data.data.districtList,res.data.data.manager,district.shopList,res.data.data.shopTypeCount[0]]
         this.$store.commit("city/setCityDistrictList",districtList)
         this.$store.commit("city/setCityManager",manager)
         this.$store.commit("city/setCityShopList",shopList)

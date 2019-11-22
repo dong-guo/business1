@@ -197,7 +197,8 @@ export default {
                 },
                 label:{
                   show:true,
-                  color:'#33D3F6'
+                  color:'#33D3F6',
+                  fontSize:20,
                 },
                 itemStyle:{
                   areaColor:'#00083B',

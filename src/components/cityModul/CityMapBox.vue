@@ -24,7 +24,8 @@ export default {
     ...mapState({
       drawCityChange: state => state.home.cityChange,
       drawCityZoom: state => state.home.cityZoom,
-      drawCityDistrictList: state => state.city.cityDistrictList
+      drawCityDistrictList: state => state.city.cityDistrictList,
+      drawCityShopList: state => state.city.cityShopList
     })
   },
   watch: {
@@ -41,6 +42,13 @@ export default {
         this.drawCityDistrictList
       );
       this.actionCity();
+    },
+    //城市店面数量
+    drawCityShopList(newValue, oldValue) {
+      console.log(
+        "city-map-box-drawCityShopList监测",
+        this.drawCityShopList
+      );
     }
   },
   mounted() {
@@ -217,37 +225,71 @@ export default {
       return grade;
     },
     //气球区别
+    // gradeDistrictBalloon() {
+    //   // let list = this.drawCityDistrictList;
+    //   let list = this.drawCityShopList
+    //   // console.log("9999-list", list);
+    //   let balloon = [];
+    //   for (let i = 0; i < list.length; i++) {
+    //     if (list[i].shopList.length > 0) {
+    //       for (let index = 0; index<list[i].shopList.length; index++) {
+    //         if (list[i].shopList[index].nature == 'Deaer') {
+    //           balloon.push({
+    //             name: list[i].shopList[index].address,
+    //             address: list[i].shopList[index].address,
+    //             value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
+    //             symbol: `image://${yellowballoonIcon}`,
+    //             symbolSize: [24, 30],
+    //             itemStyle: {
+    //               color: "#EEC947"
+    //             }
+    //           });
+    //         } else {
+    //           balloon.push({
+    //             name: list[i].shopList[index].address,
+    //             address: list[i].shopList[index].address,
+    //             value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
+    //             symbol: `image://${greenballoonIcon}`,
+    //             symbolSize: [24, 30],
+    //             itemStyle: {
+    //               color: "#2CC68B"
+    //             }
+    //           });
+    //         }
+    //       }
+    //     }
+    //   }
+    //   return balloon;
+    // },
+    //气球区别--数据解构更改
     gradeDistrictBalloon() {
-      let list = this.drawCityDistrictList;
+      // let list = this.drawCityDistrictList;
+      let list = this.drawCityShopList
       // console.log("9999-list", list);
       let balloon = [];
       for (let i = 0; i < list.length; i++) {
-        if (list[i].shopList.length > 0) {
-          for (let index = 0; index<list[i].shopList.length; index++) {
-            if (list[i].shopList[index].nature == 'Deaer') {
-              balloon.push({
-                name: list[i].shopList[index].address,
-                address: list[i].shopList[index].address,
-                value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
-                symbol: `image://${yellowballoonIcon}`,
-                symbolSize: [24, 30],
-                itemStyle: {
-                  color: "#EEC947"
-                }
-              });
-            } else {
-              balloon.push({
-                name: list[i].shopList[index].address,
-                address: list[i].shopList[index].address,
-                value: [list[i].shopList[index].longitude, list[i].shopList[index].latitude],
-                symbol: `image://${greenballoonIcon}`,
-                symbolSize: [24, 30],
-                itemStyle: {
-                  color: "#2CC68B"
-                }
-              });
+        if (list[i].nature == 'Deaer') {
+          balloon.push({
+            name: list[i].address,
+            address: list[i].address,
+            value: [list[i].longitude, list[i].latitude],
+            symbol: `image://${yellowballoonIcon}`,
+            symbolSize: [24, 30],
+            itemStyle: {
+              color: "#EEC947"
             }
-          }
+          });
+        } else {
+          balloon.push({
+            name: list[i].address,
+            address: list[i].address,
+            value: [list[i].longitude, list[i].latitude],
+            symbol: `image://${greenballoonIcon}`,
+            symbolSize: [24, 30],
+            itemStyle: {
+              color: "#2CC68B"
+            }
+          });
         }
       }
       return balloon;

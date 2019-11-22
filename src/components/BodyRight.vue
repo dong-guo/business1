@@ -72,7 +72,8 @@ export default {
     })
   },
   mounted(){
-      console.log('drawCountryNumberShop',this.drawCountryNumber[0].franchiseStore)
+      // console.log('drawCountryNumberShop',this.drawCountryNumber[0].franchiseStore)
+      console.log('drawCountryNumber',this.drawCountryNumber)
   },
   methods: {
     change() {

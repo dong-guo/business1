@@ -39,15 +39,20 @@ export default {
         let countryName = res.data.data
         // countryName = this.deleteSpace(countryName)
         this.$store.commit("home/setAllTotal",countryName.total)
-        // console.log('countryName数据',countryName.country,countryName.total)
+        console.log('countryName数据',countryName.country,countryName.total)
         //将国家前十名存入VUEX中
-        for(let i = 0; i< countryName.country.length; i++){
-          let [index,franchiseStoreNum,directSaleStoreNum,totalNum] = [i,countryName.country[i].franchiseStore,countryName.country[i].directSaleStore,countryName.country[i].total]
+        let country = []
+        for(let i = 0; i< countryName.country.length && i<10; i++){
+          let [index,franchiseStore,directSaleStore,total] = [i,countryName.country[i].franchiseStore,countryName.country[i].directSaleStore,countryName.country[i].total]
           //对国家名字左右两边去除空格
-          let deleteSpaceName = countryName.country[i].country.replace(/(^\s*)|(\s*$)/g,"")
-          this.$store.commit("home/setCountryNumberName",{'idx':index,'val':deleteSpaceName})
-          this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
+          let name = countryName.country[i].country.replace(/(^\s*)|(\s*$)/g,"")
+          country.push({name,directSaleStore,franchiseStore,total})
+          // this.$store.commit("home/setCountryNumber",countryName)
+          // this.$store.commit("home/setCountryNumberName",{'idx':index,'val':deleteSpaceName})
+          // this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
         }
+        this.$store.commit("home/setCountryNumber",country)
+        // console.log('drawCountryNumber',this.drawCountryNumber)
         this.worldeSet();
         // console.log('drawCountryNumber',this.drawCountryNumber)
       })
@@ -157,7 +162,7 @@ export default {
             Dubai:'迪拜',
             "New Zealand":'新西兰',
             Cambodia:'柬埔寨',
-            "United Arab Emirates":'迪拜'
+            "United Arab Emirates":'阿联酋'
           },
           regions: otherStyle,
           // regions:[
@@ -181,6 +186,7 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [173, 173],
+            symbolOffset:[0,'-50%'],
             // formatter: `{a}`,
             data: countryBigBall
           },
@@ -189,6 +195,7 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [129, 129],
+            symbolOffset:[0,'-50%'],
             data: countryMidBall
           },
           {
@@ -196,6 +203,7 @@ export default {
             type: "scatter",
             symbol: `image://${balloonIcon}`,
             symbolSize: [86, 86],
+            symbolOffset:[0,'-50%'],
             data: countrySmallBall
           }
         ]
@@ -234,7 +242,7 @@ export default {
               ].join("\n")
             }
           });
-        } else if (obj.total > 1 && obj.total <= 30) {
+        } else if (obj.total >= 6 && obj.total <= 30) {
           countryMidBall.push({
             name: obj.name,
             // value: dcn[i].jindu,
