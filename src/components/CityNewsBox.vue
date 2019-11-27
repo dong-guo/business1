@@ -1,7 +1,9 @@
 <template>
 <div class="cityBox">
   <div class="content">
-    <div class="content_contentPic"><img style="width:80px;height:80px;border-radius:50%;" :src="drawCityManager.profilePhoto"/></div>
+    <div class="content_contentPic">
+       <img v-if="drawCityManager.profilePhoto" style="width:80px;height:80px;border-radius:50%;" :src="drawCityManager.profilePhoto"/>
+    </div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
        <P v-if="drawCityManager" class="contentText_name">{{drawCityManager.managerName}}</P>
@@ -15,7 +17,7 @@
   </div>
   <div class="QrcodeBox">
     <div class="qrcode">
-      <img class="qrcode_photo" :src="drawCityManager.contactPhoto" alt="">
+      <img class="qrcode_photo" v-if="drawCityManager" :src="drawCityManager.contactPhoto" alt="">
     </div>
     <p>扫一扫添加好友</p>
   </div> 

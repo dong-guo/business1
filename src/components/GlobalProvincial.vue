@@ -91,6 +91,7 @@ export default {
 }
 .chooseProvincial p {
   color: rgba(255, 255, 255, 1);
+  width:220px;
   font-size: 36px;
   font-weight: 400;
   line-height: 38px;

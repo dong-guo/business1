@@ -2,22 +2,24 @@
 <div class="provincialBox">
   <div class="content">
     <div class="content_contentPic">
-      <img class="content_contentPic_photo" :src="drawCityManager.profilePhoto" alt="">
+      <img class="content_contentPic_photo" v-if="drawCityManager" :src="drawCityManager.profilePhoto" alt="">
     </div>
     <div class="content_contentPic_contentText">
        <p class="contentText_massager">招商经理</p>
        <P v-if="drawCityManager" class="contentText_name">{{drawCityManager.managerName}}</P>
     </div>
   </div>
-  <div v-if="drawCityManager" class="phone">
-    <span>联系电话&nbsp;:&nbsp;</span>{{drawCityManager.phone}}
+  <div class="phone">
+    <span>联系电话&nbsp;:&nbsp;</span>
+    <span v-if="drawCityManager">{{drawCityManager.phone}}</span>
   </div>
-  <div v-if="drawCityManager" class="territory">
-    <span>负责区域&nbsp;:&nbsp;</span>{{drawCityManager.chargeProvince}}
+  <div class="territory">
+    <span>负责区域&nbsp;:&nbsp;</span>
+    <span v-if="drawCityManager">{{drawCityManager.chargeProvince}}</span>
   </div>
   <div class="QrcodeBox">
     <div class="qrcode">
-      <img class="qrcode_photo" :src="drawCityManager.contactPhoto" alt="">
+      <img class="qrcode_photo" v-if="drawCityManager" :src="drawCityManager.contactPhoto" alt="">
     </div>
     <p>扫一扫添加好友</p>
   </div>

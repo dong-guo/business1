@@ -40,6 +40,7 @@ export default {
       drawProvincialList: state =>state.country.provincialList,
 
       drawCountryChange: state => state.home.countryChange,
+      drawOtherCountryChange: state => state.home.otherCountryChange,
       drawCountry: state => state.home.country,
       drawCountryBoxMapKey:state=>state.country.countryBoxMapKey,
 
@@ -58,16 +59,30 @@ export default {
     drawProvincialList(newValue,oldValue){ 
       this.content = this.drawProvincialList
       this.otherShopList = this.drawOtherList.shopList
-      console.log('Couuntry主页传递过来的数据-otherCountry检测',this.content)
-      console.log('Couuntry主页传递过来的数据-otherShopList检测',this.otherShopList)    
+      // console.log('Couuntry主页传递过来的数据-otherCountry检测',this.content)
+      // console.log('Couuntry主页传递过来的数据-otherShopList检测',this.otherShopList)    
       this.getCountryMap()
     },
   },
   methods:{
     activeCountryMap(){
-      if(this.drawCountryChange != '中国'){
+      if(this.drawCountryChange != 'China'){
         this.judgeCountry()
       }
+    },
+    //判断是什么国家更改样式容器大小
+    judgeCountry(){
+      if(this.drawCountryChange == 'Australia'||this.drawCountryChange == 'India'){
+        this.otherCountryStyle.width = '900px'
+        this.otherCountryStyle.paddingLeft = '270px'
+        this.content = this.drawProvincialList
+        this.getCountryMap()
+        // console.log('成功执行')
+      }else{
+        this.content = this.drawProvincialList
+        this.getCountryMap()
+        // console.log('失败执行')
+      }      
     },
     //初始化地图
     getCountryMap(){
@@ -89,7 +104,7 @@ export default {
     },
     //Echarts配置地图
     countryOption(grade,list,gradeBalloon) {
-      console.log('222222',gradeBalloon)
+      // console.log('222222',gradeBalloon)
       return {
         tooltip:{
             trigger:'item',
@@ -133,11 +148,12 @@ export default {
                     for(let index = 0; index<gradeBalloon.length; index++){
                       if(params.name == gradeBalloon[index].name){
                          address = gradeBalloon[index].address
+                         name = gradeBalloon[index].name
                       }
                     }
                     let res = 
                       `<div style ='width:auto; height:74px;padding-top:10px; margin:-20px -20px -20px -20px; border-radius:4px; background:rgba(14,109,233,0.5); font-size:20px;' >
-                            <p style ='margin-left:5px;height:36px;'>${params.name}</p>
+                            <p style ='margin-left:5px;height:36px;'>${name}</p>
                             <p style ='margin-left:5px;height:36px;'>地址：${address}</p>
                       </div>`
                       res += `<img style='width:21px; height:94px; position:absolute; top:-5px; left:-15px;' src='${formatterleftIcon}'/>`
@@ -223,29 +239,15 @@ export default {
       }
       return grade
     },
-    //判断是什么国家更改样式大小
-    judgeCountry(){
-      if(this.drawCountryChange == 'Australia'||this.drawCountryChange == 'India'){
-        this.otherCountryStyle.width = '900px'
-        this.otherCountryStyle.paddingLeft = '270px'
-        this.content = this.drawProvincialList
-        this.getCountryMap()
-        // console.log('成功执行')
-      }else{
-        this.content = this.drawProvincialList
-        this.getCountryMap()
-        // console.log('失败执行')
-      }      
-    },
     gradeBalloon(){
        let balloon = []
-       console.log('this.otherShopList',this.otherShopList)
+      //  console.log('this.otherShopList',this.otherShopList)
        let list = this.otherShopList
-          console.log('气球待处理数据',list)
+          // console.log('气球待处理数据',list)
           for(let i=0; i< list.length; i++){
               if(list[i].nature =='Dealer'){
                 balloon.push({
-                        name:list[i].address,
+                        name:list[i].shopName,
                         address:list[i].address,
                         value:[list[i].longitude,list[i].latitude],
                         symbol:`image://${yellowballoonIcon}`,
@@ -256,7 +258,7 @@ export default {
                 })
                 }else{
                 balloon.push({
-                        name:list[i].address,
+                        name:list[i].shopName,
                         address:list[i].address,
                         value:[list[i].longitude,list[i].latitude],
                         symbol:`image://${greenballoonIcon}`,

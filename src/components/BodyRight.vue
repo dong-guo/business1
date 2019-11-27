@@ -7,40 +7,41 @@
     </div>
     <div class="border_title">
       <span>门店分布</span>
-      <!-- {{drawNum}} -->
     </div>
     <div class="home_body_right_content" :class="{'changeContent':drawBoxKey}">
-      <ul>
-        <li v-for="(item,index) in drawCountryNumber" :key="item+index">
-          <div class="record">
-            <span class="record_country">{{item.name}}</span>
-            <span class="record_number">{{item.total}}</span>
-          </div>
-          <div class="shop">
-            <div class="shop_franchser">
-              <div class="shop_franchser_name">加盟店</div>
-              <div class="shop_franchser_number">
-                <!-- {{drawNumber[index]}} -->
-                {{item.franchiseStore}}
-                <!-- {{drawCountryNumber[index].franchiseStore}} -->
-                <span>家</span>
-              </div>
+      <div @click="changeCurrentPageNum">
+        <ul>
+          <li v-for="(item,index) in countryShowList" :key="item+index">
+            <div class="record">
+              <span class="record_country">{{item.name}}</span>
+              <span class="record_number">{{item.total}}</span>
             </div>
-            <div class="shop_sony">
-              <div class="shop_sony_name">直营店</div>
-              <div class="shop_sony_number">
-                {{item.directSaleStore}}
-                <!-- {{drawCountryNumber[index].directSaleStore}} -->
-                <span>家</span>
+            <div class="shop">
+              <div class="shop_franchser">
+                <div class="shop_franchser_name">加盟店</div>
+                <div class="shop_franchser_number">
+                  <!-- {{drawNumber[index]}} -->
+                  {{item.franchiseStore}}
+                  <!-- {{drawCountryNumber[index].franchiseStore}} -->
+                  <span>家</span>
+                </div>
               </div>
+              <div class="shop_sony">
+                <div class="shop_sony_name">直营店</div>
+                <div class="shop_sony_number">
+                  {{item.directSaleStore}}
+                  <!-- {{drawCountryNumber[index].directSaleStore}} -->
+                  <span>家</span>
+                </div>
+              </div>
+              <div class="shop_left"></div>
+              <div class="shop_right"></div>
             </div>
-            <div class="shop_left"></div>
-            <div class="shop_right"></div>
-          </div>
-          <div class="shop_border" v-if="[index+1]%4 != 0"></div>
-          <div class="shop_borderBottom" v-else></div>
-        </li>
-      </ul>
+            <div class="shop_border" v-if="[index+1]%4 != 0"></div>
+            <div class="shop_borderBottom" v-else></div>
+          </li>
+        </ul>
+      </div>
       <div class="right_bottom">
         <div class="right_bottom_left"></div>
         <div class="right_bottom_right"></div>
@@ -51,6 +52,8 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex"
+import Swiper from "swiper";
+import "swiper/css/swiper.min.css";
 
 
 
@@ -59,7 +62,15 @@ export default {
   data() {
     return {
       myEcharts: null,
-      up: false
+      up: false,
+      //数据总页数
+      pageNumber:'',
+      //所有数据存放容器
+      countryTotal:[],
+      //展示容器
+      countryShowList:[],
+      //数据页码
+      currentPage: 0,
     };
   },
   computed: {
@@ -71,16 +82,55 @@ export default {
       drawCountryNumber: state => state.home.countryNumber
     })
   },
+  watch:{
+      drawCountryNumber(newValue,oldValue){
+         console.log('countryShowList',this.drawCountryNumber)
+         this.paging()
+      }
+  },
   mounted(){
-      // console.log('drawCountryNumberShop',this.drawCountryNumber[0].franchiseStore)
-      console.log('drawCountryNumber',this.drawCountryNumber)
+      console.log('drawCountryNumber子',this.drawCountryNumber)
+      this.paging()
   },
   methods: {
+    //改变侧拉框大小
     change() {
       this.up = !this.up;
       this.$store.commit("home/setBoxKey", this.up);
-      //  console.log(111,this.up)
-      //  console.log(222,this.drawBoxKey)
+      this.currentPage = 0
+      this.countryShowList = this.countryTotal[this.currentPage]
+    },
+    //对父组件数据进行分页
+    paging(){
+      let country = this.drawCountryNumber
+      let page = 1 
+      let pageSize = 12
+      this.pageNumber = Math.ceil(country.length/pageSize) || 1
+      for(let i=0;i<this.pageNumber;i++){
+          this.countryTotal[i] = country.slice(pageSize*i,pageSize*(i+1)) 
+      }
+      this.countryShowList = this.countryTotal[this.currentPage]
+    },
+    //改变页数函数
+    changeCurrentPage() {
+      if (this.currentPage >= this.pageNumber) {
+        this.currentPage = this.pageNum - 1;
+      }
+      this.countryShowList = this.countryTotal[this.currentPage];
+    },
+    changeCurrentPageNum(){
+      if(this.up == true){
+        console.log('7777',this.pageNumber)
+        if(this.currentPage < this.pageNumber-1){
+          this.currentPage += 1
+          console.log('this.currentPage',this.currentPage)
+          // this.currentPage = this.pageNum;
+          this.countryShowList = this.countryTotal[this.currentPage];
+        }else{
+          this.currentPage = 0
+          this.countryShowList = this.countryTotal[this.currentPage];
+        }
+      }
     }
   }
 };
@@ -227,6 +277,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
+  /* background:yellow; */
   /* align-content: center; */
 }
 .home_body_right_content li {

@@ -1,11 +1,11 @@
 <template>
 <div id="provincial">
   <reach-provincial></reach-provincial>
-  <div class="provincialTitleBox">
+    <div class="provincialTitleBox">
       <div class="provincialTitleLeftPic"></div>
       <div class="provincialTitleText">{{drawProvincialChinaChange}}加盟商分布</div>
       <div class="provincialTitleRightPic"></div>
-   </div>
+  </div>
    <provincial-map-box class="provincialMapBox"></provincial-map-box>
    <global-provincial class="globalProvincial"></global-provincial>
    <provincialnews-box class="provincialnewsBox"></provincialnews-box>
@@ -76,25 +76,34 @@ export default {
 }
 .provincialTitleBox{
   width:349px;
+  max-width:450px;
   height:11px;
   /* background-color:pink; */
-  position:absolute;
-  top:26px;
-  left:785px;
+  margin:0 auto;
+  margin-top:26px;
+  position:relative;
+  /* position:absolute; */
+  /* top:26px;
+  left:785px; */
   display:flex;
+  justify-content:space-between;
 }
 .provincialTitleText{
   /* width:140px; */
   height:35px;
+  /* float:left; */
   /* background-color:yellowgreen; */
-  position:absolute;
-  top:-12px;
-  left:58px;
+  /* position:absolute; */
+  /* top:-12px;
+  left:58px; */
+  /* margin:0 auto; */
+  margin-top:-12px;
   color:rgba(255,255,255,1);
   font-size:30px;
   font-weight:400;
   line-height:35px;
   letter-spacing:5px;
+  white-space:nowrap;
   text-align:center;
 }
 .provincialTitleLeftPic{
@@ -112,9 +121,9 @@ export default {
   background-image:url(../assets/images/country_title_right@2x.png);
   background-repeat:no-repeat;
   background-size:cover;
-  position:absolute;
+  /* position:absolute;
   right:0;
-  top:0;
+  top:0; */
 }
 .globalProvincial{
   position:absolute;
@@ -133,7 +142,8 @@ export default {
 }
 .provincialshopNum{
   position:absolute;
-  left:1676px;
+  /* left:1676px; */
+  right:50px;
   top:827px;
 }
 </style>

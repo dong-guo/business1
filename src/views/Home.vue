@@ -10,7 +10,7 @@
       <reach class="reach"></reach>
       <global class="home_global"></global>
       <div class="home_body_top">
-        <p>截止目前,全球共有门店<span>(家)</span></p>
+        <div class="home_body_top_text">目前截止，全球共有门店<span>(家)</span></div>
         <div class="home_body_bg">
           <ul>
             <li v-for="(item,index) in stringNum" :key="item+index">{{item}}</li>
@@ -90,21 +90,23 @@ export default {
 }
 .home_body_top {
   height: 132px;
-  width: 432px;
+  /* width: 432px; */
+  width:452px;
   position: absolute;
   top: 126px;
   left: 747px;
   /* background:yellow; */
 }
-.home_body_top p {
+.home_body_top_text {
   width: 432px;
   color: rgba(255, 255, 255, 1);
   font-weight: 400;
   font-size: 36px;
   line-height: 40px;
   text-align: center;
+  white-space:nowrap;
 }
-.home_body_top span {
+.home_body_top_text span {
   font-size: 24px;
 }
 .home_body_bg{

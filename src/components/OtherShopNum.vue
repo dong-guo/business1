@@ -2,11 +2,11 @@
 <div class="cityShop">
     <div class="singleShop">
     <div class="greenballoon"></div>
-    <p v-if="drawOtherShopList">单品店&nbsp;&nbsp;({{drawOtherShopList[0].single}})</p>
+    <p v-if="drawOtherShopList[0]">单品店&nbsp;&nbsp;({{drawOtherShopList[0].single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>
-      <p v-if="drawOtherShopList">综合店&nbsp;&nbsp;({{drawOtherShopList[0].multiple}})</p>
+      <p v-if="drawOtherShopList[0]">综合店&nbsp;&nbsp;({{drawOtherShopList[0].multiple}})</p>
     </div>
 </div>
 

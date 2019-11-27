@@ -15,7 +15,8 @@ export default {
   name: "world",
   data() {
     return {
-      myEcharts: null
+      myEcharts: null,
+      kong:{},
     };
   },
   computed: {
@@ -30,6 +31,7 @@ export default {
   },
   mounted() {
     // this.getCountryList()
+    // this.requestWorld(this.kong)
   },
   methods: {
     //请求后台国家数据
@@ -37,19 +39,19 @@ export default {
       indexModel.getCountry()
       .then(res =>{
         let countryName = res.data.data
-        // countryName = this.deleteSpace(countryName)
         this.$store.commit("home/setAllTotal",countryName.total)
         console.log('countryName数据',countryName.country,countryName.total)
-        //将国家前十名存入VUEX中
+        //将国家存入VUEX中
         let country = []
-        for(let i = 0; i< countryName.country.length && i<10; i++){
+        for(let i = 0; i< countryName.country.length; i++){
           let [index,franchiseStore,directSaleStore,total] = [i,countryName.country[i].franchiseStore,countryName.country[i].directSaleStore,countryName.country[i].total]
           //对国家名字左右两边去除空格
           let name = countryName.country[i].country.replace(/(^\s*)|(\s*$)/g,"")
           country.push({name,directSaleStore,franchiseStore,total})
-          // this.$store.commit("home/setCountryNumber",countryName)
-          // this.$store.commit("home/setCountryNumberName",{'idx':index,'val':deleteSpaceName})
-          // this.$store.commit("home/setCountryShopNum",{'idx':index,'franchiseStoreNum':franchiseStoreNum,'directSaleStoreNum':directSaleStoreNum,'totalNum':totalNum})
+          //国家门店排序
+          country = country.sort((a,b)=>{
+                      return b.total-a.total
+                    })
         }
         this.$store.commit("home/setCountryNumber",country)
         // console.log('drawCountryNumber',this.drawCountryNumber)
@@ -82,18 +84,20 @@ export default {
         this.setBallnoonStyle(obj,countryBigBall,countryMidBall,countrySmallBall,countryCoordinate,arr,otherStyle)
       }
       //请求世界地图
-      this.requestWorld(otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn)
+      this.requestWorld({otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn})
     },
     //世界地图请求
-    requestWorld(otherStyle,countryBigBall,countryMidBall,countrySmallBall,dcn){
+    requestWorld(object){
       axios.get("./geoJson/world.json").then(res => {
         let worldJson = res.data;
         echarts.registerMap("world", worldJson);
         this.myEcharts = echarts.init(document.getElementById("world_box"));
-        let option = this.worldOption(otherStyle,countryBigBall,countryMidBall,countrySmallBall);
+        let option = this.worldOption(object);
         this.myEcharts.setOption(option);
         //跳转国家地图
         let country = this.drawCountry;
+        let dcn = object.dcn
+        console.log('11111',dcn)
         this.myEcharts.on("click", params => {
           console.log('跳转名字',params.name)
           //取得亮蓝色国家
@@ -103,7 +107,9 @@ export default {
     },
     //取得亮蓝色国家
     getblueCountry(dcn,params,country){
-        for (let i = 0; i < dcn.length; i++) {
+      //前十名才可以点击进去
+      console.log('22222',dcn)
+        for (let i = 0; i < dcn.length && i<10; i++) {
           if (params.name == dcn[i].name) {
             //取得中英文名称匹对数据
             for(let i = 0; i < country.length; i++){
@@ -122,7 +128,7 @@ export default {
         }
     },
     //世界地图配置
-    worldOption(otherStyle, countryBigBall, countryMidBall, countrySmallBall) {
+    worldOption(object) {
       // console.log('otherStyle',otherStyle)
       // console.log('气泡图',countryBigBall, countryMidBall, countrySmallBall)
       return {
@@ -147,24 +153,27 @@ export default {
             "United States of America": "美国",
             Australia: "澳大利亚",
             Japan: "日本",
-            // Germany: "德国",
+            Germany: "德国",
+            "France":"法国",
             India: "印度",
-            // "South Africa": "南非",
-            // Brazil: "巴西",
-            // Argentina: "阿根廷",
-            // Slovakia: "斯洛伐克",
-            // Mexico: "墨西哥",
-            // Russia: "俄罗斯",
-            // Austria: "奥地利",
+            "South Africa": "南非",
+            Brazil: "巴西",
+            Argentina: "阿根廷",
+            Slovakia: "斯洛伐克",
+            Mexico: "墨西哥",
+            Russia: "俄罗斯",
+            Austria: "奥地利",
             Canada:'加拿大',
             "South Korea":'韩国',
             Malaysia:'马来西亚',
             Dubai:'迪拜',
             "New Zealand":'新西兰',
             Cambodia:'柬埔寨',
-            "United Arab Emirates":'阿联酋'
+            "United Arab Emirates":'阿联酋',
+            "Italy":"意大利",
+            "Georgia":"格鲁吉亚",
           },
-          regions: otherStyle,
+          regions: object.otherStyle,
           // regions:[
           //   {itemStyle: {areaColor: "#33D8FA"},name: "美国",selected: false}
           // ],
@@ -188,7 +197,7 @@ export default {
             symbolSize: [173, 173],
             symbolOffset:[0,'-50%'],
             // formatter: `{a}`,
-            data: countryBigBall
+            data: object.countryBigBall
           },
           {
             coordinateSystem: "geo",
@@ -196,7 +205,7 @@ export default {
             symbol: `image://${balloonIcon}`,
             symbolSize: [129, 129],
             symbolOffset:[0,'-50%'],
-            data: countryMidBall
+            data: object.countryMidBall
           },
           {
             coordinateSystem: "geo",
@@ -204,7 +213,7 @@ export default {
             symbol: `image://${balloonIcon}`,
             symbolSize: [86, 86],
             symbolOffset:[0,'-50%'],
-            data: countrySmallBall
+            data: object.countrySmallBall
           }
         ]
       };
@@ -306,6 +315,7 @@ export default {
         }
         return{countryBigBall,countryMidBall,countrySmallBall}          
     },
+
   }
 };
 </script>

@@ -265,12 +265,12 @@ export default {
     gradeDistrictBalloon() {
       // let list = this.drawCityDistrictList;
       let list = this.drawCityShopList
-      // console.log("9999-list", list);
+      console.log("9999-list", list);
       let balloon = [];
       for (let i = 0; i < list.length; i++) {
-        if (list[i].nature == 'Deaer') {
+        if (list[i].nature == 'Dealer') {
           balloon.push({
-            name: list[i].address,
+            name: list[i].shopName,
             address: list[i].address,
             value: [list[i].longitude, list[i].latitude],
             symbol: `image://${yellowballoonIcon}`,
@@ -281,7 +281,7 @@ export default {
           });
         } else {
           balloon.push({
-            name: list[i].address,
+            name: list[i].shopName,
             address: list[i].address,
             value: [list[i].longitude, list[i].latitude],
             symbol: `image://${greenballoonIcon}`,

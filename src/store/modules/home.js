@@ -3,18 +3,24 @@ const state = {
   allTotal:'',
   country:[
     {EnglishName:'China',ChinaName:'中国',jindu:[100.5, 31.104306]},
-    {EnglishName:'USA',ChinaName:'美国',jindu:[-100.5, 48.48]},
+    {EnglishName:'USA',ChinaName:'美国',jindu:[-100.5, 33.48]},
     {EnglishName:'Japan',ChinaName:'日本',jindu:[140.54,39.874413]},
     {EnglishName:'India',ChinaName:'印度',jindu:[78.101672,21.158496]},
-    {EnglishName:'United Arab Emirates',ChinaName:'阿联酋',jindu:[53.13, 31.2]},
+    {EnglishName:'United Arab Emirates',ChinaName:'阿联酋',jindu:[54.923952, 24.624583]},
     {EnglishName:'Australia',ChinaName:'澳大利亚',jindu:[133.882276,-25.588435]},
     {EnglishName:'Canada',ChinaName:'加拿大',jindu:[-108.078972,56.819742]},
     {EnglishName:'Cambodia',ChinaName:'柬埔寨',jindu:[105.476849,12.666345]},
     {EnglishName:'Malaysia',ChinaName:'马来西亚',jindu:[53.5, 32.7]},
     {EnglishName:"New Zealand",ChinaName:'新西兰',jindu:[171.707118,-43.149482]},
-    {EnglishName:"South Korea",ChinaName:'韩国',jindu:[127.45,45.37]},
+    {EnglishName:"South Korea",ChinaName:'韩国',jindu:[127.450696,36.623652]},
     {EnglishName:"Hong Kong",ChinaName:'香港',jindu:[114.123579,22.419289]},
     {EnglishName:"Taiwan",ChinaName:'台湾',jindu:[121.077757,24.833727]},
+    {EnglishName:"Federation of Malaysia",ChinaName:'马来西亚',jindu:[113.188191,2.775801]},
+    {EnglishName:"Germany",ChinaName:'德国',jindu:[9.298656,51.44174]},
+    {EnglishName:"France",ChinaName:'法国',jindu:[2.822808,46.50583]},
+    {EnglishName:"Italy",ChinaName:'意大利',jindu:[13.714007,41.766297]},
+    {EnglishName:"Georgia",ChinaName:'格鲁吉亚',jindu:[43.444039,42.096014]},
+
   ],
   countryNumber:[],
   // countryNumber:[
@@ -32,6 +38,7 @@ const state = {
   // ],
   selectCountry:[],
   countryChange:'China',
+  otherCountryChange:'USA',
   letterName:['anhui','aomen','fujian','gansu','guangdong','guangxi','guizhou','hainan','hebei','heilongjiang','henan','hubei','hunan','jiangsu','jiangxi','jilin','liaoning','neimenggu','ningxia','qinghai','shandong','shanxi','shanxi1','sichuan','xinjiang','xizang','yunnan','zhejiang','beijing','shanghai','chongqing','tianjin','xianggang'],
   chinaName:['安徽','澳门','福建','甘肃','广东','广西','贵州','海南','河北','黑龙江','河南','湖北','湖南','江苏','江西','吉林','辽宁','内蒙古','宁夏','青海','山东','山西','陕西','四川','新疆','西藏','云南','浙江','北京','上海','重庆','天津','香港'],
   provincialChange:'guangdong',
@@ -61,6 +68,9 @@ const mutations = {
   },
   setCountryChange:(state,string) => {
     state.countryChange = string
+  },
+  setOtherCountryChange:(state,string) => {
+    state.otherCountryChange = string
   },
   setProvincialChange:(state,string) => {
     state.provincialChange = string

@@ -31,6 +31,7 @@ export default {
       drawProvincialList: state =>state.country.provincialList,
 
       drawCountryChange: state => state.home.countryChange,
+      drawCountryEnglishChange: state => state.home.countryEnglishChange,
       drawProvincialChange: state => state.home.provincialChange,
       drawLetterName: state => state.home.letterName,
       drawChinaName: state => state.home.chinaName,
@@ -48,24 +49,9 @@ export default {
       this.content = this.drawProvincialList   
       // this.getCountryList() 
       this.getCountryMap()
-      // this.plain1().then(this.plain2)
-    }
+    },
   },
   methods: {
-    plain1(){
-      let data = new Promise((resolve,reject)=>{
-         this.content = this.drawProvincialList 
-         console.log('操作一')
-         resolve()
-      })
-      return data
-    },
-    plain2(){
-      let data = new Promise((resolve,reject)=>{
-        this.getCountryMap()
-        console.log('操作二')
-      })
-    },
     //该请求数据函数转移到china主页上,不用
     getCountryList(){
       let [contentType,Authorization,country] = ['text/plain','token','']

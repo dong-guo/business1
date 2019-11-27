@@ -25,12 +25,13 @@ export default {
    name:'provincialMapBox',
    data(){
      return{
-       developedCity:['云浮市','广州市','深圳市','佛山市','东莞市'],
-       incompleteCity:['惠州市','中山市','珠海市','江门市'],
+      //  developedCity:['云浮市','广州市','深圳市','佛山市','东莞市'],
+      //  incompleteCity:['惠州市','中山市','珠海市','江门市'],
        showChinaCountry:'',
        allCityList:{},
        cityShopNumber:{},
        cityManager:{},
+       afterProvince:''
      }
    },
    computed:{
@@ -59,7 +60,24 @@ export default {
    methods:{
      //请求省内经销商数据
      requestCityList(){
-       let [country,province] = [this.showChinaCountry,this.drawProvincialChinaChange + '省']
+       if(this.drawProvincialChinaChange=='北京'){
+         this.afterProvince = this.drawProvincialChinaChange + '市'
+         console.log('1111',this.afterProvince)
+       }else if(this.drawProvincialChinaChange=='上海'){
+         this.afterProvince = this.drawProvincialChinaChange + '市'
+         console.log('2222',this.afterProvince)
+       }else if(this.drawProvincialChinaChange=='天津'){
+         this.afterProvince = this.drawProvincialChinaChange + '市'
+         console.log('3333',this.afterProvince)         
+       }else if(this.drawProvincialChinaChange=='重庆'){
+         this.afterProvince = this.drawProvincialChinaChange + '市'
+         console.log('4444',this.afterProvince)
+       }else{
+         this.afterProvince = this.drawProvincialChinaChange + '省'
+         console.log('5555',this.afterProvince)
+       }
+      console.log('8989',this.afterProvince)
+       let [country,province] = [this.showChinaCountry,this.afterProvince]
        indexModel.getCityList(country,province)
        .then(res=>{
         //  console.log('res.data',res.data)
@@ -301,7 +319,7 @@ export default {
             for(let index=0; index<list[i].shopList.length;index++){
               if(list[i].shopList[index].nature =='Dealer'){
                 balloon.push({
-                        name:list[i].shopList[index].address,
+                        name:list[i].shopList[index].shopName,
                         address:list[i].shopList[index].address,
                         value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
                         symbol:`image://${yellowballoonIcon}`,
@@ -312,7 +330,7 @@ export default {
                 })
                 }else{
                 balloon.push({
-                        name:list[i].shopList[index].address,
+                        name:list[i].shopList[index].shopName,
                         address:list[i].shopList[index].address,
                         value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
                         symbol:`image://${greenballoonIcon}`,

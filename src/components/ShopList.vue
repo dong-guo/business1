@@ -56,30 +56,14 @@ export default {
     })
   },
   watch:{
-    totalShow(newValue,oldValue){
-        // this.$nextTick(()=>{
-        //   this.swiper()
-        // })    
-    }
+    // totalShow(newValue,oldValue){
+    //     this.$nextTick(()=>{
+    //       this.swiper()
+    //     })    
+    // }
   },
   mounted() {
     // this.swiper()
-    // new Swiper(".swiper-container", {
-    //   loop: true,
-    //   autoplay: {
-    //     delay: 2000
-    //   },
-    //   pagination: {
-    //     el: ".swiper-pagination",
-    //     type:'bullets',
-    //     clickable: true,
-    //     bulletElement : 'li',
-    //     // hideOnClick :true,
-    //     // bulletClass:'my-bullet',
-    //   },
-    //   observer: true,
-    //   observeParents: true
-    // });
     console.log('CITY-drawCityShopList',this.drawCityShopList) 
   },
   methods: {
@@ -103,7 +87,7 @@ export default {
           onSlideChangeEnd: function(swiper){
           　　　swiper.update();  
           　　　mySwiper.startAutoplay();
-          　　   mySwiper.reLoop();  
+          　　  mySwiper.reLoop();  
           }      
       }); 
       console.log('运行')     
