@@ -19,6 +19,7 @@
           <div class="canvass_body_personal">
             <div class="body_personal_news">
                 <div class="personal_news_pic">
+                  <img src="item[index].profilePhoto" alt="">
                 </div>
                 <div class="personal_news_people"> 
                   <div class="news_people_manager">招商经理</div>
@@ -30,7 +31,7 @@
           </div>
           <div class="canvass_body_barcode">
             <div class="body_barcode_QRcode">
-              <img src="item[index].profilePhoto" alt="">
+              <img src="item[index].contactPhoto" alt="">
             </div>
             <div class="body_barcode_text">扫一扫添加好友</div>
           </div>
@@ -59,10 +60,11 @@ export default {
    },
    mounted(){
      this.getManagerList()
+     console.log('监测信息mounted',this.personal)
    },
    watch:{
      personal(newValue,oldValue){
-      //  console.log('监测信息',this.personal)
+       console.log('监测信息',this.personal)
       //  console.log(767,this.personal[2].profilePhoto)
      }
    },
@@ -292,6 +294,11 @@ display:none
   background-image:url(../assets/images/headPic.png);
   background-size:cover;
   
+}
+.personal_news_pic img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
 }
 .personal_news_people{
   /* background-color:moccasin; */

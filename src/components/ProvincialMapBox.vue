@@ -316,39 +316,72 @@ export default {
      },
      //气球商店区分函数
      gradeBalloon(){
-       let list = this.allCityList.cityList
-       let balloon = []
-       for(let i=0; i<list.length; i++){
-         if(list[i].shopList.length > 0){
-            for(let index=0; index<list[i].shopList.length;index++){
-              if(list[i].shopList[index].nature =='Direct Sales'){
-                balloon.push({
-                        name:list[i].shopList[index].shopName,
-                        address:list[i].shopList[index].address,
-                        value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
-                        symbol:`image://${yellowballoonIcon}`,
-                        symbolSize: [16,20],
-                        itemStyle:{
-                          color:'#EEC947'
-                        }
-                })
-                }else{
-                balloon.push({
-                        name:list[i].shopList[index].shopName,
-                        address:list[i].shopList[index].address,
-                        value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
-                        symbol:`image://${greenballoonIcon}`,
-                        symbolSize: [16,20],
-                        itemStyle:{
-                          color:'#2CC68B'
-                        }
-                })
-              }
+       console.log('气球数据',this.drawProvincialChange)
+       if(this.drawProvincialChange != 'xianggang'&&this.drawProvincialChange != 'aomen'&&this.drawProvincialChange != 'taiwan'){
+          let list = this.allCityList.cityList
+          let balloon = []
+          for(let i=0; i<list.length; i++){
+            if(list[i].shopList.length > 0){
+                for(let index=0; index<list[i].shopList.length;index++){
+                  if(list[i].shopList[index].nature =='Direct Sales'){
+                    balloon.push({
+                            name:list[i].shopList[index].shopName,
+                            address:list[i].shopList[index].address,
+                            value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
+                            symbol:`image://${yellowballoonIcon}`,
+                            symbolSize: [16,20],
+                            itemStyle:{
+                              color:'#EEC947'
+                            }
+                    })
+                    }else{
+                    balloon.push({
+                            name:list[i].shopList[index].shopName,
+                            address:list[i].shopList[index].address,
+                            value:[list[i].shopList[index].longitude,list[i].shopList[index].latitude],
+                            symbol:`image://${greenballoonIcon}`,
+                            symbolSize: [16,20],
+                            itemStyle:{
+                              color:'#2CC68B'
+                            }
+                    })
+                  }
+                }
             }
+          }
+          return balloon
+       }else{
+         let list = this.allCityList.shopList
+         let balloon = []
+         for(let i = 0 ;i<list.length;i++){
+          if(list[i].nature =='Direct Sales'){
+            balloon.push({
+                    name:list[i].shopName,
+                    address:list[i].address,
+                    value:[list[i].longitude,list[i].latitude],
+                    symbol:`image://${yellowballoonIcon}`,
+                    symbolSize: [16,20],
+                    itemStyle:{
+                      color:'#EEC947'
+                    }
+            })
+            }else{
+            balloon.push({
+                    name:list[i].shopName,
+                    address:list[i].address,
+                    value:[list[i].longitude,list[i].latitude],
+                    symbol:`image://${greenballoonIcon}`,
+                    symbolSize: [16,20],
+                    itemStyle:{
+                      color:'#2CC68B'
+                    }
+            })
+          }
          }
+         return balloon
        }
-       return balloon
-     }
+     },
+     
    }
 }
 </script>

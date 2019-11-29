@@ -104,7 +104,9 @@ export default {
 }
 .contentText_name{
   color:#7AB4FB;
-  font-size:36px;
+  line-height:50px;
+  font-size:28px;
+  white-space:nowrap;
 }
 .phone{
   color:#20FDFA;
