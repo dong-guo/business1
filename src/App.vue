@@ -18,7 +18,39 @@ export default {
   computed: {
     ...mapState({
       drawBoxKey: state => state.home.boxKey,
+      drawCountryChange: state => state.home.countryChange,
+      drawOtherCountryChange: state => state.home.otherCountryChange,
+
+      drawProvincialChinaChange: state => state.home.provincialChinaChange,
+      drawProvincialChange: state => state.home.provincialChange,
+      
+      drawCityChange: state => state.home.cityChange,
+      drawCityChinaChange: state => state.home.cityChinaChange
     })
+  },
+  created(){
+      //  if(sessionStorage.getItem("enkey")){
+      //    this.$store.commit("home/setProvincialChinaChange", sessionStorage.getItem("key"));
+      //    this.$store.commit("home/setProvincialChange", sessionStorage.getItem("Enkey"));
+      //  }
+       window.addEventListener("beforeunload",()=>{
+         sessionStorage.setItem("key",this.drawProvincialChinaChange)
+         sessionStorage.setItem("Enkey",this.drawProvincialChange)
+         sessionStorage.setItem("cityNum",this.drawCityChange)
+         sessionStorage.setItem("cityChina",this.drawCityChinaChange)
+         sessionStorage.setItem("otherCountry",this.drawOtherCountryChange)
+       })
+  },
+  beforeMount(){
+       this.$store.commit("home/setProvincialChinaChange", sessionStorage.getItem("key"));
+       this.$store.commit("home/setProvincialChange", sessionStorage.getItem("Enkey"));
+       this.$store.commit("home/setCityChange", sessionStorage.getItem("cityNum"));
+       this.$store.commit("home/setCityChinaChange", sessionStorage.getItem("cityChina"));
+       this.$store.commit("home/setOtherCountryChange", sessionStorage.getItem("otherCountry"));
+  },
+  watch:{
+  },
+  methods:{
   }
 };
 </script>

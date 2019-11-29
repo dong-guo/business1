@@ -93,6 +93,7 @@ export default {
                 this.$store.commit("home/setProvincialChange", letterName[i]);
                 this.$store.commit("home/setProvincialChinaChange",param.name)
                 this.$router.push({ name: "provincial" });
+                console.log('传入vuex省份',letterName[i])
                 // this.$router.push(route).catch(err=>{
                 //   console.log('输出报错',err)
                 // })

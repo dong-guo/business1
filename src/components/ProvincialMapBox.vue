@@ -62,21 +62,24 @@ export default {
      requestCityList(){
        if(this.drawProvincialChinaChange=='北京'){
          this.afterProvince = this.drawProvincialChinaChange + '市'
-         console.log('1111',this.afterProvince)
+        //  console.log('1111',this.afterProvince)
        }else if(this.drawProvincialChinaChange=='上海'){
          this.afterProvince = this.drawProvincialChinaChange + '市'
-         console.log('2222',this.afterProvince)
+        //  console.log('2222',this.afterProvince)
        }else if(this.drawProvincialChinaChange=='天津'){
          this.afterProvince = this.drawProvincialChinaChange + '市'
-         console.log('3333',this.afterProvince)         
+        //  console.log('3333',this.afterProvince)         
        }else if(this.drawProvincialChinaChange=='重庆'){
          this.afterProvince = this.drawProvincialChinaChange + '市'
-         console.log('4444',this.afterProvince)
+        //  console.log('4444',this.afterProvince)
+       }else if(this.drawProvincialChinaChange=='香港'||this.drawProvincialChinaChange=='澳门'){
+         this.afterProvince = this.drawProvincialChinaChange + '特别行政区'
+        //  console.log('5555',this.afterProvince)
        }else{
          this.afterProvince = this.drawProvincialChinaChange + '省'
-         console.log('5555',this.afterProvince)
+        //  console.log('6666',this.afterProvince)
        }
-      console.log('8989',this.afterProvince)
+      // console.log('8989',this.afterProvince)
        let [country,province] = [this.showChinaCountry,this.afterProvince]
        indexModel.getCityList(country,province)
        .then(res=>{
@@ -104,6 +107,7 @@ export default {
         let [provincialChange,provincialZoom,cityBrandList] = [this.drawProvincialChange,this.drawProvincialZoom,this.allCityList.cityList]
         // console.log('provincialChange',this.drawProvincialChange)
         console.log('cityBrandList转化嵌套',cityBrandList)
+        console.log('省份',provincialChange)
         axios.get(`./geoJson/province/${provincialChange}.json`)
         .then(res => {
           //城市区分开发程度
@@ -282,7 +286,7 @@ export default {
      //城市区分开发程度函数
      gradeCity(){
        let list = this.allCityList.cityList
-       console.log('list',list)
+      //  console.log('list',list)
        let grade =[]
        for(let i = 0; i < list.length; i++){
           if(list[i].developFlag == 0){
@@ -317,7 +321,7 @@ export default {
        for(let i=0; i<list.length; i++){
          if(list[i].shopList.length > 0){
             for(let index=0; index<list[i].shopList.length;index++){
-              if(list[i].shopList[index].nature =='Dealer'){
+              if(list[i].shopList[index].nature =='Direct Sales'){
                 balloon.push({
                         name:list[i].shopList[index].shopName,
                         address:list[i].shopList[index].address,
@@ -351,9 +355,11 @@ export default {
 
 <style scoped>
 #provincialBox{
-  height: 717px;
+  /* height: 717px; */
   /* width: 929px; */
-  width:1329px;
+  /* width:1329px; */
+  height:100%;
+  width:100%;
   /* border:1px solid yellow; */
   /* background-color:yellow; */
 }

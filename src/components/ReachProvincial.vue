@@ -41,6 +41,7 @@ export default {
   font-weight: 400;
   color: rgba(229, 229, 229, 1);
   line-height: 31px;
+  z-index:1;
 }
 .reach_after {
   height: 60px;

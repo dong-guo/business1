@@ -133,5 +133,6 @@ export default {
   padding-left: 74px;
   padding-top: 68px;
   letter-spacing:10px;  
+  white-space:nowrap;
 }
 </style>

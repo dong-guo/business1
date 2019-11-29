@@ -1,7 +1,7 @@
 <template>
 <div id="provincial">
   <reach-provincial></reach-provincial>
-    <div class="provincialTitleBox">
+  <div class="provincialTitleBox">
       <div class="provincialTitleLeftPic"></div>
       <div class="provincialTitleText">{{drawProvincialChinaChange}}加盟商分布</div>
       <div class="provincialTitleRightPic"></div>
@@ -70,9 +70,11 @@ export default {
 }
 .provincialMapBox{
   position:absolute;
-  top:85px;
+  top:0;
+  left:0;
+  /* top:85px; */
   /* left:496px; */
-  left:296px;
+  /* left:296px; */
 }
 .provincialTitleBox{
   width:349px;

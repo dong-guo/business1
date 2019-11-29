@@ -54,6 +54,7 @@ export default {
     ...mapState({
        drawCountryChange: state => state.home.countryChange,
        drawCountry: state => state.home.country,
+       drawOtherCountryChange: state => state.home.otherCountryChange
     })
   },
   wathc:{
@@ -67,7 +68,7 @@ export default {
     //将得到英文名字国家变成中文名称
     matchingCountry(){
         for(let i = 0; i<this.drawCountry.length; i++){
-            if(this.drawCountryChange==this.drawCountry[i].EnglishName){
+            if(this.drawOtherCountryChange==this.drawCountry[i].EnglishName){
               this.showCountry = this.drawCountry[i].ChinaName
             }
         }
@@ -77,7 +78,7 @@ export default {
       let [contentType,Authorization,country] = ['text/plain','token','']
       //中文名和英文名国家匹配转换
       for(let i = 0; i<this.drawCountry.length; i++){
-        if(this.drawCountryChange == this.drawCountry[i].EnglishName){
+        if(this.drawOtherCountryChange == this.drawCountry[i].EnglishName){
            country = this.drawCountry[i].ChinaName
         }
       }

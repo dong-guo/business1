@@ -50,7 +50,7 @@ export default {
   mounted() {
     // this.content = this.drawProvincialList
     // this.getCountryMap()
-    console.log('现在是什么国家drawCountry',this.drawCountryChange,this.otherShopList)
+    console.log('现在是什么国家drawCountry',this.drawOtherCountryChange,this.otherShopList)
     // this.getCountryList()
     this.judgeCountry()
     // this.activeCountryMap()
@@ -72,21 +72,21 @@ export default {
     },
     //判断是什么国家更改样式容器大小
     judgeCountry(){
-      if(this.drawCountryChange == 'Australia'||this.drawCountryChange == 'India'){
+      if(this.drawOtherCountryChange == 'Australia'||this.drawOtherCountryChange == 'India'){
         this.otherCountryStyle.width = '900px'
         this.otherCountryStyle.paddingLeft = '270px'
         this.content = this.drawProvincialList
         this.getCountryMap()
         // console.log('成功执行')
       }else{
-        this.content = this.drawProvincialList
+        this.content = this.drawOtherCountryChange
         this.getCountryMap()
         // console.log('失败执行')
       }      
     },
     //初始化地图
     getCountryMap(){
-      let [country,list,grade,balloonList] = [this.drawCountryChange,this.content,[],this.otherShopList]
+      let [country,list,grade,balloonList] = [this.drawOtherCountryChange,this.content,[],this.otherShopList]
       // console.log(110,country,this.content)
       // console.log(120,country,balloonList)
       //设定已开发蓝色州
@@ -245,7 +245,7 @@ export default {
        let list = this.otherShopList
           // console.log('气球待处理数据',list)
           for(let i=0; i< list.length; i++){
-              if(list[i].nature =='Dealer'){
+              if(list[i].nature =='Direct Sales'){
                 balloon.push({
                         name:list[i].shopName,
                         address:list[i].address,

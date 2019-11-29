@@ -118,7 +118,7 @@ export default {
                   this.$store.commit("home/setCountryChange", country[i].EnglishName);
                   this.$router.push({ name: "china" });
                 }else{
-                  this.$store.commit("home/setCountryChange", country[i].EnglishName);
+                  this.$store.commit("home/setOtherCountryChange", country[i].EnglishName);
                   this.$router.push({ name: "other" });                  
                 }
               }
@@ -172,6 +172,10 @@ export default {
             "United Arab Emirates":'阿联酋',
             "Italy":"意大利",
             "Georgia":"格鲁吉亚",
+            "Vietnam":"越南",
+            "Philippines":"菲律宾",
+            "Brunei":"文莱",
+            "Morocco":"摩洛哥",
           },
           regions: object.otherStyle,
           // regions:[

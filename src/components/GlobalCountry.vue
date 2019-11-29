@@ -30,19 +30,29 @@ export default {
       ...mapState({
         drawCountry: state => state.home.country,
         drawCountryChange: state => state.home.countryChange,
+        drawOtherCountryChange: state => state.home.otherCountryChange
       })
     },
     mounted(){
       this.matchingCountry()
+      console.log('其他国家按钮',this.drawOtherCountryChange)
     },
     methods:{
         //将得到英文名字国家变成中文名称
         matchingCountry(){
+          if(this.$route.name == 'china'){
             for(let i = 0; i<this.drawCountry.length; i++){
                 if(this.drawCountryChange==this.drawCountry[i].EnglishName){
                   this.showCountry = this.drawCountry[i].ChinaName
                 }
             }
+          }else{
+            for(let i = 0; i<this.drawCountry.length; i++){
+                if(this.drawOtherCountryChange==this.drawCountry[i].EnglishName){
+                  this.showCountry = this.drawCountry[i].ChinaName
+                }
+            }
+          }
         }
     }
 }

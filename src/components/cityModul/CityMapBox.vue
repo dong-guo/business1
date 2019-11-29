@@ -268,7 +268,7 @@ export default {
       console.log("9999-list", list);
       let balloon = [];
       for (let i = 0; i < list.length; i++) {
-        if (list[i].nature == 'Dealer') {
+        if (list[i].nature == 'Direct Sales') {
           balloon.push({
             name: list[i].shopName,
             address: list[i].address,
