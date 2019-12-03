@@ -56,7 +56,7 @@ export default {
           //以原始设定值每次变大0.5倍
           provincialzoom -= 2
           if(provincialzoom < 1){
-            provincialzoom = 1
+            provincialzoom = 0.9
           }
           this.$store.commit("home/setProvincialZoom",provincialzoom);
           console.log('provincialzoom',this.drawProvincialZoom) 

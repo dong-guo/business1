@@ -1,7 +1,7 @@
 <template>
 <div class="listItem">
    <div class="pic"></div>
-   <div class="listItem_name">{{item.city}}</div>
+   <div class="listItem_name">{{item.shopName}}</div>
    <div class="listItem_add">{{item.address}}</div>
    <div class="listItem_title">经营品牌</div>
    <ul class="brandBox">

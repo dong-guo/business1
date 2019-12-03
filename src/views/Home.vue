@@ -10,7 +10,7 @@
       <reach class="reach"></reach>
       <global class="home_global"></global>
       <div class="home_body_top">
-        <div class="home_body_top_text">目前截止，全球共有门店<span>(家)</span></div>
+        <div class="home_body_top_text">全球慕思门店数累计<span>(家)</span></div>
         <div class="home_body_bg">
           <ul>
             <li v-for="(item,index) in stringNum" :key="item+index">{{item}}</li>

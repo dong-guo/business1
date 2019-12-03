@@ -337,7 +337,8 @@ display:none
   color:#20FDFA
 }
 .body_barcode_QRcode{
-  background-color:yellow;
+  /* background-color:yellow; */
+  background-image:url(../assets/images/QRcode.png);
   width:100px;
   height:100px;
 }

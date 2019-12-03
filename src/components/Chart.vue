@@ -428,7 +428,7 @@ export default {
 #chart_box {
   width: 1173px;
   height: 712px;
-  background-color: #232323;
+  /* background-color: #232323; */
   /* margin-top: 30px;
   margin-left: 38px; */
 }

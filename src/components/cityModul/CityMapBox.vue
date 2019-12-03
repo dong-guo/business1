@@ -101,8 +101,8 @@ export default {
               }
             } else {
               let res = `<div style ='width:auto; height:74px;padding-top:10px; margin:-8px -8px -8px -8px; border-radius:4px; background:rgba(14,109,233,0.5); font-size:20px;' >
-                            <p style ='margin-left:5px;height:36px;'>${params.name}</p>
-                            <p style ='margin-left:5px;height:36px;'>地址：${params.name}</p>
+                            <p style ='margin-left:5px;height:36px; padding-left:10px; padding-right:10px;'>${params.name}</p>
+                            <p style ='margin-left:5px;height:36px; padding-left:10px; padding-right:10px;'>地址：${params.name}</p>
                       </div>`;
               res += `<img style='width:21px; height:94px; position:absolute; top:-8px; left:-15px;' src='${formatterleftIcon}'/>`;
               res += `<img style='width:21px; height:94px; position:absolute; top:-8px; right:-15px;' src='${formatterrightIcon}'/>`;

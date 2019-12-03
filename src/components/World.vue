@@ -144,9 +144,9 @@ export default {
             areaColor: "#000001",
             bordercolor: "#2A3879",
             shadowColor: "#2A3879",
-            shadowBlur: 10,
-            shadowOffsetX: 2,
-            shadowOffsetY: 2
+            // shadowBlur: 10,
+            // shadowOffsetX: 2,
+            // shadowOffsetY: 2
           },
           nameMap: {
             China: "中国",

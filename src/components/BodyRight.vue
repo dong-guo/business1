@@ -14,7 +14,7 @@
           <li v-for="(item,index) in countryShowList" :key="item+index">
             <div class="record">
               <span class="record_country">{{item.name}}</span>
-              <span class="record_number">{{item.total}}</span>
+              <span class="record_number">{{item.total}}家</span>
             </div>
             <div class="shop">
               <div class="shop_franchser">

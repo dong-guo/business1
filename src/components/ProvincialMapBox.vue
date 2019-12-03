@@ -163,18 +163,38 @@ export default {
                             // console.log('cityBrandList.brandList.city',brandListArray)
                             list += `<p style ='margin-left:5px;height:36px;'>${brandListArray[index].brand}：${brandListArray[index].total}</p>`
                           }
+                          // if(brandListArray.length >0){
+                          //   let res =`<img style='width:280px; height:380px;margin:-15px -10px -15px -10px; display:block;' src='${newsIcon}'/>`
+                          //   res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
+                          //   res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
+                          //   res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; bottom:-12px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
+                          //   res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; bottom:-12px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
+                          //   res += 
+                          //       `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:206px;padding-top:10px;' >
+                          //             <p style ='margin-left:5px;height:36px;'>${params.name}</p>
+                          //             ${list}
+                          //       </div>`    
+                          //   return res 
+                          // } else{
+                          //     let res = `<img style='width:280px; height:100px;margin:-10px -10px -10px -10px; display:block;' src='${newsIcon}'/>`
+                          //     res += 
+                          //         `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:100px;padding-top:10px; font-size:20px;'>
+                          //           <p style ='margin-left:5px;height:36px;'>${params.name}</p>
+                          //           <p style ='margin-left:5px;height:36px;'>暂无数据</p>
+                          //         </div>`
+                          //     return res
+                          // }
                           if(brandListArray.length >0){
-                              let res =`<img style='width:280px; height:380px;margin:-15px -10px -15px -10px; display:block;' src='${newsIcon}'/>`
-                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
-                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
-                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:250px; top:340px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
-                              res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:340px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
-                              res += 
-                                  `<div style ='position:absolute; letf:0px; top:0px; width:280px; height:206px;padding-top:10px;' >
-                                        <p style ='margin-left:5px;height:36px;'>${params.name}</p>
-                                        ${list}
-                                  </div>`    
-                              return res 
+                          let res = 
+                                 `<div style ='position:absolute; letf:0px; top:0px; width:280px;border:2px solid rgba(43, 58, 124, 1);background:linear-gradient(0deg,rgba(1,9,40,1),rgba(0,8,73,1));' >
+                                      <p style ='margin-left:5px;height:36px;'>${params.name}</p>
+                                      ${list}
+                                      <img style='width:30px; height:30px; position:absolute; display:block; left:-10px; top:-10px; ' src='${formatterLeftAngleIcon}'/>
+                                      <img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/> 
+                                      <img style='width:30px; height:30px; position:absolute; display:block; left:-10px; bottom:-10px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>
+                                      <img style='width:30px; height:30px; position:absolute; display:block; right:-10px; bottom:-10px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>
+                                </div>`    
+                          return res                               
                           } else{
                               let res = `<img style='width:280px; height:100px;margin:-10px -10px -10px -10px; display:block;' src='${newsIcon}'/>`
                               res += 
@@ -182,8 +202,8 @@ export default {
                                     <p style ='margin-left:5px;height:36px;'>${params.name}</p>
                                     <p style ='margin-left:5px;height:36px;'>暂无数据</p>
                                   </div>`
-                              return res
-                          }
+                              return res                            
+                          }   
                     }
                 }
               } else {          
@@ -197,8 +217,8 @@ export default {
                     }
                     let res = 
                       `<div style ='width:auto; height:74px;padding-top:10px; margin:-5px -5px -5px -5px; border-radius:4px; background:rgba(14,109,233,0.5); font-size:20px;' >
-                            <p style ='margin-left:5px;height:36px;'>${params.name}</p>
-                            <p style ='margin-left:5px;height:36px;'>地址：${address}</p>
+                            <p style ='margin-left:5px;height:36px; padding-left:10px;padding-right:10px;'>${params.name}</p>
+                            <p style ='margin-left:5px;height:36px; padding-left:10px;padding-right:10px;'>地址：${address}</p>
                       </div>`
                       res += `<img style='width:21px; height:94px; position:absolute; top:-5px; left:-15px;' src='${formatterleftIcon}'/>`
                       res += `<img style='width:21px; height:94px; position:absolute; top:-5px; right:-15px;' src='${formatterrightIcon}'/>`
@@ -243,7 +263,8 @@ export default {
               },
               itemStyle:{
                 // areaColor:'rgba(51,216,250,1)',
-                areaColor:'rgba(56,166,200,1)'
+                // areaColor:'rgba(56,166,200,1)',
+                areaColor: "rgba(56,166,200,1)",
               }
             },
             regions:developCity
@@ -388,11 +409,11 @@ export default {
 
 <style scoped>
 #provincialBox{
-  /* height: 717px; */
-  /* width: 929px; */
+  height: 717px;
+  width: 929px;
   /* width:1329px; */
-  height:100%;
-  width:100%;
+  /* height:100%; */
+  /* width:100%; */
   /* border:1px solid yellow; */
   /* background-color:yellow; */
 }

@@ -70,10 +70,11 @@ export default {
 }
 .provincialMapBox{
   position:absolute;
-  top:0;
-  left:0;
+  /* top:0;
+  left:0; */
   /* top:85px; */
-  /* left:496px; */
+  top:32px;
+  left:496px;
   /* left:296px; */
 }
 .provincialTitleBox{

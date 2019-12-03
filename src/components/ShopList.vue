@@ -21,8 +21,9 @@
             </li>
           </ul>
         </div>
-        <div class="swiper-pagination"></div>
+        <!-- <div class="swiper-pagination"></div> -->
       </div>
+      <div class="swiper-pagination"></div>
       <div class="changeShop_bottom_corner"></div>
     </div>
   </div>
@@ -70,25 +71,24 @@ export default {
     //设置swiper组件api
     swiper(){
       new Swiper(".swiper-container", {
-        // loop: true,
-        // autoplay: {
-        //   delay: 2000
-        // },
         pagination: {
           el: ".swiper-pagination",
-          type:'bullets',
+          // type:'bullets',
           clickable: true,
-          // bulletElement : 'li',
-          hideOnClick :true,
-          // bulletClass:'my-bullet',
+          renderBullet: function (index, className) {
+            console.log('第几页',index)
+            return '<span class="' + className + '" style="background:rgba(2,90,158,1);margin:0 6px 0 6px;"></span>';
+          },          
         },
         observer: true,
         observeParents: true,
-          onSlideChangeEnd: function(swiper){
-          　　　swiper.update();  
-          　　　mySwiper.startAutoplay();
-          　　  mySwiper.reLoop();  
-          }      
+        // bulletClass:'my-bullet',
+          // onSlideChangeEnd: function(swiper){
+          // 　　　swiper.update();  
+          // 　　　mySwiper.startAutoplay();
+          // 　　  mySwiper.reLoop();  
+          // }    
+
       }); 
       console.log('运行')     
     },
@@ -153,7 +153,7 @@ export default {
   height: 953px;
   /* background-color:coral; */
   background-color: rgba(0, 7, 17, 0.9);
-  /* border:1px solid goldenrod; */
+  border:1px solid rgba(14, 109, 233, 1);
   position: absolute;
   /* position:relative; */
   top: 13px;
@@ -319,11 +319,16 @@ export default {
   margin-bottom: 72px;
 }
 .swiper-container {
-  --swiper-pagination-color: #025a9e;
+  /* --swiper-pagination-color: #025a9e; */
   /* height:20px;
   width:20px; */
 }
-.my-bullet{
-  --swiper-pagination-color: #025a9e;
-}
+.swiper-pagination-bullets{
+  /* position:absolute; */
+  height:20px;
+  top:903px;
+  width:100%;
+  /* z-index:999; */
+  /* background:yellow; */
+} 
 </style>

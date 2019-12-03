@@ -11,11 +11,11 @@
   </div>
   <div class="phone">
     <span>联系电话&nbsp;:&nbsp;</span>
-    <span v-if="drawCityManager">{{drawCityManager.phone}}</span>
+    <span class="phone_color" v-if="drawCityManager">{{drawCityManager.phone}}</span>
   </div>
   <div class="territory">
     <span>负责区域&nbsp;:&nbsp;</span>
-    <span v-if="drawCityManager">{{drawCityManager.chargeProvince}}</span>
+    <span class="territory_color" v-if="drawCityManager">{{drawCityManager.chargeProvince}}</span>
   </div>
   <div class="QrcodeBox">
     <div class="qrcode">
@@ -84,6 +84,7 @@ export default {
   width:80px;
   height:80px;
   border-radius:50%;
+  border:2px solid rgba(51,216,250,1);
   background-color:wheat;
   background-image:url(../assets/images/headPic.png);
 }
@@ -116,6 +117,9 @@ export default {
 .phone span{
   color:#fff;
 }
+.phone .phone_color{
+  color:rgba(32, 253, 250, 1);
+}
 .territory{
   color:#20FDFA;
   font-size:20px;
@@ -123,6 +127,9 @@ export default {
 }
 .territory span{
   color:#fff;
+}
+.territory .territory_color{
+  color:rgba(32, 253, 250, 1);
 }
 .QrcodeBox{
   /* background-color:white; */
@@ -134,6 +141,7 @@ export default {
   width:100px;
   height:100px;
   background-color:pink;
+  background-image:url(../assets/images/QRcode.png);
 }
 .qrcode_photo{
   width:100px;

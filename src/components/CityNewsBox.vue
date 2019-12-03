@@ -73,6 +73,7 @@ export default {
   width:80px;
   height:80px;
   border-radius:50%;
+  border:2px solid rgba(51,216,250,1);
   /* background-color:wheat; */
   background-image:url(../assets/images/headPic.png);
 }
@@ -116,6 +117,7 @@ export default {
   width:100px;
   height:100px;
   background-color:pink;
+  background-image:url(../assets/images/QRcode.png);
 }
 .qrcode_photo{
   width:100px;

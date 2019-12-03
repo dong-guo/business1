@@ -60,7 +60,7 @@ export default {
   position:relative;
   /* background-color:burlywood; */
   height:40px;
-  width:180px;
+  width:208px;
 }
 .greenballoon{
  margin-right:27px;
@@ -69,7 +69,7 @@ export default {
  /* border:1px solid pink; */
  background-image:url(../assets/images/greenBalloon@2x.png);
  background-repeat:no-repeat;
- background-size:cover;
+ background-size:contain;
 }
 .singleShop p{
   width:208px;
@@ -98,7 +98,7 @@ export default {
  /* border:1px solid pink; */
  background-image:url(../assets/images/yellowBalloon@2x.png);
  background-repeat:no-repeat;
- background-size:cover;
+ background-size:contain;
 }
 .generalStore p{
   width:208px;
