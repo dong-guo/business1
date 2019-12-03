@@ -1,5 +1,6 @@
 <template>
   <div class="city">
+    <div class="shade" v-if="drawShadeBoxKey"></div>
     <city-map-box class="cityMapBox"></city-map-box>
     <reach class="reach"></reach>
     <div class="cityTitleBox">
@@ -56,7 +57,8 @@ export default {
       drawProvincialChinaChange: state => state.home.provincialChinaChange,
       drawCountryChange: state => state.home.countryChange,
       drawCityChinaChange: state => state.home.cityChinaChange,
-      drawCountry: state => state.home.country
+      drawCountry: state => state.home.country,
+      drawShadeBoxKey: state => state.city.shadeBoxKey,
     })
   },
   created(){
@@ -120,7 +122,6 @@ export default {
   width: 1920px;
   height: 984px;
   overflow: hidden;
-  /* background-color:yellowgreen; */
   position: relative;
   .cityMapBox {
     position: absolute;
@@ -201,5 +202,15 @@ export default {
   position: absolute;
   left: 1676px;
   top: 827px;
+}
+//遮罩层
+.shade{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index:1;
+    background: rgba(0,0,0,0.8);
 }
 </style>

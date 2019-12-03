@@ -2,7 +2,8 @@ const state ={
    cityDistrictList:[],
    cityManager:{},
    cityShopList:[],
-   cityShopTypeCount:{}
+   cityShopTypeCount:{},
+   shadeBoxKey:false
 }
 const mutations = {
    setCityDistrictList:(state,array) => {
@@ -16,6 +17,9 @@ const mutations = {
    },
    setCityShopTypeCount:(state,obj) => {
      state.cityShopTypeCount = obj
+   },
+   setShadeBoxKey:(state,boolean) => {
+     state.shadeBoxKey = boolean
    }
 }
 const action = {

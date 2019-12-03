@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="shop" v-if="shopKey" @click="openShopKey"></div>
+    <div class="shop" v-if="shopKey" @click="openShopKey" ></div>
     <div class="changeShop" v-else>
       <div class="shop_num" @click="openShopKey">
         <div class="shop_one"></div>
@@ -95,6 +95,7 @@ export default {
     //开启店铺列表开关
     openShopKey() {
       this.shopKey = !this.shopKey;
+      this.$store.commit("city/setShadeBoxKey",!this.shopKey)
       this.openItem();
     },
     //打开盒子 刷新数据到totalShow
