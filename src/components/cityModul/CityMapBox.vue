@@ -140,7 +140,7 @@ export default {
               color: "white"
             },
             itemStyle: {
-              // areaColor:'rgba(51,216,250,1)',
+              // areaColor:'blue',
               areaColor: "rgba(56,166,200,1)"
             }
           },

@@ -3,7 +3,8 @@
     <div class="app-home">
       <div class="home_head">
         <p>
-          <span :class="{'home_head_change':drawBoxKey}">慕思招商系统</span>
+          <!-- <span :class="{'home_head_change':drawBoxKey}">慕思招商系统</span> -->
+          <img src="./assets/images/businessTitle@2x.png" alt="">
         </p>
       </div>
       <router-view />
@@ -85,9 +86,15 @@ html {
   font-size: 46px;
   font-weight: medium;
   color: #fff;
-  background-image: url(./assets/images/home_head_change@2x.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
+  // background-image: url(./assets/images/home_head_change@2x.png);
+  // background-repeat: no-repeat;
+  // background-size: 100%;
+}
+.home_head p img{
+  // background:yellow;
+  width:323px;
+  height:62px;
+  margin-top:7px;
 }
 .home_head_change {
   text-shadow: 2px 2px 9px rgba(1, 21, 59, 1);

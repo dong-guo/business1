@@ -18,9 +18,9 @@
         </div>
       </div>
       <body-right></body-right>
-      <div id='stars'></div>
+      <!-- <div id='stars'></div>
       <div id='stars2'></div>
-      <div id='stars3'></div>
+      <div id='stars3'></div> -->
     </div>
     <router-view></router-view>
   </div>
@@ -80,6 +80,7 @@ export default {
   /* width: 1920px; */
   /* background-color:#2B3A7C; */
   /* background-image: url(../assets/images/background@2x.png); */
+  overflow:hidden;
 }
 
 .home_body {

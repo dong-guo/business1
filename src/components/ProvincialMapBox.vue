@@ -263,8 +263,8 @@ export default {
               },
               itemStyle:{
                 // areaColor:'rgba(51,216,250,1)',
-                // areaColor:'rgba(56,166,200,1)',
-                areaColor: "rgba(56,166,200,1)",
+                // areaColor: "rgba(56,166,200,1)",
+                areaColor:'#9343b5',
               }
             },
             regions:developCity
