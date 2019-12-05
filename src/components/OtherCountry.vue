@@ -91,7 +91,7 @@ export default {
       // console.log(120,country,balloonList)
       //设定已开发蓝色州
       this.gradeOtherCountryProvincial(grade,list)
-      // console.log('grade',grade)
+      console.log('grade',grade)
       // console.log('list',list)
       axios.get(`./geoJson/country/${country}.json`).then(res => {
         let countryJson = res.data;

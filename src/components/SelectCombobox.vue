@@ -2,7 +2,8 @@
   <div class="select_combobox">
     <div class="select_combobox_box">
       <div class="combobox" @click="openValueCountry">
-        <input type="text" v-model="valueCountry" placeholder="国家" />
+        <!-- <input type="text" v-model="valueCountry" placeholder="国家" /> -->
+        <span>{{valueCountry}}</span>
         <img src="../assets/images/iconfont-xiasanjiao@2x.png" alt />
       </div>
       <div class="list" v-show="showCountry">
@@ -17,7 +18,9 @@
     </div>
     <div class="select_combobox_box">
       <div class="combobox" @click="openProvincial" id="combobox2">
-        <input type="text" v-model="valueProvincial" :placeholder="showPlaceHoleder" />
+        <!-- <input type="text" v-model="valueProvincial" :placeholder="showPlaceHoleder" /> -->
+        <span v-if="valueProvincial">{{valueProvincial}}</span>
+        <span v-else>省</span>
         <img src="../assets/images/iconfont-xiasanjiao@2x.png" alt />
       </div>
       <div class="list" v-show="showProvincial">
@@ -34,7 +37,9 @@
     </div>
     <div class="select_combobox_box">
       <div class="combobox" @click="openCity" id="combobox3">
-        <input type="text" v-model="valueCity" placeholder="市" />
+        <!-- <input type="text" v-model="valueCity" placeholder="市" /> -->
+        <span v-if="valueCity">{{valueCity}}</span>
+        <span v-else>市</span>
         <img src="../assets/images/iconfont-xiasanjiao@2x.png" alt />
       </div>
       <div class="list" v-show="showCity">
@@ -274,8 +279,20 @@ export default {
   border: 1px solid rgba(14, 109, 233, 1);
   box-sizing: border-box;
   position: relative;
+  /* background:yellow; */
   /* display:inline-block; */
   /* margin-right: 20px; */
+}
+.combobox span{
+  width: 100%;
+  height: 100%;
+  display:inline-block;
+  font-size: 26px;
+  line-height: 74px;
+  text-indent: 18px;
+  border-radius: 4px;
+  background-color: rgba(14, 109, 233, 0.2);
+  color: rgba(0, 150, 255, 1);
 }
 .combobox input {
   border: none;

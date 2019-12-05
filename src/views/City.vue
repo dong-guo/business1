@@ -13,9 +13,9 @@
     <global-city class="golbalCity"></global-city>
     <scaling-box class="scalingBox"></scaling-box>
     <city-shop-num class="cityShopNum"></city-shop-num>
-    <!-- <div id='stars'></div>
+    <div id='stars'></div>
     <div id='stars2'></div>
-    <div id='stars3'></div>     -->
+    <div id='stars3'></div>    
   </div>
 </template>
 <script>

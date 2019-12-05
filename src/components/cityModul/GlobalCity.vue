@@ -113,6 +113,7 @@ export default {
   padding-left: 74px;
   padding-top: 68px;
   letter-spacing:10px;
+  white-space:nowrap;
   background:linear-gradient(0deg,rgba(255,255,255,1) 0%, rgba(51,216,250,1) 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;

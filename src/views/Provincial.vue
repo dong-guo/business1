@@ -11,9 +11,9 @@
    <provincialnews-box class="provincialnewsBox"></provincialnews-box>
    <scaling-box class="scalingBox"></scaling-box>
    <provincialshop-num class="provincialshopNum"></provincialshop-num>
-   <!-- <div id='stars'></div>
+   <div id='stars'></div>
    <div id='stars2'></div>
-   <div id='stars3'></div> -->
+   <div id='stars3'></div>
 </div>
 
 </template>

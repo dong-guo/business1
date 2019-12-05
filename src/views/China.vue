@@ -12,9 +12,9 @@
    <country-map-box class="chinaMapBox" v-if="key"></country-map-box>
    <Other-Country class="otherMapBox" v-else></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
-   <!-- <div id='stars'></div>
+   <div id='stars'></div>
    <div id='stars2'></div>
-   <div id='stars3'></div> -->
+   <div id='stars3'></div>
 </div>
 
 </template>

@@ -47,7 +47,7 @@ export default {
        this.$store.commit("home/setProvincialChange", sessionStorage.getItem("Enkey"));
        this.$store.commit("home/setCityChange", sessionStorage.getItem("cityNum"));
        this.$store.commit("home/setCityChinaChange", sessionStorage.getItem("cityChina"));
-       this.$store.commit("home/setOtherCountryChange", sessionStorage.getItem("otherCountry"));
+       this.$store.commit("home/setOtherCountryChange",sessionStorage.getItem("otherCountry"));
   },
   watch:{
   },

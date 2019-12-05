@@ -149,6 +149,7 @@ export default {
   -webkit-transition-property: all;
   -webkit-transition-duration: 1.5s;
   -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
 }
 .ckangeBox {
   /* -webkit-transition-property: all;

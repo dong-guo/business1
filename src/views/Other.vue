@@ -11,9 +11,9 @@
    <other-shop-num class="otherShopNum"></other-shop-num>
    <Other-Country class="otherMapBox"></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
-   <!-- <div id='stars'></div>
+   <div id='stars'></div>
    <div id='stars2'></div>
-   <div id='stars3'></div> -->
+   <div id='stars3'></div>
 </div>
 
 </template>
