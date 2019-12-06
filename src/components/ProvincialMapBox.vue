@@ -338,13 +338,13 @@ export default {
      //气球商店区分函数
      gradeBalloon(){
        console.log('气球数据',this.drawProvincialChange)
-       if(this.drawProvincialChange != 'xianggang'&&this.drawProvincialChange != 'aomen'&&this.drawProvincialChange != 'taiwan'){
+       if(this.drawProvincialChange != 'xianggang' && this.drawProvincialChange != 'aomen' && this.drawProvincialChange != 'taiwan'){
           let list = this.allCityList.cityList
           let balloon = []
           for(let i=0; i<list.length; i++){
             if(list[i].shopList.length > 0){
                 for(let index=0; index<list[i].shopList.length;index++){
-                  if(list[i].shopList[index].nature =='Direct Sales'){
+                  if(list[i].shopList[index].brandType == 0 ){
                     balloon.push({
                             name:list[i].shopList[index].shopName,
                             address:list[i].shopList[index].address,
@@ -375,7 +375,7 @@ export default {
          let list = this.allCityList.shopList
          let balloon = []
          for(let i = 0 ;i<list.length;i++){
-          if(list[i].nature =='Direct Sales'){
+          if(list[i].brandType == 0 ){
             balloon.push({
                     name:list[i].shopName,
                     address:list[i].address,

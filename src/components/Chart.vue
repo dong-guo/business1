@@ -102,7 +102,8 @@ export default {
       // }
       let drawBrandList = this.drawBrandList
       let provincialTotal = this.provincialTotal
-      let seriesColor = ['#005F64','#00838F','#0097A7','#00ADC1','#00ADC1','#24C5DA','#4CCFE1','#80DEEA','#B2EAF2']
+      // let seriesColor = ['#005F64','#00838F','#0097A7','#00ADC1','#00ADC1','#24C5DA','#4CCFE1','#80DEEA','#B2EAF2']
+      let seriesColor =['#0900C3','#0075F6','#00CBFE','#537EC5','#0B4381','#03E2AE','#005F64','#22E02D','#F5AC2D','#F94589','#FBFC01']
       let seriesList = []
       let total=[]
       console.log('Yprovincial',Yprovincial) 
