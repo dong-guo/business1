@@ -3,7 +3,7 @@
   <div class="select">
     <div class="select_left">
       <div class="select_left_sign"></div>
-      <p>慕思经销商网店列表</p>
+      <p>慕思品牌分布图表</p>
     </div>
      <div class="select_right">
        <select-combobox></select-combobox>

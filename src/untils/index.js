@@ -1,9 +1,10 @@
 import { Request } from './request'
  
-const enviroment = 'pro'
+const enviroment = 'dev'
 
 class IndexModel extends Request {
-  baseUrl = enviroment === 'pro' ? 'https://mobiletest.derucci.net/consumer-admin':'https://qiang.derucci.com'
+  // baseUrl = enviroment === 'pro' ? 'https://mobiletest.derucci.net/consumer-admin':'https://qiang.derucci.com'
+  baseUrl = enviroment === 'pro' ? 'https://mobiletest.derucci.net/consumer-admin':'https://op.derucci.com'
 
   getCountry(){
     return this.getList({

@@ -109,7 +109,7 @@ export default {
     getblueCountry(dcn,params,country){
       //前十名才可以点击进去
       console.log('22222',dcn)
-        for (let i = 0; i < dcn.length && i<10; i++) {
+        for (let i = 0; i < dcn.length && i<7; i++) {
           if (params.name == dcn[i].name) {
             //取得中英文名称匹对数据
             for(let i = 0; i < country.length; i++){
