@@ -12,6 +12,7 @@
    <country-map-box class="chinaMapBox" v-if="key"></country-map-box>
    <Other-Country class="otherMapBox" v-else></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>
+   <scaling-box class="scalingBox"></scaling-box>
    <div id='stars'></div>
    <div id='stars2'></div>
    <div id='stars3'></div>
@@ -29,6 +30,7 @@ import CountryMapBox from "../components/CountryMapBox.vue"
 import OtherCountry from "../components/OtherCountry.vue"
 
 import GlobalCountry from "../components/GlobalCountry.vue"
+import ScalingBox from "../components/ScalingBox"
 
 import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
@@ -45,7 +47,8 @@ export default {
   components:{
     CountryMapBox,
     OtherCountry,
-    GlobalCountry
+    GlobalCountry,
+    ScalingBox
   },
   computed:{
     ...mapState({
@@ -212,5 +215,10 @@ export default {
   position:absolute;
   left:44px;
   bottom:0;
+}
+.scalingBox{
+  position:absolute;
+  left:1739px;
+  top:900px;
 }
 </style>

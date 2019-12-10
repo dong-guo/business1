@@ -71,13 +71,12 @@ export default {
     this.matchingCountry()
     console.log("city-showChinaCountry", this.showChinaCountry,this.drawProvincialChinaChange,this.drawCityChinaChange);
     this.requestDistrict()
+    this.initializeProvincial()
   },
   watch:{
      
   },
   methods: {
-    
-
     //請求县区参数
     requestDistrict() {
       let [country,provincial,city] = [this.showChinaCountry,this.drawProvincialChinaChange + '省',this.drawCityChinaChange + '市']

@@ -40,7 +40,7 @@ export default {
       .then(res =>{
         let countryName = res.data.data
         this.$store.commit("home/setAllTotal",countryName.total)
-        console.log('countryName数据',countryName.country,countryName.total)
+        console.log('countryName总数据',countryName.country,countryName.total)
         //将国家存入VUEX中
         let country = []
         for(let i = 0; i< countryName.country.length; i++){

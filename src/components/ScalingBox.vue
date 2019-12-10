@@ -20,7 +20,8 @@ export default {
   computed:{
     ...mapState({
       drawProvincialZoom: state => state.home.provincialZoom,
-      drawCityZoom: state => state.home.cityZoom
+      drawCityZoom: state => state.home.cityZoom,
+      drawCountryZoom: state => state.home.countryZoom
     })
   },
   mounted(){
@@ -38,7 +39,7 @@ export default {
           }
           this.$store.commit("home/setProvincialZoom",provincialzoom);
           console.log('provincialzoom',this.drawProvincialZoom)
-      } else{
+      } else if (this.$route.name =='city'){
           let cityzoom =Number(this.drawCityZoom)
           cityzoom += 2
           if(cityzoom>10.2){
@@ -46,6 +47,14 @@ export default {
           }
           this.$store.commit("home/setCityZoom",cityzoom);
           console.log('cityzoom',this.drawCityZoom)        
+      } else{
+          let countryZoom =Number(this.drawCountryZoom)
+          countryZoom += 2
+          if(countryZoom > 9.9){
+            countryZoom = 9.9
+          }
+          this.$store.commit("home/setCountryZoom",countryZoom);
+          console.log('countryZoom',this.drawCountryZoom)
       }
     },
     //缩小地图
@@ -60,7 +69,7 @@ export default {
           }
           this.$store.commit("home/setProvincialZoom",provincialzoom);
           console.log('provincialzoom',this.drawProvincialZoom) 
-      }  else{
+      }  else if (this.$route.name =='city'){
         //以原始设定值每次缩小0.5倍
           let cityzoom =Number(this.drawCityZoom)
           cityzoom -= 2
@@ -69,6 +78,14 @@ export default {
           }
           this.$store.commit("home/setCityZoom",cityzoom);
           console.log('cityzoom',this.drawCityZoom)         
+      }else {
+          let countryZoom =Number(this.drawCountryZoom)
+          countryZoom -= 2
+          if(countryZoom < 1.25){
+            countryZoom = 1.25
+          }
+          this.$store.commit("home/setCountryZoom",countryZoom);
+          console.log('countryZoom',this.drawCountryZoom)
       }   
     }
   },

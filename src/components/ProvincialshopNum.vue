@@ -3,7 +3,7 @@
   <div class="singleShop">
     <div class="greenballoon"></div>
     <!-- <p>单品店&nbsp;&nbsp;({{drawAllCityList.shopTypeCount[0].single}})</p> -->
-    <p v-if="drawCityShopNumber">单品店&nbsp;&nbsp;({{drawCityShopNumber.single}})</p>
+    <p v-if="drawCityShopNumber">品牌店&nbsp;&nbsp;({{drawCityShopNumber.single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>

@@ -50,6 +50,8 @@ import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
 
 import axios from "axios";
+import { mapState } from "vuex";
+
 export default {
    data(){
      return{
@@ -58,6 +60,11 @@ export default {
        canvassPhoto:''
      }
    },
+   computed:{
+    ...mapState({
+      drawValueCountry: state => state.succession.valueCountry,
+    })
+  },
    mounted(){
      this.getManagerList()
      console.log('监测信息mounted',this.personal)
@@ -66,13 +73,18 @@ export default {
      personal(newValue,oldValue){
        console.log('监测信息',this.personal)
       //  console.log(767,this.personal[2].profilePhoto)
+     },
+     drawValueCountry(newValue,oldValue){
+       this.getManagerList()
      }
    },
    methods:{
      getManagerList(){
-       let page = 1
-       let limit = 2
-        indexModel.getCanvassList(page,limit)
+      //  let page = 1
+      //  let limit = 2
+       let country = this.drawValueCountry
+       console.log('国家',country)
+        indexModel.getCanvassList(country)
         .then(res=>{
           let managerList = res.data.data
           console.log('managerList',managerList)
@@ -332,9 +344,10 @@ display:none
   color:#FFFFFF;
   margin-top:10px;
   font-size:20px;
+  white-space: nowrap;
 }
 .body_personal_adds span{
-  color:#20FDFA
+  color:#20FDFA;
 }
 .body_barcode_QRcode{
   /* background-color:yellow; */

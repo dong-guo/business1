@@ -2,7 +2,7 @@
 <div class="cityShop">
     <div class="singleShop">
     <div class="greenballoon"></div>
-    <p v-if="drawCityShopTypeCount">单品店&nbsp;&nbsp;({{drawCityShopTypeCount.single}})</p>
+    <p v-if="drawCityShopTypeCount">品牌店&nbsp;&nbsp;({{drawCityShopTypeCount.single}})</p>
     </div>
   <div class="generalStore">
     <div class="yellowballoon"></div>

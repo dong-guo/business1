@@ -50,8 +50,17 @@ export default {
        this.$store.commit("home/setOtherCountryChange",sessionStorage.getItem("otherCountry"));
   },
   watch:{
+    '$route.path'(newValue,oldValue){
+        this.initialize()
+    }
   },
   methods:{
+    initialize(){
+      let[countryZoom,provincialZoom,cityZoom]=[1.25,0.9,1.2]
+      this.$store.commit("home/setCountryZoom",countryZoom);
+      this.$store.commit("home/setProvincialZoom",provincialZoom);
+      this.$store.commit("home/setCityZoom",cityZoom);
+    }
   }
 };
 </script>

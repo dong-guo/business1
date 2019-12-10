@@ -36,6 +36,7 @@ export default {
       drawLetterName: state => state.home.letterName,
       drawChinaName: state => state.home.chinaName,
       drawCountry: state => state.home.country,
+      drawCountryZoom: state => state.home.countryZoom
     })
   },
   mounted() {
@@ -50,6 +51,9 @@ export default {
       // this.getCountryList() 
       this.getCountryMap()
     },
+    drawCountryZoom(newValue,oldValue){
+      this.getCountryMap()
+    }
   },
   methods: {
     //该请求数据函数转移到china主页上,不用
@@ -70,14 +74,14 @@ export default {
     },
     //初始化国家地图函数
     getCountryMap(){
-      let[country,content]  = [this.drawCountryChange,this.content]
+      let[country,content,countryZoom]  = [this.drawCountryChange,this.content,this.drawCountryZoom]
       // console.log('初始化国家地图参数country,content:',country,content)
       axios.get(`./geoJson/country/${country}.json`)
       .then(res => {
         let countryJson = res.data;
         echarts.registerMap("China", countryJson);
         this.myEcharts = echarts.init(document.getElementById("country_box"));
-        let option = this.countryOption(content,newsIcon);
+        let option = this.countryOption(content,newsIcon,countryZoom);
         this.myEcharts.setOption(option);
         //跳转到省内地图
         this.jumpProvincial()
@@ -87,7 +91,7 @@ export default {
     jumpProvincial(){
         this.myEcharts.on('click',param =>{
           let[provincial,letterName,chinaName] = [param.name,this.drawLetterName,this.drawChinaName]
-          console.log('param',provincial)
+          console.log('param',provincial)           
             for(let i = 0; i<chinaName.length; i++){
               if(provincial==chinaName[i]){
                 this.$store.commit("home/setProvincialChange", letterName[i]);
@@ -102,7 +106,7 @@ export default {
         })
     },
     //国家地图样式配置
-    countryOption(content,newsIcon) {
+    countryOption(content,newsIcon,countryZoom) {
       return {
           tooltip:{
               trigger:'item',
@@ -171,8 +175,10 @@ export default {
                 type:'map',
                 map:'China',
                 // geoIndex:0,
+                roam:'move',
                 data:content,
-                zoom:1.25,
+                // zoom:1.25,
+                zoom:countryZoom,
                 emphasis:{
                   label:{
                     show:true,

@@ -63,12 +63,13 @@ class IndexModel extends Request {
     })
   }
   //请求经销商数据
-  getCanvassList(page,limit){
+  getCanvassList(country){
     return this.getParamsList({
       url:this.baseUrl + '/api/merchants/getManagerList',
-      parmas:{
-        page:page,
-        limit:limit
+      params:{
+        // page:page,
+        // limit:limit,
+        country:country,
       }
     })
   }
