@@ -159,7 +159,7 @@ export default {
   /* position:relative; */
   top: 13px;
   left: 0;
-  z-index: 1;
+  z-index: 3;
   /* -webkit-transition-property: width;
   -webkit-transition-duration: 1.5s;
   -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1); */

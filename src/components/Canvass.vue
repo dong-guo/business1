@@ -26,6 +26,7 @@
                   <div class="news_people_name">{{item.managerName}}</div>
                 </div>
             </div>
+            <div class="body_personal_brand" >经营品牌：<span>V6,3D,歌蒂娅</span></div>
             <div class="body_personal_phone">联系电话: <span>{{item.phone}}</span></div>
             <div class="body_personal_adds">负责区域: <span>{{item.chargeProvince}}</span></div>
           </div>
@@ -266,13 +267,13 @@ display:none
 }
 .canvass_body ul li{
   width:578px;
-  height:245px;
+  height:265px;
   /* border:1px solid rgba(51,140,250,1); 
   box-sizing:border-box; */
   /* background-color:lightgreen; */
   background-image:url(../assets/images/background_border@2x.png);
   background-repeat:no-repeat;
-  background-size:cover;
+  background-size:578px 265px;
   display:flex;
 }
 .canvass_body_personal{
@@ -332,9 +333,17 @@ display:none
   font-size:36px;
   /* background-color:orange; */
 }
+.body_personal_brand{
+  color:#FFFFFF;
+  margin-top:20px;
+  font-size:20px;
+}
+.body_personal_brand span{
+  color:#20FDFA
+}
 .body_personal_phone{
   color:#FFFFFF;
-  margin-top:29px;
+  margin-top:10px;
   font-size:20px;
 }
 .body_personal_phone span{

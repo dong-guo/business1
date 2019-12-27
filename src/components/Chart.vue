@@ -32,6 +32,9 @@ export default {
   watch:{
     drawYList(newValue,oleValue){
       this.List = this.drawYList
+      // for(let i=0; i<drawEchartRequestList.length; i++){
+      //   this.List.push(drawEchartRequestList[i].province)
+      // }
       // console.log('监视Y轴数据变动',this.List)
       this.initChart()
     },
@@ -65,8 +68,10 @@ export default {
       this.initChart()
     }
   },
+  created(){
+    this.provincialTotal = this.drawEchartRequestList
+  },
   mounted(){
-  //  this.provincialTotal = this.drawEchartRequestList
   //  this.getBrand()
    this.initChart()
    console.log('this.provincialTotal',this.provincialTotal)
@@ -94,40 +99,39 @@ export default {
   //     })     
   //  },
    initChart(){
-      // console.log('chart列表-32',this.drawProvincial,this.List)
       let Yprovincial = this.List
-      // let Yprovincial =[]
-      // for(let i=0; i<this.drawEchartRequestList.length;i++){
-      //   Yprovincial.push(this.drawEchartRequestList[i].province)
-      // }
       let drawBrandList = this.drawBrandList
       let provincialTotal = this.provincialTotal
       // let seriesColor = ['#005F64','#00838F','#0097A7','#00ADC1','#00ADC1','#24C5DA','#4CCFE1','#80DEEA','#B2EAF2']
       let seriesColor =['#0900C3','#0075F6','#00CBFE','#537EC5','#0B4381','#03E2AE','#005F64','#22E02D','#F5AC2D','#F94589','#FBFC01']
       let seriesList = []
-      let total=[]
-      console.log('Yprovincial',Yprovincial) 
-      console.log('drawBrandList',drawBrandList)
-      for(let j=0;j<drawBrandList.length;j++){
-        total.push([])
-        //历遍请求品牌
-        for(let m=j;m<total.length;m++){
-          //历遍省份
-          for(let z=0;z<Yprovincial.length;z++){
-            //历遍数据
-            for(let k=0; k<provincialTotal.length;k++){
-              if(Yprovincial[z]==provincialTotal[k].province){
-                for(let n=0;n<provincialTotal[k].brands.length;n++){
-                  if(drawBrandList[j].name==provincialTotal[k].brands[n].aliasBrand){
-                      total[m].push(provincialTotal[k].brands[n].total)
-                  }
+      let totalList=[]
+      // console.log('11111drawEchartRequestList',this.drawEchartRequestList)
+      // console.log('品牌长度drawBrandList.length',drawBrandList)
+      // console.log('省份长度Yprovincial.length',Yprovincial)
+       console.log('匹配数据provincialTotal',provincialTotal)
+      
+      //历遍请求品牌数量
+      for(let j=0; j < drawBrandList.length; j++){
+        totalList.push([])
+          //历遍Y轴省份数量
+        for(let z = 0; z < Yprovincial.length; z++){
+          //对数据长度历遍数量
+          for(let k = 0; k < provincialTotal.length; k++){
+            //匹配Y轴省份名称
+            if(Yprovincial[z] == provincialTotal[k].province){
+              //对每条数据品牌数量历遍
+              for(let n = 0; n < provincialTotal[k].brands.length; n++){
+                //匹对每条数据品牌与盒子品牌
+                if(drawBrandList[j].name == provincialTotal[k].brands[n].aliasBrand){
+                    totalList[j].push(provincialTotal[k].brands[n].total)
                 }
               }
             }
           }
         }
-      }
-      console.log('total',total)
+      }   
+      console.log('totalList',totalList)
       //遍历品牌
       for(let i=0; i<drawBrandList.length; i++){
         seriesList.push({
@@ -143,9 +147,10 @@ export default {
               color:seriesColor[i]
             },
             // data: [320, 302, 301,678,900 ]
-            data:total[i]
+            data:totalList[i]
         })
       }
+      // console.log('seriesList22222222',seriesList)
       
       this.myEcharts = echarts.init(document.getElementById("chart_box"));
       let option = this.chartOption(Yprovincial,drawBrandList,seriesList);

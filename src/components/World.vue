@@ -54,7 +54,8 @@ export default {
                     })
         }
         this.$store.commit("home/setCountryNumber",country)
-        // console.log('drawCountryNumber',this.drawCountryNumber)
+        // console.log('drawCountryNumber11111',country)
+        // console.log('drawCountryNumber11111',this.drawCountryNumber)
         this.worldeSet();
         // console.log('drawCountryNumber',this.drawCountryNumber)
       })
@@ -64,7 +65,7 @@ export default {
       let [dcn,coordinate] =[this.drawCountryNumber,this.drawCountry]
       let [countryShopNum,otherStyle,countryBigBall,countryMidBall,countrySmallBall] = [[],[],[],[],[]]
       //显示浅蓝色国家
-      for (let i = 0; i < dcn.length && dcn[i].name!=''; i++) {
+      for (let i = 0; i < dcn.length; i++) {
         countryShopNum.push(String(dcn[i].total));
         otherStyle.push({
           name: dcn[i].name,
@@ -176,6 +177,7 @@ export default {
             "Philippines":"菲律宾",
             "Brunei":"文莱",
             "Morocco":"摩洛哥",
+            "Nigeria":"尼日利亚"
           },
           regions: object.otherStyle,
           // regions:[

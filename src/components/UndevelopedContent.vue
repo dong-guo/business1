@@ -27,12 +27,12 @@ export default {
         drawValueProvincial: state => state.succession.valueProvincial,
         drawValueCity: state => state.succession.valueCity,
 
-        drawChangeType: state => state.succession.changeType
+        drawChangeType: state => state.succession.changeType,
       })
     },
     watch:{
       drawChangeType(newValue,oldValue){
-        console.log('this.drawChangeType',this.drawChangeType)
+        console.log('this.drawChangeType2222222',this.drawChangeType)
         this.showUndevelopedCity()
       },
       drawValueCountry(newValue,oldValue){
@@ -57,7 +57,7 @@ export default {
          indexModel.getUndevelopedCity(country,province,city,type)
          .then(res=>{
            this.urbanArea = res.data.data
-          //  console.log('unCity',this.urbanArea)
+           console.log('unCity',this.urbanArea)
          })
        },
     }

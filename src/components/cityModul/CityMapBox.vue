@@ -25,7 +25,9 @@ export default {
       drawCityChange: state => state.home.cityChange,
       drawCityZoom: state => state.home.cityZoom,
       drawCityDistrictList: state => state.city.cityDistrictList,
-      drawCityShopList: state => state.city.cityShopList
+      drawCityShopList: state => state.city.cityShopList,
+      drawCityChinaChange: state => state.home.cityChinaChange,
+      drawCityShopTypeCount:state => state.city.cityShopTypeCount
     })
   },
   watch: {
@@ -63,6 +65,7 @@ export default {
       let [cityZoom,cityChange,cityDistrictList] = [this.drawCityZoom,this.drawCityChange,this.drawCityDistrictList]
       //区分开发县区等级
       let developDistrict = this.gradeDistrict();
+      let spaceColor = this.spaceCity()
       //区分气球颜色
       let gradeBalloon = this.gradeDistrictBalloon();
       console.log("developDistrict-气球",gradeBalloon);
@@ -71,12 +74,28 @@ export default {
         let cityChangeJson = res.data;
         echarts.registerMap("cityChange", cityChangeJson);
         this.myEcharts = echarts.init(document.getElementById("cityMap"));
-        let option = this.cityChangeOption(cityZoom,developDistrict,cityDistrictList,gradeBalloon);
+        let option = this.cityChangeOption(cityZoom,developDistrict,cityDistrictList,gradeBalloon,spaceColor);
         this.myEcharts.setOption(option);
       });
     },
+    //特别处理东莞，中山
+    spaceCity(){
+       let spaceCity = this.drawCityChinaChange
+       let spaceCityList = this.drawCityShopTypeCount
+       let spaceColor = ''
+       if(spaceCity == '东莞'||spaceCity == '中山'){
+         if(this.drawCityShopTypeCount.single ==0 && this.drawCityShopTypeCount.multiple == 0){
+            spaceColor = "#00083C"
+         }else{
+            spaceColor = '#AC4ED3'
+         }
+       }else{
+            spaceColor = "#00083C"
+       }
+       return spaceColor
+    },
     //配置城市地图
-    cityChangeOption(cityZoom,developDistrict,cityDistrictList,gradeBalloon){
+    cityChangeOption(cityZoom,developDistrict,cityDistrictList,gradeBalloon,spaceColor){
       return {
         tooltip: {
           show: true,
@@ -117,9 +136,9 @@ export default {
           zoom: cityZoom,
           top: "60px",
           itemStyle: {
-            areaColor: "#00083C",
+            // areaColor: "#00083C",
+            areaColor: spaceColor,
             borderColor: "#2B3A7C",
-            // borderColor:'yellow',
             borderType: "solid",
             borderWidth: 3,
             // shadowBlur:2,

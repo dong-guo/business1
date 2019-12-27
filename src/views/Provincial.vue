@@ -134,7 +134,8 @@ export default {
 }
 .provincialnewsBox{
   position:absolute;
-  left:1499px;
+  /* left:1499px; */
+  right:100px;
   top:27px;
 }
 .scalingBox{

@@ -25,8 +25,6 @@ export default {
    name:'provincialMapBox',
    data(){
      return{
-      //  developedCity:['云浮市','广州市','深圳市','佛山市','东莞市'],
-      //  incompleteCity:['惠州市','中山市','珠海市','江门市'],
        showChinaCountry:'',
        allCityList:{},
        cityShopNumber:{},
@@ -60,21 +58,31 @@ export default {
    methods:{
      //请求省内经销商数据
      requestCityList(){
-       if(this.drawProvincialChinaChange=='北京'){
+       if(this.drawProvincialChinaChange=='北京' || this.drawProvincialChinaChange=='上海' || this.drawProvincialChinaChange=='天津'|| this.drawProvincialChinaChange=='重庆'){
          this.afterProvince = this.drawProvincialChinaChange + '市'
-        //  console.log('1111',this.afterProvince)
-       }else if(this.drawProvincialChinaChange=='上海'){
-         this.afterProvince = this.drawProvincialChinaChange + '市'
-        //  console.log('2222',this.afterProvince)
-       }else if(this.drawProvincialChinaChange=='天津'){
-         this.afterProvince = this.drawProvincialChinaChange + '市'
-        //  console.log('3333',this.afterProvince)         
-       }else if(this.drawProvincialChinaChange=='重庆'){
-         this.afterProvince = this.drawProvincialChinaChange + '市'
-        //  console.log('4444',this.afterProvince)
-       }else if(this.drawProvincialChinaChange=='香港'||this.drawProvincialChinaChange=='澳门'){
+         console.log('1111',this.afterProvince)
+       }
+      //  else if(this.drawProvincialChinaChange=='上海'){
+      //    this.afterProvince = this.drawProvincialChinaChange + '市'
+      //   //  console.log('2222',this.afterProvince)
+      //  }else if(this.drawProvincialChinaChange=='天津'){
+      //    this.afterProvince = this.drawProvincialChinaChange + '市'
+      //   //  console.log('3333',this.afterProvince)         
+      //  }else if(this.drawProvincialChinaChange=='重庆'){
+      //    this.afterProvince = this.drawProvincialChinaChange + '市'
+      //   //  console.log('4444',this.afterProvince)
+      //  }
+       else if(this.drawProvincialChinaChange=='香港'||this.drawProvincialChinaChange=='澳门'){
          this.afterProvince = this.drawProvincialChinaChange + '特别行政区'
         //  console.log('5555',this.afterProvince)
+       }else if(this.drawProvincialChinaChange == '内蒙古'||this.drawProvincialChinaChange == '西藏'){
+         this.afterProvince = this.drawProvincialChinaChange + '自治区'
+       }else if(this.drawProvincialChinaChange == '广西'){
+         this.afterProvince = this.drawProvincialChinaChange + '壮族自治区'
+       }else if(this.drawProvincialChinaChange == '宁夏'){
+         this.afterProvince = this.drawProvincialChinaChange + '回族自治区'
+       }else if(this.drawProvincialChinaChange == '新疆'){
+         this.afterProvince = this.drawProvincialChinaChange + '维吾尔自治区'
        }else{
          this.afterProvince = this.drawProvincialChinaChange + '省'
         //  console.log('6666',this.afterProvince)
@@ -111,14 +119,16 @@ export default {
         axios.get(`./geoJson/province/${provincialChange}.json`)
         .then(res => {
           //城市区分开发程度
-          let developCity=this.gradeCity()
+          let developCity = this.gradeCity()
+          console.log('地图颜色',developCity)
+          let spaceColor = this.gradeSpaceCity()
           //区分气球颜色
           let gradeBalloon = this.gradeBalloon()
           // console.log('66气球数据',gradeBalloon)
           let provincialChangeJson = res.data;
           echarts.registerMap("provincialChange", provincialChangeJson);
           this.myEcharts = echarts.init(document.getElementById("provincialBox"));
-          let option = this.provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon);
+          let option = this.provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon,spaceColor);
           this.myEcharts.setOption(option); 
           //城市地图跳转
           this.jumpCity()
@@ -133,7 +143,8 @@ export default {
             if(params.name==cityAry[i]){
               //  console.log('cityMapNum',cityMap[cityAry[i]])
                 let cityname = params.name
-                let city = cityname.substr(0,cityname.length-1)
+                // let city = cityname.substr(0,cityname.length-1)
+                let city = cityname
                 this.$store.commit("home/setCityChange",cityMap[cityAry[i]])
                 this.$store.commit("home/setCityChinaChange",city)
                 this.$router.push({ name: "city" });
@@ -142,7 +153,7 @@ export default {
         })
      },
      //地图配置
-     provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon){
+     provincialOption(provincialZoom,cityBrandList,developCity,gradeBalloon,spaceColor){
        console.log('balloon',gradeBalloon)
        return{
           tooltip:{
@@ -243,7 +254,8 @@ export default {
             zoom: provincialZoom,
             top: "1px",
             itemStyle: {
-              areaColor: "#00083C",
+              // areaColor: "#00083C",
+              areaColor: spaceColor,
               borderColor: "#2B3A7C",
               borderType:'solid',
               borderWidth:1,
@@ -307,7 +319,7 @@ export default {
      //城市区分开发程度函数
      gradeCity(){
        let list = this.allCityList.cityList
-      //  console.log('list',list)
+       console.log('list',list)
        let grade =[]
        for(let i = 0; i < list.length; i++){
           if(list[i].developFlag == 0){
@@ -334,6 +346,24 @@ export default {
           }
        }
        return grade
+     },
+     //特殊处理直辖市开发颜色
+     gradeSpaceCity(){
+      //  let spaceList = this.allCityList.cityList
+        let spaceList = this.afterProvince
+        let selectColor = ""
+        if(spaceList == '北京市' ||spaceList == '上海市'||spaceList == '重庆市'||spaceList == '天津市'||spaceList == '香港特别行政区'||spaceList == '澳门特别行政区'||spaceList == '台湾省'){
+          console.log('北京颜色变化',spaceList.city)
+          //门店数为0就黑色
+          if(this.allCityList.shopTypeCount[0].multiple==0 && this.allCityList.shopTypeCount[0].single==0){
+            selectColor = "#00083C"
+          }else{
+            selectColor = "#AC4ED3"
+          }
+        }else{
+          selectColor = "#00083C"
+        }
+        return selectColor
      },
      //气球商店区分函数
      gradeBalloon(){

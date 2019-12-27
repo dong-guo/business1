@@ -72,7 +72,7 @@ export default {
     },
     //判断是什么国家更改样式容器大小
     judgeCountry(){
-      if(this.drawOtherCountryChange == 'Australia'||this.drawOtherCountryChange == 'India'){
+      if(this.drawOtherCountryChange == 'Australia'||this.drawOtherCountryChange == 'India'||this.drawOtherCountryChange == 'Germany'){
         this.otherCountryStyle.width = '900px'
         this.otherCountryStyle.paddingLeft = '270px'
         this.content = this.drawProvincialList
@@ -96,6 +96,7 @@ export default {
       axios.get(`./geoJson/country/${country}.json`).then(res => {
         let countryJson = res.data;
         let gradeBalloon = this.gradeBalloon()
+        console.log('gradeBalloon2222',gradeBalloon)
         echarts.registerMap("China", countryJson);
         this.myEcharts = echarts.init(document.getElementById("otherCountry"));
         let option = this.countryOption(grade,list,gradeBalloon);
@@ -154,7 +155,7 @@ export default {
                     let res = 
                       `<div style ='width:auto; height:74px;padding-top:10px; margin:-20px -20px -20px -20px; border-radius:4px; background:rgba(14,109,233,0.5); font-size:20px;' >
                             <p style ='margin-left:5px;height:36px;'>${name}</p>
-                            <p style ='margin-left:5px;height:36px;'>地址：${address}</p>
+                            <p style ='margin-left:5px;height:36px;'>address：${address}</p>
                       </div>`
                       res += `<img style='width:21px; height:94px; position:absolute; top:-5px; left:-15px;' src='${formatterleftIcon}'/>`
                       res += `<img style='width:21px; height:94px; position:absolute; top:-5px; right:-15px;' src='${formatterrightIcon}'/>`

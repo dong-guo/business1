@@ -61,17 +61,21 @@ export default {
       drawShadeBoxKey: state => state.city.shadeBoxKey,
     })
   },
+  // computed:mapState({
+  //     drawProvincialChinaChange: state => state.home.provincialChinaChange,
+  //     drawCountryChange: state => state.home.countryChange,
+  //     drawCityChinaChange: state => state.home.cityChinaChange,
+  //     drawCountry: state => state.home.country,
+  //     drawShadeBoxKey: state => state.city.shadeBoxKey,
+  // }),
   created(){
-      // window.addEventListener("beforeunload",()=>{
-      //   localStorage.setItem("messageStore",JSON.stringify(this.$store.state))
-      // })
-      // localStorage.getItem("messageStore") && this.$store.replaceState(Object.assign(this.$store.state,JSON.parse(localStorage.getItem("messageStore"))));
   },
   mounted() {
+    console.log('多个值',this.drawProvincialChinaChange,this.drawCountryChange,this.drawCountry)
     this.matchingCountry()
     console.log("city-showChinaCountry", this.showChinaCountry,this.drawProvincialChinaChange,this.drawCityChinaChange);
     this.requestDistrict()
-    this.initializeProvincial()
+    // this.initializeProvincial()
   },
   watch:{
      
@@ -79,7 +83,22 @@ export default {
   methods: {
     //請求县区参数
     requestDistrict() {
-      let [country,provincial,city] = [this.showChinaCountry,this.drawProvincialChinaChange + '省',this.drawCityChinaChange + '市']
+      //对传值过来省份名称重整
+      let newProvincial = this.drawProvincialChinaChange
+      if(newProvincial == '广西'){
+        newProvincial = newProvincial + '壮族自治区'
+      }else if(newProvincial == '西藏'){
+        newProvincial = newProvincial + '自治区'
+      }else if(newProvincial == '内蒙古'){
+        newProvincial = newProvincial + '自治区'
+      }else if(newProvincial == '宁夏'){
+        newProvincial = newProvincial + '回族自治区'
+      }else if(newProvincial == '新疆'){
+        newProvincial = newProvincial + '维吾尔自治区'
+      }else{
+        newProvincial = newProvincial + '省'
+      }
+      let [country,provincial,city] = [this.showChinaCountry,newProvincial,this.drawCityChinaChange]
       indexModel.getDistrictList(country,provincial,city)
       .then(res => {
         //求得数据拆分存入VUEX
@@ -93,16 +112,16 @@ export default {
         // this.sendCommit()
       });
     },
-    sendCommit(){
-      return {
-        ...mapMutations({
-          "city/setCityDistrictList":districtList,
-          "city/setCityManager":manager,
-          "city/setCityShopList":shopList,
-          "city/setCityShopTypeCount":shopTypeCount
-        })
-      }
-    },
+    // sendCommit(){
+    //   return {
+    //     ...mapMutations({
+    //       "city/setCityDistrictList":districtList,
+    //       "city/setCityManager":manager,
+    //       "city/setCityShopList":shopList,
+    //       "city/setCityShopTypeCount":shopTypeCount
+    //     })
+    //   }
+    // },
     matchingCountry() {
       for (let i = 0; i < this.drawCountry.length; i++) {
         if (this.drawCountryChange == this.drawCountry[i].EnglishName) {
@@ -131,8 +150,9 @@ export default {
 }
 .cityTitleBox {
   width: 400px;
+  // width:500px;
   height: 11px;
-  /* background-color:pink; */
+  //  background-color:pink; 
   position: absolute;
   top: 26px;
   left: 765px;
@@ -209,7 +229,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index:1;
+    z-index:2;
     background: rgba(0,0,0,0.8);
 }
 </style>

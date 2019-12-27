@@ -175,6 +175,7 @@ export default {
       this.showCountry = false;
       this.valueProvincial = ''
       this.type = 'country'
+      this.$store.commit("succession/setChangeType",this.type)
       let  [type,country,province,city] = [this.type,this.drawValueCountry,this.valueProvincial,this.valueCity]
       console.log('国家更改',type,country,province,city)
       this.getBrand(type,country,province,city)

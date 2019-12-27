@@ -24,6 +24,8 @@ const state = {
     {EnglishName:"Philippines",ChinaName:'菲律宾',jindu:[121.114552,14.453012]},
     {EnglishName:"Brunei",ChinaName:'文莱',jindu:[115.176103,4.887877]},
     {EnglishName:"Morocco",ChinaName:'摩洛哥',jindu:[-6.335313,31.942948]},
+    {EnglishName:"Russia",ChinaName:'俄罗斯',jindu:[103.470969,65.288994]},
+    {EnglishName:"Nigeria",ChinaName:'尼日利亚',jindu:[6.866593,8.326003]},
   ],
   countryNumber:[],
   // countryNumber:[

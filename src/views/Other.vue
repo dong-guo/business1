@@ -7,7 +7,7 @@
         <div class="countryTitleRightPic"></div>
       </div>
    </div>
-   <reach class="reach"></reach>
+   <!-- <reach class="reach"></reach> -->
    <other-shop-num class="otherShopNum"></other-shop-num>
    <Other-Country class="otherMapBox"></Other-Country>
    <global-country class="GlobalCountryBox"></global-country>

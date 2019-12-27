@@ -122,7 +122,21 @@ export default {
                   let lastString = content[i].province.charAt(content[i].province.length-1)
                   if(lastString == '省'){
                     name = content[i].province.substring(0,content[i].province.length-1)
-                  } else{
+                  } else if (content[i].province == '内蒙古自治区'){
+                    name = '内蒙古'
+                  }else if (content[i].province == '西藏自治区'){
+                    name = '西藏'
+                  }else if(content[i].province == '广西壮族自治区'){
+                    name = '广西'
+                  } else if(content[i].province == '宁夏回族自治区'){
+                    name = '宁夏'
+                  }else if(content[i].province == '香港特别行政区'){
+                    name = '香港'
+                  }else if(content[i].province == '澳门特别行政区'){
+                    name = '澳门'
+                  }else if(content[i].province == '新疆维吾尔自治区'){
+                    name = '新疆'
+                  }else{
                     name = content[i].province
                   }
                   if(params.name == name){
@@ -135,16 +149,13 @@ export default {
                         brand += '<br/>'
                       }
                     }          
-                    let res =`<img style='width:400px; height:auto;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                    let res =`<img style='width:400px; height:150px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
                     res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
                     res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
-                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:240px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
-                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:240px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:120px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:120px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
                     res += 
                     `<div style ='position:absolute; letf:0px; top:0px; width:400px; height:auto; padding:20px;' >
-                        <p style ='margin-left:-15px;height:36px;'>招商经理：${content[i].managerName}</p>
-                        <p style ='margin-left:-15px;height:36px;'>联系电话：${content[i].phone}</p>
-                        <p style ='margin-left:-15px;height:36px;'>负责区域：${content[i].chargeProvince}</p>
                         <p style ='margin-left:-15px;height:36px;'>门店数量：${content[i].shopNumber}</p>
                         <p style ='margin-left:-15px;height:36px;'>${brand}</p>
                     </div>`
