@@ -109,28 +109,54 @@ export default {
       // console.log('11111drawEchartRequestList',this.drawEchartRequestList)
       // console.log('品牌长度drawBrandList.length',drawBrandList)
       // console.log('省份长度Yprovincial.length',Yprovincial)
-       console.log('匹配数据provincialTotal',provincialTotal)
-      
+      console.log('匹配数据provincialTotal',provincialTotal)
       //历遍请求品牌数量
       for(let j=0; j < drawBrandList.length; j++){
         totalList.push([])
-          //历遍Y轴省份数量
-        for(let z = 0; z < Yprovincial.length; z++){
-          //对数据长度历遍数量
-          for(let k = 0; k < provincialTotal.length; k++){
-            //匹配Y轴省份名称
-            if(Yprovincial[z] == provincialTotal[k].province){
-              //对每条数据品牌数量历遍
-              for(let n = 0; n < provincialTotal[k].brands.length; n++){
-                //匹对每条数据品牌与盒子品牌
-                if(drawBrandList[j].name == provincialTotal[k].brands[n].aliasBrand){
+        //历遍数据长度
+        for(let k = 0; k < provincialTotal.length; k++){
+          //历遍Y轴省份
+          for(let m = 0; m < Yprovincial.length; m++){
+            //匹对Y轴省份与对应省份数据
+            if(Yprovincial[m] == provincialTotal[k].province){
+                let key = true
+                //对每条数据品牌数量历遍
+                for(let n = 0; n<provincialTotal[k].brands.length; n++){
+                  //匹对每条数据里面品牌与标题品牌
+                  if(drawBrandList[j].name == provincialTotal[k].brands[n].aliasBrand){
                     totalList[j].push(provincialTotal[k].brands[n].total)
+                    key = false
+                  }
                 }
-              }
+                //for循环完毕无添加值，添加一个0值
+                if(key == true){
+                  totalList[j].push(null)
+                }
             }
           }
         }
-      }   
+      }
+   
+      // 历遍请求品牌数量
+      // for(let j=0; j < drawBrandList.length; j++){
+      //   totalList.push([])
+      //     //历遍Y轴省份数量
+      //   for(let z = 0; z < Yprovincial.length; z++){
+      //     //对数据长度历遍数量
+      //     for(let k = 0; k < provincialTotal.length; k++){
+      //       //匹配Y轴省份名称
+      //       if(Yprovincial[z] == provincialTotal[k].province){
+      //         //对每条数据品牌数量历遍
+      //         for(let n = 0; n < provincialTotal[k].brands.length; n++){
+      //           //匹对每条数据里面品牌与标题品牌
+      //           if(drawBrandList[j].name == provincialTotal[k].brands[n].aliasBrand){
+      //               totalList[j].push(provincialTotal[k].brands[n].total)
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }   
       console.log('totalList',totalList)
       //遍历品牌
       for(let i=0; i<drawBrandList.length; i++){

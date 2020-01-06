@@ -5,7 +5,7 @@
       <div class="cityBox swiper-slide" v-for="(item,index) in drawCityManager" :key="item+index">
         <div class="content">
           <div class="content_contentPic">
-            <img v-if="drawCityManager.profilePhoto" style="width:80px;height:80px;border-radius:50%;" :src="drawCityManager.profilePhoto"/>
+            <img class="content_contentPic_photo" v-if="item.profilePhoto" :src="item.profilePhoto"/>
           </div>
           <div class="content_contentPic_contentText">
             <p class="contentText_massager">招商经理</p>
@@ -49,7 +49,8 @@ export default {
   },
   computed:{
     ...mapState({
-      drawCityManager:state =>state.city.cityManager
+      drawCityManager:state =>state.city.cityManager,
+      drawShadeBoxKey: state =>state.city.shadeBoxKey
     })
   },
   mounted(){
@@ -59,6 +60,12 @@ export default {
   watch:{
     drawCityManager(newValue,oldValue){
       console.log('CityNewsBox-drawCityManager-检测',this.drawCityManager)
+    },
+    drawShadeBoxKey(newValue,oldValue){
+        if(this.drawShadeBoxKey == false){
+          this.swiper()
+          console.log('22222')
+        }
     }
   },
   methods:{
@@ -127,6 +134,11 @@ export default {
   border:2px solid rgba(51,216,250,1);
   /* background-color:wheat; */
   background-image:url(../assets/images/headPic.png);
+}
+.content_contentPic_photo{
+  width:80px;
+  height:80px;
+  border-radius:50%;
 }
 .content_contentPic_contentText{
   margin-left:20px;

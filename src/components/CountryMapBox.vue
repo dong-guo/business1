@@ -114,13 +114,13 @@ export default {
               position:'right',
               // borderColor:'red',
               formatter:function(params){
-                // console.log(999,params)
+                // console.log(999,params.name)
                 // console.log(998,content)
                 let name=''
                 for(let i=0; i<content.length; i++){
                   //c处理最后一位带省去掉省
                   let lastString = content[i].province.charAt(content[i].province.length-1)
-                  if(lastString == '省'){
+                  if(lastString == '省'||lastString == '市'){
                     name = content[i].province.substring(0,content[i].province.length-1)
                   } else if (content[i].province == '内蒙古自治区'){
                     name = '内蒙古'
@@ -140,6 +140,7 @@ export default {
                     name = content[i].province
                   }
                   if(params.name == name){
+                    console.log('所处于位置直辖市',content[i])
                     console.log('所处于位置',content[i].brands.length,name)
                     let arr = content[i].brands.split(",")
                     let brand = '品牌加盟：'
@@ -149,11 +150,11 @@ export default {
                         brand += '<br/>'
                       }
                     }          
-                    let res =`<img style='width:400px; height:150px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
-                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
+                    let res =`<img style='width:410px; height:160px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; left:-10px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
                     res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
-                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:370px; top:120px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
-                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:120px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; left:-10px; bottom:-10px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
+                    res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; bottom:-10px; transform:rotate(180deg) ' src='${formatterLeftAngleIcon}'/>`
                     res += 
                     `<div style ='position:absolute; letf:0px; top:0px; width:400px; height:auto; padding:20px;' >
                         <p style ='margin-left:-15px;height:36px;'>门店数量：${content[i].shopNumber}</p>

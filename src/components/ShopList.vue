@@ -47,13 +47,13 @@ export default {
       totalShow: [],
       pageNum: "",
       currentPage: 0,
-      startPoint: 0
+      startPoint: 0,
     };
   },
   computed: {
     ...mapState({
       drawShopData: state => state.shopList.shopData,
-      drawCityShopList: state =>state.city.cityShopList
+      drawCityShopList: state =>state.city.cityShopList,
     })
   },
   watch:{
@@ -76,7 +76,7 @@ export default {
           // type:'bullets',
           clickable: true,
           renderBullet: function (index, className) {
-            console.log('第几页',index)
+            console.log('第几页222',index)
             return '<span class="' + className + '" style="background:rgba(2,90,158,1);margin:0 6px 0 6px;"></span>';
           },          
         },

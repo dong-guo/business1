@@ -170,6 +170,8 @@ export default {
   margin-top:31px;
   color:#20FDFA;
   font-size:20px;
+  width:320px;
+  /* background:yellow; */
 }
 .brand span{
   color:#fff;
@@ -235,7 +237,7 @@ export default {
 .developing{
   width:282px;
   height:200px;
-  margin-top:32px;
+  margin-top:28px;
   /* background-color:yellow; */
 }
 .developingTitle{
@@ -262,6 +264,15 @@ export default {
   color:rgba(122,180,251,1);
   line-height:26px;
   font-size:16px;
+  height:80px;
+  width:282px;
+  position:absolute;
+  overflow:hidden;
+  -ms-text-overflow: ellipsis;text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* background:yellow; */
 }
 .swiper-pagination{
   height:25px;

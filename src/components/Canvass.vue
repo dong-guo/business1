@@ -19,20 +19,20 @@
           <div class="canvass_body_personal">
             <div class="body_personal_news">
                 <div class="personal_news_pic">
-                  <img src="item[index].profilePhoto" alt="">
+                  <img :src="item.profilePhoto" alt="">
                 </div>
                 <div class="personal_news_people"> 
                   <div class="news_people_manager">招商经理</div>
                   <div class="news_people_name">{{item.managerName}}</div>
                 </div>
             </div>
-            <div class="body_personal_brand" >经营品牌：<span>V6,3D,歌蒂娅</span></div>
+            <div class="body_personal_brand" >负责品牌：<span>{{item.aliasBrand}}</span></div>
             <div class="body_personal_phone">联系电话: <span>{{item.phone}}</span></div>
             <div class="body_personal_adds">负责区域: <span>{{item.chargeProvince}}</span></div>
           </div>
           <div class="canvass_body_barcode">
             <div class="body_barcode_QRcode">
-              <img src="item[index].contactPhoto" alt="">
+              <img class="body_barcode_QRcode_photo" :src="item.contactPhoto" alt="">
             </div>
             <div class="body_barcode_text">扫一扫添加好友</div>
           </div>
@@ -80,6 +80,7 @@ export default {
      }
    },
    methods:{
+     //请求招商经理数据
      getManagerList(){
       //  let page = 1
       //  let limit = 2
@@ -267,14 +268,17 @@ display:none
 }
 .canvass_body ul li{
   width:578px;
-  height:265px;
+  /* height:265px; */
+  height:335px;
+  /* height:auto; */
   /* border:1px solid rgba(51,140,250,1); 
   box-sizing:border-box; */
   /* background-color:lightgreen; */
   background-image:url(../assets/images/background_border@2x.png);
   background-repeat:no-repeat;
-  background-size:578px 265px;
+  background-size:100% 100%;
   display:flex;
+  position:relative;
 }
 .canvass_body_personal{
   /* background-color:lightsalmon; */
@@ -304,13 +308,14 @@ display:none
   height:70px;
   width:70px;
   border-radius:100%;
+  border:2px solid rgba(51,216,250,1);
   background-image:url(../assets/images/headPic.png);
   background-size:cover;
   
 }
 .personal_news_pic img{
-  width:80px;
-  height:80px;
+  width:70px;
+  height:70px;
   border-radius:50%;
 }
 .personal_news_people{
@@ -353,7 +358,16 @@ display:none
   color:#FFFFFF;
   margin-top:10px;
   font-size:20px;
-  white-space: nowrap;
+  height:55px;
+  width:450px;
+  position:absolute;
+  overflow:hidden;
+  -ms-text-overflow: ellipsis;text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /* background:yellow; */
+  /* white-space: nowrap; */
 }
 .body_personal_adds span{
   color:#20FDFA;
@@ -361,6 +375,10 @@ display:none
 .body_barcode_QRcode{
   /* background-color:yellow; */
   background-image:url(../assets/images/QRcode.png);
+  width:100px;
+  height:100px;
+}
+.body_barcode_QRcode_photo{
   width:100px;
   height:100px;
 }
