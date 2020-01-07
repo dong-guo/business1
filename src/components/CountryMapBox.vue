@@ -140,8 +140,8 @@ export default {
                     name = content[i].province
                   }
                   if(params.name == name){
-                    console.log('所处于位置直辖市',content[i])
-                    console.log('所处于位置',content[i].brands.length,name)
+                    // console.log('所处于位置直辖市',content[i])
+                    // console.log('所处于位置',content[i].brands.length,name)
                     let arr = content[i].brands.split(",")
                     let brand = '品牌加盟：'
                     for(let i=0;i<arr.length;i++){
