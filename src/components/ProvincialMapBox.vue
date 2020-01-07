@@ -62,16 +62,6 @@ export default {
          this.afterProvince = this.drawProvincialChinaChange + '市'
          console.log('1111',this.afterProvince)
        }
-      //  else if(this.drawProvincialChinaChange=='上海'){
-      //    this.afterProvince = this.drawProvincialChinaChange + '市'
-      //   //  console.log('2222',this.afterProvince)
-      //  }else if(this.drawProvincialChinaChange=='天津'){
-      //    this.afterProvince = this.drawProvincialChinaChange + '市'
-      //   //  console.log('3333',this.afterProvince)         
-      //  }else if(this.drawProvincialChinaChange=='重庆'){
-      //    this.afterProvince = this.drawProvincialChinaChange + '市'
-      //   //  console.log('4444',this.afterProvince)
-      //  }
        else if(this.drawProvincialChinaChange=='香港'||this.drawProvincialChinaChange=='澳门'){
          this.afterProvince = this.drawProvincialChinaChange + '特别行政区'
         //  console.log('5555',this.afterProvince)
@@ -109,18 +99,21 @@ export default {
             this.actionProvincial()
            }
        })
+       .catch(err=>{
+         console.log('111',err)
+       })
      },
      //初始化省地图
      actionProvincial(){
         let [provincialChange,provincialZoom,cityBrandList] = [this.drawProvincialChange,this.drawProvincialZoom,this.allCityList.cityList]
         // console.log('provincialChange',this.drawProvincialChange)
-        console.log('cityBrandList转化嵌套',cityBrandList)
-        console.log('省份',provincialChange)
+        // console.log('cityBrandList转化嵌套',cityBrandList)
+        // console.log('省份',provincialChange)
         axios.get(`./geoJson/province/${provincialChange}.json`)
         .then(res => {
           //城市区分开发程度
           let developCity = this.gradeCity()
-          console.log('地图颜色',developCity)
+          // console.log('地图颜色',developCity)
           let spaceColor = this.gradeSpaceCity()
           //区分气球颜色
           let gradeBalloon = this.gradeBalloon()
@@ -137,7 +130,7 @@ export default {
      //城市跳转地图函数
      jumpCity(){
         this.myEcharts.on('click',(params) =>{
-          console.log('city',params.name)
+          // console.log('city',params.name)
           let cityAry = Object.keys(cityMap)
           for(let i = 0; i<cityAry.length; i++){
             if(params.name==cityAry[i]){
@@ -319,7 +312,7 @@ export default {
      //城市区分开发程度函数
      gradeCity(){
        let list = this.allCityList.cityList
-       console.log('list',list)
+      //  console.log('list',list)
        let grade =[]
        for(let i = 0; i < list.length; i++){
           if(list[i].developFlag == 0){
@@ -353,7 +346,7 @@ export default {
         let spaceList = this.afterProvince
         let selectColor = ""
         if(spaceList == '北京市' ||spaceList == '上海市'||spaceList == '重庆市'||spaceList == '天津市'||spaceList == '香港特别行政区'||spaceList == '澳门特别行政区'||spaceList == '台湾省'){
-          console.log('北京颜色变化',spaceList.city)
+          // console.log('北京颜色变化',spaceList.city)
           //门店数为0就黑色
           if(this.allCityList.shopTypeCount[0].multiple==0 && this.allCityList.shopTypeCount[0].single==0){
             selectColor = "#00083C"
@@ -367,7 +360,7 @@ export default {
      },
      //气球商店区分函数
      gradeBalloon(){
-       console.log('气球数据',this.drawProvincialChange)
+      //  console.log('气球数据',this.drawProvincialChange)
        if(this.drawProvincialChange != 'xianggang' && this.drawProvincialChange != 'aomen' && this.drawProvincialChange != 'taiwan'){
           let list = this.allCityList.cityList
           let balloon = []

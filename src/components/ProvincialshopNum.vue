@@ -43,7 +43,7 @@ export default {
       // this.single = this.drawAllCityList.shopTypeCount[0].single
       // this.multiple = this.drawAllCityList.shopTypeCount[0].multiple
       // console.log('drawCityShopNumber',this.drawCityShopNumber)
-      console.log('drawAllCityList-11',this.drawAllCityList,'provincialShopNum')
+      // console.log('drawAllCityList-11',this.drawAllCityList,'provincialShopNum')
     }
 
 }
