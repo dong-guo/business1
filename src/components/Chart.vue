@@ -32,30 +32,9 @@ export default {
   watch:{
     drawYList(newValue,oleValue){
       this.List = this.drawYList
-      // for(let i=0; i<drawEchartRequestList.length; i++){
-      //   this.List.push(drawEchartRequestList[i].province)
-      // }
       // console.log('监视Y轴数据变动',this.List)
       this.initChart()
     },
-    // drawCity(newValue,oldValue){
-    //   // console.log('chart检测城市',this.drawCity)
-    //   this.List = this.drawCity
-    //   for(let i = 0; i<this.drawCity; i++){
-    //     this.List.push(this.drawCity[i])
-    //   }
-    //   // console.log('List',this.List)
-    //   this.initChart()      
-    // },
-    // drawProvincial(newValue,oldValue){
-    //   // console.log('chart检测省份',this.drawProvincial)
-    //   this.List = this.drawProvincial
-    //   for(let i = 0; i<this.drawProvincial; i++){
-    //     this.List.push(this.drawProvincial[i])
-    //   }
-    //   console.log('List',this.List)
-    //   this.initChart()
-    // },
     drawValueCountry(newValue,oldValue){
       // console.log('chart检测国家',this.drawValueCountry)
       this.initChart()
@@ -78,26 +57,6 @@ export default {
   },
   methods:{
    //请求后台品牌
-  //  getBrand(){
-  //     let ContentType ='text/plain'
-  //     let Authorization ='token'
-  //     let country = this.drawValueCountry
-  //     indexModel.getChartList(country)
-  //     .then(res=>{
-  //       let date = res.data.data.brand
-  //       let all = res.data.data
-  //       console.log('请求原始值',all)
-  //       let chartBrandList = []
-  //       for(let i =0; i< date.length; i++){
-  //          chartBrandList.push({name:date[i].brand})
-  //       }
-  //       console.log('chartBrand-30',chartBrandList)
-  //       this.$store.commit("succession/setBrandList",chartBrandList)
-  //       this.provincialTotal = res.data.data.developedProvince
-  //       console.log('请求原始值this.provincialTotal',this.provincialTotal)
-  //       this.initChart()
-  //     })     
-  //  },
    initChart(){
       let Yprovincial = this.List
       let drawBrandList = this.drawBrandList
@@ -146,7 +105,6 @@ export default {
             itemStyle:{
               color:seriesColor[i]
             },
-            // data: [320, 302, 301,678,900 ]
             data:totalList[i]
         })
       }
@@ -176,21 +134,6 @@ export default {
                 fontSize:'18',
               },
               data:drawBrandList
-              // data:[
-              //   {name:'全部'},
-              //   {name:'璞素'},
-              //   {name:'0769'},
-              //   {name:'慕思家纺'},
-              //   {name:'慕思儿童'},
-              //   {name:'慕思助眠'},
-              //   {name:'3D'},
-              //   {name:'苏斯'},
-              //   {name:'V6'},
-              //   {name:'名品汇'},
-              //   {name:'兰博基尼'},
-              //   {name:'歌蒂娅'},
-              //   {name:'凯奇'},
-              // ]
         },
         grid: {
               left: '1%',
