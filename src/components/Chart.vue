@@ -102,13 +102,9 @@ export default {
       let Yprovincial = this.List
       let drawBrandList = this.drawBrandList
       let provincialTotal = this.provincialTotal
-      // let seriesColor = ['#005F64','#00838F','#0097A7','#00ADC1','#00ADC1','#24C5DA','#4CCFE1','#80DEEA','#B2EAF2']
       let seriesColor =['#0900C3','#0075F6','#00CBFE','#537EC5','#0B4381','#03E2AE','#005F64','#22E02D','#F5AC2D','#F94589','#FBFC01']
       let seriesList = []
       let totalList=[]
-      // console.log('11111drawEchartRequestList',this.drawEchartRequestList)
-      // console.log('品牌长度drawBrandList.length',drawBrandList)
-      // console.log('省份长度Yprovincial.length',Yprovincial)
       console.log('匹配数据provincialTotal',provincialTotal)
       //历遍请求品牌数量
       for(let j=0; j < drawBrandList.length; j++){
@@ -135,29 +131,7 @@ export default {
             }
           }
         }
-      }
-   
-      // 历遍请求品牌数量
-      // for(let j=0; j < drawBrandList.length; j++){
-      //   totalList.push([])
-      //     //历遍Y轴省份数量
-      //   for(let z = 0; z < Yprovincial.length; z++){
-      //     //对数据长度历遍数量
-      //     for(let k = 0; k < provincialTotal.length; k++){
-      //       //匹配Y轴省份名称
-      //       if(Yprovincial[z] == provincialTotal[k].province){
-      //         //对每条数据品牌数量历遍
-      //         for(let n = 0; n < provincialTotal[k].brands.length; n++){
-      //           //匹对每条数据里面品牌与标题品牌
-      //           if(drawBrandList[j].name == provincialTotal[k].brands[n].aliasBrand){
-      //               totalList[j].push(provincialTotal[k].brands[n].total)
-      //           }
-      //         }
-      //       }
-      //     }
-      //   }
-      // }   
-      console.log('totalList',totalList)
+      }  
       //遍历品牌
       for(let i=0; i<drawBrandList.length; i++){
         seriesList.push({
@@ -222,6 +196,7 @@ export default {
               left: '1%',
               right: '3%',
               bottom: '1%',
+              top:125,
               containLabel: true
         },
         xAxis:  {
@@ -265,190 +240,6 @@ export default {
   
         },
         series:seriesList
-        // series: [
-        //       {
-        //         name: '全部',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight',
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#005F64'
-        //         },
-        //         data: [320, 302, 301, 334, ]
-        //       },
-        //       {
-        //         name: '璞素',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#00838F'
-        //         },
-        //         data: [120, 132, 101,990 ]
-        //       },
-        //       {
-        //         name: '0769',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#0097A7'
-        //         },
-        //         data: [220, 182, 191, 234, ]
-        //       },
-        //       {
-        //         name: '慕思家纺',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //          itemStyle:{
-        //           color:'#00ADC1'
-        //         },
-        //         data: [150, 212, 201, 154, ]
-        //       },
-        //       {
-        //         name: '慕思儿童',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#00BCD5'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       },
-        //       {
-        //         name: '慕思助眠',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#24C5DA'
-        //         },
-        //         data: [820, 832, 901, 934, ]
-        //       },
-        //       {
-        //         name: '3D',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#4CCFE1'
-        //         },
-        //         data: [820, 832, 901, 934, ]
-        //       },
-        //       {
-        //         name: '苏斯',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#80DEEA'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       },
-        //       {
-        //         name: 'V6',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#B2EAF2'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       },
-        //       {
-        //         name: '名品汇',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#E1F7FA'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       },
-        //       {
-        //         name: '兰博基尼',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#C5CCD2'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       },
-        //       {
-        //         name: '歌蒂娅',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#005F64'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       },
-        //       {
-        //         name: '凯奇',
-        //         type: 'bar',
-        //         stack: '总量',
-        //         label: {
-        //             normal: {
-        //                 position: 'insideRight'
-        //             }
-        //         },
-        //         itemStyle:{
-        //           color:'#525252'
-        //         },
-        //         data: [820, 832, 901, 934]
-        //       }
-        // ] 
      }
    } 
   }

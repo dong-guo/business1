@@ -1,10 +1,14 @@
 import { Request } from './request'
  
-const enviroment = 'dev'
+const enviroment = 'pro'
 
 class IndexModel extends Request {
-  // baseUrl = enviroment === 'pro' ? 'https://mobiletest.derucci.net/consumer-admin':'https://qiang.derucci.com'
-  baseUrl = enviroment === 'pro' ? 'https://mobiletest.derucci.net/consumer-admin':'https://op.derucci.com'
+  constructor() {
+    super()
+    // baseUrl = enviroment === 'dev' ? 'https://mobiletest.derucci.net/consumer-admin':'https://qiang.derucci.com'
+    this.baseUrl = enviroment === 'dev' ? 'https://mobiletest.derucci.net/consumer-admin' : 'https://derucci.net'  
+  }
+  
 
   getCountry(){
     return this.getList({

@@ -260,18 +260,18 @@ export default {
 }
 .developCityText{
   font-weight:400;
-  margin-top:16px;
+  margin-top:12px;
   color:rgba(122,180,251,1);
   line-height:26px;
   font-size:16px;
-  height:80px;
+  height:56px;
   width:282px;
   position:absolute;
   overflow:hidden;
   -ms-text-overflow: ellipsis;text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   /* background:yellow; */
 }
 .swiper-pagination{

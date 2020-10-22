@@ -11,6 +11,8 @@ import { mapState } from "vuex";
 import { IndexModel } from '../untils/index'
 const indexModel = new IndexModel()
 
+ 
+
 export default {
   name: "world",
   data() {
@@ -40,7 +42,7 @@ export default {
       .then(res =>{
         let countryName = res.data.data
         this.$store.commit("home/setAllTotal",countryName.total)
-        console.log('countryName总数据',countryName.country,countryName.total)
+        // console.log('countryName总数据',countryName.country,countryName.total)
         //将国家存入VUEX中
         let country = []
         for(let i = 0; i< countryName.country.length; i++){
@@ -98,9 +100,7 @@ export default {
         //跳转国家地图
         let country = this.drawCountry;
         let dcn = object.dcn
-        console.log('11111',dcn)
         this.myEcharts.on("click", params => {
-          console.log('跳转名字',params.name)
           //取得亮蓝色国家
           this.getblueCountry(dcn,params,country)
         });
@@ -109,8 +109,7 @@ export default {
     //取得亮蓝色国家
     getblueCountry(dcn,params,country){
       //前十名才可以点击进去
-      console.log('22222',dcn)
-        for (let i = 0; i < dcn.length && i<7; i++) {
+        for (let i = 0; i < dcn.length && i<10; i++) {
           if (params.name == dcn[i].name) {
             //取得中英文名称匹对数据
             for(let i = 0; i < country.length; i++){
@@ -150,26 +149,26 @@ export default {
             // shadowOffsetY: 2
           },
           nameMap: {
-            China: "中国",
+            'China': "中国",
             "United States of America": "美国",
-            Australia: "澳大利亚",
-            Japan: "日本",
-            Germany: "德国",
+            "Australia": "澳大利亚",
+            "Japan": "日本",
+            "Germany": "德国",
             "France":"法国",
-            India: "印度",
+            "India": "印度",
             "South Africa": "南非",
-            Brazil: "巴西",
-            Argentina: "阿根廷",
-            Slovakia: "斯洛伐克",
-            Mexico: "墨西哥",
-            Russia: "俄罗斯",
-            Austria: "奥地利",
-            Canada:'加拿大',
+            "Brazil": "巴西",
+            "Argentina": "阿根廷",
+            "Slovakia": "斯洛伐克",
+            "Mexico": "墨西哥",
+            "Russia": "俄罗斯",
+            "Austria": "奥地利",
+            "Canada":'加拿大',
             "South Korea":'韩国',
-            Malaysia:'马来西亚',
-            Dubai:'迪拜',
+            "Malaysia":'马来西亚',
+            "Dubai":'迪拜',
             "New Zealand":'新西兰',
-            Cambodia:'柬埔寨',
+            "Cambodia":'柬埔寨',
             "United Arab Emirates":'阿联酋',
             "Italy":"意大利",
             "Georgia":"格鲁吉亚",

@@ -72,7 +72,7 @@ export default {
     },
     //判断是什么国家更改样式容器大小
     judgeCountry(){
-      if(this.drawOtherCountryChange == 'Australia'||this.drawOtherCountryChange == 'India'||this.drawOtherCountryChange == 'Germany'){
+      if(this.drawOtherCountryChange == 'India'||this.drawOtherCountryChange == 'Germany'){
         this.otherCountryStyle.width = '900px'
         this.otherCountryStyle.paddingLeft = '270px'
         this.content = this.drawProvincialList

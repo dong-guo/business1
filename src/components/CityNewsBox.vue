@@ -102,23 +102,24 @@ export default {
 .city-box{
   position:relative;
   width:380px;
-  height:505px;
+  height:545px;
   /* border:1px solid yellow; */
 }
 .swiper-container{
   width:380px;
-  height:505px;
+  height:545px;
   border:1px solid #338CFA;
 }
 .cityBox{
   width:365px;
-  height:490px;
+  height:525px;
   box-sizing:border-box;
   /* border:1px solid yellow; */
   background-image:url(../assets/images/city_background@2x.png);
   background-repeat:no-repeat;
   background-size:100% 100%;
   padding-left:46px;
+  padding-right:20px;
 }
 .content{
   width:225px;
@@ -182,7 +183,7 @@ export default {
   /* background-color:white; */
   width:100px;
   height:135px;
-  margin-top:30px;
+  margin-top:15px;
 }
 .qrcode{
   width:100px;

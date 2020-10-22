@@ -67,7 +67,7 @@ export default {
       indexModel.getProvincialList(country)
       .then(res=>{
         let provincialList = res.data.data
-        // console.log('provincialList中国数据',provincialList)
+        console.log('provincialList中国数据',provincialList)
         this.content = provincialList
         this.getCountryMap()
       })
@@ -124,33 +124,35 @@ export default {
                     name = content[i].province.substring(0,content[i].province.length-1)
                   } else if (content[i].province == '内蒙古自治区'){
                     name = '内蒙古'
-                  }else if (content[i].province == '西藏自治区'){
+                  } else if (content[i].province == '西藏自治区'){
                     name = '西藏'
-                  }else if(content[i].province == '广西壮族自治区'){
+                  } else if(content[i].province == '广西壮族自治区'){
                     name = '广西'
                   } else if(content[i].province == '宁夏回族自治区'){
                     name = '宁夏'
-                  }else if(content[i].province == '香港特别行政区'){
+                  } else if(content[i].province == '香港特别行政区'){
                     name = '香港'
-                  }else if(content[i].province == '澳门特别行政区'){
+                  } else if(content[i].province == '澳门特别行政区'){
                     name = '澳门'
-                  }else if(content[i].province == '新疆维吾尔自治区'){
+                  } else if(content[i].province == '新疆维吾尔自治区'){
                     name = '新疆'
-                  }else{
+                  } else{
                     name = content[i].province
                   }
                   if(params.name == name){
                     // console.log('所处于位置直辖市',content[i])
                     // console.log('所处于位置',content[i].brands.length,name)
+                    console.log('content[i].brands',content[i].brands)
                     let arr = content[i].brands.split(",")
-                    let brand = '品牌加盟：'
-                    for(let i=0;i<arr.length;i++){
-                      brand += arr[i].toString()+','
-                      if(brand.length-20>0&& i<5){
-                        brand += '<br/>'
-                      }
-                    }          
-                    let res =`<img style='width:410px; height:160px;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
+                    let brand = ''
+                    // for(let i=0;i<arr.length;i++){
+                    //   brand += arr[i].toString()+','
+                    //   if(brand.length-20>0&& i<5){
+                    //     brand += '<br/>'
+                    //   }
+                    // }       
+                    brand += arr
+                    let res =`<img style='width:410px; height:auto;margin:-25px -25px -25px -25px; display:block;' src='${newsIcon}'/>`
                     res +=`<img style='width:30px; height:30px; position:absolute; display:block; left:-10px; top:-10px; ' src='${formatterLeftAngleIcon}'/>`
                     res +=`<img style='width:30px; height:30px; position:absolute; display:block; right:-10px; top:-10px; transform:rotate(90deg) ' src='${formatterLeftAngleIcon}'/>`
                     res +=`<img style='width:30px; height:30px; position:absolute; display:block; left:-10px; bottom:-10px; transform:rotate(-90deg) ' src='${formatterLeftAngleIcon}'/>`
@@ -158,7 +160,10 @@ export default {
                     res += 
                     `<div style ='position:absolute; letf:0px; top:0px; width:400px; height:auto; padding:20px;' >
                         <p style ='margin-left:-15px;height:36px;'>门店数量：${content[i].shopNumber}</p>
-                        <p style ='margin-left:-15px;height:36px;'>${brand}</p>
+                        <div style='margin-left:-15px;margin-right:55px;height:auto;display:flex;'>
+                          <p>品牌加盟：</p>
+                          <p style ='white-space:pre-wrap;'>${brand}</p>
+                        </div>
                     </div>`
                     return res            
                   }
